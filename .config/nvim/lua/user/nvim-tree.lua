@@ -214,7 +214,7 @@ nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
     },
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
     git_clean = false,
     no_buffer = false,
     custom = {},

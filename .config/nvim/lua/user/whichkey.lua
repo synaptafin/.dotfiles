@@ -32,7 +32,7 @@ local setup = {
     -- ["<space>"] = "SPC",
     -- ["<cr>"] = "RET",
     -- ["<tab>"] = "TAB",
-     
+
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo

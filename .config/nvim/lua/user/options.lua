@@ -17,8 +17,11 @@ vim.opt.swapfile = false
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 8
 vim.opt.pumheight = 10
+vim.opt.autowriteall = true
+vim.opt.foldmethod = "syntax"
 -- vim.opt.termguicolors = true
 
+-- default settings
 vim.opt.relativenumber = false
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true

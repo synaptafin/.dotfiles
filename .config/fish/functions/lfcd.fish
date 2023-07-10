@@ -1,0 +1,1 @@
+/Users/dopamine/.config/lf/lfcd.fish

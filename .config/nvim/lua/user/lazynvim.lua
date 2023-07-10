@@ -20,8 +20,9 @@ require("lazy").setup({
 	"nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
 	"windwp/nvim-autopairs",
 
-  -- theme
-  "shatur/neovim-ayu",
+	-- appearance
+	"shatur/neovim-ayu",
+	"lukas-reineke/indent-blankline.nvim",
 
 	-- which key
 	-- Lua
@@ -84,11 +85,14 @@ require("lazy").setup({
 	-- toggleterminal
 	"akinsho/toggleterm.nvim",
 
+	-- lualine
+	"nvim-lualine/lualine.nvim",
+
 	-- edit
 	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+		event = "VeryLazy",
 		config = function()
 			require("nvim-surround").setup({
 				-- Configuration here, or leave empty to use defaults

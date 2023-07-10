@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+
+echo "starting..."
+exit 1
 
 # OS detection
 UNAME_OUTPUT=$(uname -s)
@@ -23,31 +27,23 @@ cd "$DIR"
 source ./functions/functions.sh
 
 # make sure sudo permission when process is running
-function sudo_permission_persist() {
-	info "Propmting for sudo password"
-	if sudo -v; then
-		# Keep-alive: update existing `sudo` time stamp until `setup.sh` has finished
-		while true; do
-			sudo -n true         # refresh sudo credentials
-			sleep 60             # test credentials every minute
-			kill -0 "$$" || exit # if process exists, keep loop
-		done 2>/dev/null &
-		success "Sudo credentials updated."
-	else
-		error "Failed to obtain sudo credentials."
-	fi
-}
+info "Propmting for sudo password"
+if sudo -v; then
+	# Keep-alive: update existing `sudo` time stamp until `setup.sh` has finished
+	while true; do
+		sudo -n true         # refresh sudo credentials
+		sleep 60             # test credentials every minute
+		kill -0 "$$" || exit # if process exists, keep loop
+	done 2>/dev/null &
+	success "Sudo credentials updated."
+else
+	error "Failed to obtain sudo credentials."
+fi
 
 # execute setup.sh to config tools
 find * -name "setup.sh" | while read setup; do
-	./$setup
+	bash $setup
 done
 
 success "Finish installing Dotfiles"
 
-# Sync local config
-function load_local_config() {
-	if [ -f "$HOME/.localrc" ]; then
-		source "$HOME/.localrc"
-	fi
-}

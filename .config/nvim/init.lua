@@ -14,3 +14,8 @@ require "user.nvim-tree"
 require "user.bufferline"
 require "user.toggleterm"
 require "user.whichkey"
+require "user.copilot"
+require "user.lualine"
+require "user.indent_blankline"
+
+
