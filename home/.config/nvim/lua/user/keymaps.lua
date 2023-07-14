@@ -60,7 +60,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Command --
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-f>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<C-f>", "<cmd>Telescope live_grep<cr>", opts)
 
 -- NvimTree --
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)

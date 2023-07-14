@@ -74,6 +74,7 @@ require("lazy").setup({
 
 	-- git
 	"lewis6991/gitsigns.nvim",
+	"kdheepak/lazygit.nvim",
 
 	-- file explorer
 	"nvim-tree/nvim-tree.lua",

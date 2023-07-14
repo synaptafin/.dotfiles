@@ -92,14 +92,12 @@ telescope.setup({
 			},
 		},
 	},
-	pickers = {
-		-- Default configuration for builtin pickers goes here:
-		find_files = {
-			hidden = true,
-		},
-		-- Now the picker_config_key will be applied every time you call this
-		-- builtin picker
-	},
+  pickers = {
+    find_files = {
+      hidden = true,
+      no_ignore = true,
+    },
+  },
 	extensions = {
 		media_files = {
 			-- filetypes whitelist

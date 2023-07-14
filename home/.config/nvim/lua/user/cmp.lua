@@ -133,7 +133,10 @@ cmp.setup({
 
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline({
+    ["<C-j>"] = {s = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })},
+    ["<C-k>"] = {s = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })},
+  }),
 	sources = {
 		{ name = "buffer" },
 	},
@@ -154,3 +157,4 @@ cmp.setup.cmdline(":", {
 		},
 	} }),
 })
+
