@@ -1,5 +1,7 @@
 require "user.options"
 require "user.keymaps"
+require "user.functions"
+
 require "user.lazynvim"
 -- require "user.packer"
 require "user.colorscheme"
