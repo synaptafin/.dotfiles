@@ -16,7 +16,8 @@ telescope.setup({
 
 		file_ignore_patterns = {
 			".git/",
-			".cache",
+      "cache/",
+			"%.cache",
 			"node_modules/",
 			"%.o",
 			"%.a",
@@ -112,3 +113,4 @@ telescope.setup({
 		-- please take a look at the readme of the extension you want to configure
 	},
 })
+

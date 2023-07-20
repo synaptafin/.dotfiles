@@ -69,6 +69,7 @@ map a :push %touch<space>
 
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)
+
 cmd trash %set -f; mv $fx ~/.trash
 
 # define a custom 'delete' command
@@ -82,7 +83,7 @@ cmd trash %set -f; mv $fx ~/.trash
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
-map D delete
+map D trash
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -130,6 +131,15 @@ cmd fzf_jump ${{
     fi
 }}
 
+cmd test ${{
+    printf "~/.trash/$(basename $f)"
+    if [ -e "$HOME/.trash/$(basename $f)" ]; then
+      printf "file exists in"
+      exit 1
+    else 
+      printf "file doesn't exist"
+    fi
+}}
 
 # my config
 set hidden true

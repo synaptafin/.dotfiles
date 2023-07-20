@@ -21,8 +21,10 @@ require("lazy").setup({
 	"windwp/nvim-autopairs",
 
 	-- appearance
-	"shatur/neovim-ayu",
 	"lukas-reineke/indent-blankline.nvim",
+	"shatur/neovim-ayu",
+  "rebelot/kanagawa.nvim",
+  "folke/tokyonight.nvim",
 
 	-- which key
 	-- Lua
