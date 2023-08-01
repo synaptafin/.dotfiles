@@ -18,9 +18,8 @@ vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 8
 vim.opt.pumheight = 10
 vim.opt.autowriteall = true
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.termguicolors = true
+vim.opt.shell = 'fish'
 
 -- default settings
 vim.opt.relativenumber = false
@@ -28,3 +27,4 @@ vim.opt.mouse = "a"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+vim.cmd "hi Normal guibg=NONE ctermbg=NONE"

@@ -2,7 +2,7 @@
 function GenerateMarkdownTOC()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 	local toc = {}
-	for i, line in ipairs(lines) do
+	for _, line in ipairs(lines) do
 		local level, title = string.match(line, "^(##+)%s*(.*)")
 		if level and title then
 			local item =
@@ -19,4 +19,5 @@ function InsertMarkdownTOC()
 	vim.api.nvim_buf_set_lines(0, row, row, false, toc)
 end
 
+-- Insert markdown table of contents
 vim.api.nvim_set_keymap("n", "<leader>mt", ":lua InsertMarkdownTOC()<CR>", {noremap = true, silent = true})

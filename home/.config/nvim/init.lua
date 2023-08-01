@@ -20,5 +20,6 @@ require "user.whichkey"
 require "user.copilot"
 require "user.lualine"
 require "user.indent_blankline"
+require "user.hop";
 
 

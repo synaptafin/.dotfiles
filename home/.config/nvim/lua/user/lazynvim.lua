@@ -23,8 +23,8 @@ require("lazy").setup({
 	-- appearance
 	"lukas-reineke/indent-blankline.nvim",
 	"shatur/neovim-ayu",
-  "rebelot/kanagawa.nvim",
-  "folke/tokyonight.nvim",
+	"rebelot/kanagawa.nvim",
+	"folke/tokyonight.nvim",
 
 	-- which key
 	-- Lua
@@ -102,7 +102,13 @@ require("lazy").setup({
 			})
 		end,
 	},
-	"ggandor/lightspeed.nvim",
+	{
+		"phaazon/hop.nvim",
+		branch = "v2",
+		config = function()
+			require("hop").setup({})
+		end,
+	},
 	{
 		"numToStr/Comment.nvim", -- Easily comment stuff
 		config = function()

@@ -18,6 +18,7 @@ telescope.setup({
 			".git/",
       "cache/",
 			"%.cache",
+      ".venv/",
 			"node_modules/",
 			"%.o",
 			"%.a",
