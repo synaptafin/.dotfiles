@@ -21,17 +21,17 @@ echo $DIR
 source ./functions/functions.sh
 
 # make sure sudo permission when process is running
-# info "Propmting for sudo password"
-# if sudo -v; then
-# 	# Keep-alive: update existing `sudo` time stamp until `setup.sh` has finished
-# 	while true; do
-# 		sudo -n true         # refresh sudo credentials sleep 60             # test credentials every minute
-# 		kill -0 "$$" || exit # if process exists, keep loop
-# 	done 2>/dev/null &     # execute in background
-# 	success "Sudo credentials updated."
-# else
-# 	error "Failed to obtain sudo credentials."
-# fi
+info "Propmting for sudo password"
+if sudo -v; then
+	# Keep-alive: update existing `sudo` time stamp until `setup.sh` has finished
+	while true; do
+		sudo -n true         # refresh sudo credentials sleep 60             # test credentials every minute
+		kill -0 "$$" || exit # if process exists, keep loop
+	done 2>/dev/null &     # execute in background
+	success "Sudo credentials updated."
+else
+	error "Failed to obtain sudo credentials."
+fi
 
 # brew bundle --file ~/.dotfiles/Brewfile
 sh setup.sh

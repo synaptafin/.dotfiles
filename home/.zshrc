@@ -111,8 +111,10 @@ LFCD="$HOME/.config/lf/lfcd.sh"                                #  pre-built bina
 if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
+alias lf="lfcd"
 
 export EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

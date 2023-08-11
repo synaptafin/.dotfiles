@@ -8,6 +8,7 @@ hop.setup({})
 
 -- place this in one of your configuration file(s)
 local directions = require("hop.hint").HintDirection
+
 vim.keymap.set("", "f", function()
 	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
 end, { remap = true })
@@ -25,9 +26,9 @@ vim.keymap.set("", "T", function()
 end, { remap = true })
 
 vim.keymap.set("", "s", function()
-  hop.hint_char2({ direction = directions.AFTER_CURSOR })
+	hop.hint_char2({ direction = directions.AFTER_CURSOR })
 end, { remap = true })
 
 vim.keymap.set("", "S", function()
-  hop.hint_char2({ direction = directions.BEFORE_CURSOR })
+	hop.hint_char2({ direction = directions.BEFORE_CURSOR })
 end, { remap = true })

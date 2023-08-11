@@ -31,6 +31,13 @@ map ` !true
 # execute current file (must be executable)
 map x $$f
 map X !$f
+# map x ${{
+#   if [ -x $f ]; then
+#     $f
+#   else
+#     source $f
+#   fi
+# }}
 
 # dedicated keys for file opener actions
 map o &mimeopen $f
@@ -51,7 +58,7 @@ map O $mimeopen --ask $f
 # add match empty file
 cmd open &{{
     case $(file --mime-type -Lb $f) in
-        text/* | inode/*) lf -remote "send $id \$$EDITOR \$fx";;
+        text/* | inode/* | */json) lf -remote "send $id \$$EDITOR \$fx";;
         *) for f in $fx; do $OPENER $f > /dev/null & done;;
     esac
 }}
@@ -131,15 +138,12 @@ cmd fzf_jump ${{
     fi
 }}
 
+# my command
 cmd test ${{
-    printf "~/.trash/$(basename $f)"
-    if [ -e "$HOME/.trash/$(basename $f)" ]; then
-      printf "file exists in"
-      exit 1
-    else 
-      printf "file doesn't exist"
-    fi
+  printf "$f"
 }}
+
+cmd q quit
 
 # my config
 set hidden true
@@ -153,4 +157,5 @@ map v toggle
 map V invert-below
 map f :fzf_jump
 map dd cut
+map e $$EDITOR $(dirname $f)
 

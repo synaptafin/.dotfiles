@@ -1,3 +1,6 @@
 [user]
 	name = enigmaiiiiii
 	email = enigmaiiiiii@localhost.localdomain
+
+[ghq]
+  root = ~/.ghq

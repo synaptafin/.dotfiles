@@ -22,6 +22,8 @@ require("lazy").setup({
 
 	-- appearance
 	"lukas-reineke/indent-blankline.nvim",
+
+  -- theme
 	"shatur/neovim-ayu",
 	"rebelot/kanagawa.nvim",
 	"folke/tokyonight.nvim",
@@ -86,7 +88,7 @@ require("lazy").setup({
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- toggleterminal
-	"akinsho/toggleterm.nvim",
+	{"akinsho/toggleterm.nvim", event="VeryLazy"},
 
 	-- lualine
 	"nvim-lualine/lualine.nvim",

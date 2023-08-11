@@ -21,10 +21,10 @@ vim.opt.autowriteall = true
 vim.opt.termguicolors = true
 vim.opt.shell = 'fish'
 
--- default settings
 vim.opt.relativenumber = false
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
-vim.opt.splitright = true
+-- vim.opt.splitright = true
+vim.opt.showtabline = 0
 
 vim.cmd "hi Normal guibg=NONE ctermbg=NONE"
