@@ -28,7 +28,7 @@ local diff = {
 local mode = {
 	"mode",
 	fmt = function(str)
-		return "-- " .. str .. " --"
+		return str
 	end,
 }
 
@@ -66,7 +66,7 @@ end
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
+		theme = "ayu_mirage",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
@@ -74,8 +74,8 @@ lualine.setup({
 	},
 	sections = {
 		lualine_a = { branch, diagnostics },
-		lualine_b = { mode },
-		lualine_c = { "filename" },
+		lualine_b = { "filename"},
+		lualine_c = { mode },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_y = { location },

@@ -53,7 +53,7 @@ fi
 # * background_color and foreground_color. Formats:
 #   * Named colors (chech man page of tmux for complete list) e.g. black, red, green, yellow, blue, magenta, cyan, white
 #   * a hexadecimal RGB string e.g. #ffffff
-#   * 'default' for the defalt tmux color.
+#   * 'default' for the default tmux color.
 # * non_default_separator - specify an alternative character for this segment's separator
 # * separator_background_color - specify a unique background color for the separator
 # * separator_foreground_color - specify a unique foreground color for the separator
@@ -78,15 +78,15 @@ fi
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
 		# "tmux_session_info 148 234" \
-		"hostname 33 0" \
-		#"ifstat 30 255" \
-		#"ifstat_sys 30 255" \
+		# "hostname  #fe4a49 0" \
+		# "ifstat 30 255" \
+		# "ifstat_sys 30 255" \
 		# "lan_ip 24 255 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
 		# "wan_ip 24 255" \
-		"vcs_branch 29 88" \
+		"vcs_branch  #1f43e3 172" \
 		#"vcs_compare 60 255" \
 		"vcs_staged 64 255" \
-		"vcs_modified 9 255" \
+		"vcs_modified #44af69 255" \
 		#"vcs_others 245 0" \
 	)
 fi

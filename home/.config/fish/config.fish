@@ -1,4 +1,11 @@
-set fish_greeting "hello fish"
+set fish_greeting ""
+
+set -gx EDITOR nvim
+set -gx XDG_CONFIG_HOME $HOME/.config
+
+set -gx PATH bin $PATH
+set -gx PATH ~/bin $PATH
+set -gx PATH ~/.local/bin $PATH
 
 if type -q lf
   alias lf="lfcd"

@@ -27,4 +27,6 @@ vim.opt.splitbelow = true
 -- vim.opt.splitright = true
 vim.opt.showtabline = 0
 
-vim.cmd "hi Normal guibg=NONE ctermbg=NONE"
+-- vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
+
+vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')

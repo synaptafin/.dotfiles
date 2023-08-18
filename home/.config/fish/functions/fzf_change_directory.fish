@@ -2,7 +2,7 @@ function fzf_change_directory
   _fzf_change_directory | fzf | read foo
   printf "$foo"
   if test -n "$foo"
-    builtin cd "$foo"
+    cd "$foo"
     commandline -f repaint
   else 
     commandline ''

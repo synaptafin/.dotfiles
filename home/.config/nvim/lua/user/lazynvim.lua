@@ -29,7 +29,6 @@ require("lazy").setup({
 	"folke/tokyonight.nvim",
 
 	-- which key
-	-- Lua
 	{
 		"folke/which-key.nvim",
 		init = function()
@@ -78,20 +77,21 @@ require("lazy").setup({
 
 	-- git
 	"lewis6991/gitsigns.nvim",
-	"kdheepak/lazygit.nvim",
+	-- "kdheepak/lazygit.nvim",
 
 	-- file explorer
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 
-	-- bufferline
+  -- bufferline
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- toggleterminal
-	{"akinsho/toggleterm.nvim", event="VeryLazy"},
+	-- {"akinsho/toggleterm.nvim", event="VeryLazy"},
 
-	-- lualine
+	-- file info
 	"nvim-lualine/lualine.nvim",
+  'simrat39/symbols-outline.nvim',
 
 	-- edit
 	{
