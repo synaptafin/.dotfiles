@@ -1,14 +1,15 @@
 function fzf_select_history
-  if test (count $argv) = 0
-    history | fzf | read foo
+  set -l buf (commandline -b)
+  if [ $buf ]
+    history | fzf --query "$buf" | read selected
   else
-    history | fzf --query "$argv" | read foo
+    history | fzf | read foo
   end
 
-  if [ $foo ]
-    commandline $foo
+  if [ $selected ]
+    commandline -r $selected
   else
-    commandline ''
+    commandline -r ''
   end
 end
 

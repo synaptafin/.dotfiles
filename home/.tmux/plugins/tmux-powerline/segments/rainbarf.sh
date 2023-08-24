@@ -8,7 +8,7 @@ run_segment() {
 	fi
 
     # Customize via ~/.rainbarf.conf
-	stats=$(rainbarf --tmux)
+	stats=$(rainbarf --tmux --width 20 --no-battery -rgb)
 	if [ -n "$stats" ]; then
 		echo "$stats";
 	fi

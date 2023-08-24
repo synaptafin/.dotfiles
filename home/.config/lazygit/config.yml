@@ -220,7 +220,7 @@ keybinding:
     openLogMenu: '<c-l>'
     viewBisectOptions: 'b'
   stash:
-    popStash: 'g'
+    popStash: 'p'
     renameStash: 'r'
   commitFiles:
     checkoutCommitFile: 'c'
