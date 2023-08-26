@@ -15,6 +15,10 @@ find $SOURCE_DIR -depth 1 -type f | while read path; do
   symlink $path $DEST_DIR/$target
 done
 
+# config ssh
+echo "--- link file ~/.ssh/config"
+symlink $SOURCE_DIR/.ssh/config $DEST_DIR/.ssh/config
+
 # link directory in .config directory for nvim, lf, etc.
 echo "--- link directory in .config ---"
 find $SOURCE_DIR/.config -depth 1 -type d | while read path; do
