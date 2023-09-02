@@ -4,6 +4,12 @@ Configuration files for vim, tmux, git, ...
 
 ## Preparation
 
+## Bootstrap
+
+```
+./bootstrap.sh
+```
+
 ## What dotfile do
 
 - [x] config tools

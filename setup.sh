@@ -5,8 +5,8 @@ source functions/functions.sh
 DIR="home"
 cd $DIR
 
-SOURCE_DIR=$(pwd)
-DEST_DIR=$HOME
+SOURCE_DIR=$(pwd) # Directory where config stored
+DEST_DIR=$HOME # create symlink in $HOME
 
 # config file directly locate under $HOME
 echo "--- link config file directly locate under $HOME ---"

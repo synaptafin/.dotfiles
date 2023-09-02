@@ -2,8 +2,8 @@
 
 # functions for create symlink and print info
 
-# $1 target
-# $2 link name
+# $1 source file path
+# $2 symbolic link path
 symlink() {
 	OVERWRITTEN=""
 

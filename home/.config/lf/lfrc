@@ -77,7 +77,16 @@ map a :push %touch<space>
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)
 
-cmd trash %set -f; mv $fx ~/.trash
+# cmd trash %set -f; mv $fx ~/.trash
+cmd trash %{{
+  set -f
+  if [ ! -d "$f" ] || ( [ -d "$f" ] && [ -z "$(ls -A $f)" ] ); then
+    mv $f ~/.trash
+  else
+    cp -r $f ~/.trash && rm -rf $f
+  fi
+  echo "trash $f"
+}}
 
 # define a custom 'delete' command
 # cmd delete ${{
@@ -139,8 +148,13 @@ cmd fzf_jump ${{
 }}
 
 # my command
-cmd test ${{
-  printf "$f"
+cmd test %{{
+  set -f
+  if [ ! -d "$f" ] || ([ -d "$f" ] && [ -z "$(ls -A $f)"]); then
+    echo "empty or not dir"
+  else
+    echo "not empty"
+  fi
 }}
 
 cmd q quit

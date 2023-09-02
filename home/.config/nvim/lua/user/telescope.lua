@@ -16,9 +16,9 @@ telescope.setup({
 
 		file_ignore_patterns = {
 			".git/",
-      "cache/",
+			"cache/",
 			"%.cache",
-      ".venv/",
+			".venv/",
 			"node_modules/",
 			"%.o",
 			"%.a",
@@ -42,7 +42,7 @@ telescope.setup({
 				["<Down>"] = actions.move_selection_next,
 				["<Up>"] = actions.move_selection_previous,
 
-				["<CR>"] = actions.select_default,
+
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
@@ -94,12 +94,12 @@ telescope.setup({
 			},
 		},
 	},
-  pickers = {
-    find_files = {
-      hidden = true,
-      no_ignore = true,
-    },
-  },
+	pickers = {
+		find_files = {
+			hidden = true,
+			no_ignore = true,
+		},
+	},
 	extensions = {
 		media_files = {
 			-- filetypes whitelist
@@ -114,4 +114,3 @@ telescope.setup({
 		-- please take a look at the readme of the extension you want to configure
 	},
 })
-

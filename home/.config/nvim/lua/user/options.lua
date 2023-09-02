@@ -27,6 +27,10 @@ vim.opt.splitbelow = true
 -- vim.opt.splitright = true
 vim.opt.showtabline = 0
 
--- vim.cmd('hi Normal guibg=NONE ctermbg=NONE')
-
-vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
+-- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
+-- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
+vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#85877C', bg = '#85877C' })
+vim.api.nvim_set_hl(0, 'FloatBorder', {bg='#3B4252', fg='#5E81AC'})
+vim.api.nvim_set_hl(0, 'NormalFloat', {bg='#3B4252'})
+vim.api.nvim_set_hl(0, 'TelescopeNormal', {bg='#3B4252'})
+vim.api.nvim_set_hl(0, 'TelescopeBorder', {bg='#3B4252'})

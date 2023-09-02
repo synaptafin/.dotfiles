@@ -23,10 +23,12 @@ require("lazy").setup({
 	-- appearance
 	"lukas-reineke/indent-blankline.nvim",
 
-  -- theme
+	-- theme
 	"shatur/neovim-ayu",
 	"rebelot/kanagawa.nvim",
 	"folke/tokyonight.nvim",
+	"NLKNguyen/papercolor-theme",
+	"EdenEast/nightfox.nvim",
 
 	-- which key
 	{
@@ -83,7 +85,7 @@ require("lazy").setup({
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 
-  -- bufferline
+	-- bufferline
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- toggleterminal
@@ -91,7 +93,7 @@ require("lazy").setup({
 
 	-- file info
 	"nvim-lualine/lualine.nvim",
-  'simrat39/symbols-outline.nvim',
+	"simrat39/symbols-outline.nvim",
 
 	-- edit
 	{
