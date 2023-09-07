@@ -17,6 +17,9 @@ require "user.lualine"
 require "user.indent_blankline"
 require "user.hop";
 require "user.outline"
+require "user.luasnip"
+require "user.nvim-dap"
+require "user.nvim-dap-ui"
 
 require "user.options"
 

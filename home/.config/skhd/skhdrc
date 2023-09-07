@@ -30,10 +30,10 @@ ctrl + alt - m : yabai -m window --toggle zoom-fullscreen
 ctrl + alt - n : yabai -m window --toggle zoom-parent
 
 # balance out tree of windows (resize to occupy same area)
-ctrl + alt - e : yabai -m space --balance
+ctrl + alt - b : yabai -m space --balance
 
 # minimize window
-ctrl + alt - b : yabai -m window --minimize
+ctrl + alt - e : yabai -m window --minimize
 
 # -- Moving Windows Around --
 

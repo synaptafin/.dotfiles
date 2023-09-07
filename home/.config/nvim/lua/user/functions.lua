@@ -30,5 +30,21 @@ function ReplaceWithClipboard()
   vim.fn.setreg('"', clipboard_content)
 end
 
-vim.api.nvim_set_keymap("n", "dp", ":lua ReplaceWithClipboard()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "cp", ":lua ReplaceWithClipboard()<CR>", {noremap = true, silent = true})
+
+-- copy current buffer absolute path to system clipboard
+-- vim.api.nvim_create_user_command("Bufferpath", "let @+ = expand('%:p')", {bang = false, nargs = 0})
+function BufferPath()
+  local full_path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', full_path)
+  print(full_path)
+end
+vim.api.nvim_create_user_command(
+  "Bufferpath",
+  -- "let @+ = expand('%:p')",
+  BufferPath,
+  {bang = false, nargs = 0}
+)
+
+
 

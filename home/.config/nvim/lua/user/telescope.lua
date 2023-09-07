@@ -4,6 +4,8 @@ if not status_ok then
 end
 
 telescope.load_extension("media_files")
+local lst = telescope.load_extension("luasnip")
+local luasnip = require("luasnip")
 
 local actions = require("telescope.actions")
 
@@ -28,6 +30,7 @@ telescope.setup({
 			"%.mkv",
 			"%.mp4",
 			"%.zip",
+			".next/",
 		},
 		mappings = {
 			i = {
@@ -41,7 +44,6 @@ telescope.setup({
 
 				["<Down>"] = actions.move_selection_next,
 				["<Up>"] = actions.move_selection_previous,
-
 
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
@@ -106,6 +108,18 @@ telescope.setup({
 			-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
 			filetypes = { "png", "webp", "jpg", "jpeg" },
 			find_cmd = "rg", -- find command (defaults to `fd`)
+		},
+		luasnip = {
+			search = function(entry)
+				return lst.filter_null(entry.context.trigger)
+					.. " "
+					.. lst.filter_null(entry.context.name)
+					.. " "
+					.. entry.ft
+					.. " "
+					.. lst.filter_description(entry.context.name, entry.context.description)
+					.. lst.get_docstring(luasnip, entry.ft, entry.context)[1]
+			end,
 		},
 		-- Your extension configuration goes here:
 		-- extension_name = {
