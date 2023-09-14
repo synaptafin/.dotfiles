@@ -46,7 +46,7 @@ local kind_icons = { -- find more here: https://www.nerdfonts.com/cheat-sheet
 }
 
 cmp.setup({
-  preselect = cmp.PreselectMode.None,
+	preselect = cmp.PreselectMode.None,
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -99,6 +99,21 @@ cmp.setup({
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
+			if vim_item.kind == "Color" and entry.completion_item.documentation then
+				local _, _, r, g, b = string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)%)")
+				if r then
+					-- local color = string.format("#%02x%02x%02x", r, g, b)
+          local color = string.format('%02x', r) .. string.format('%02x', g) .. string.format('%02x', b)
+          local group = 'Tw_' .. color
+          if vim.fn.hlID(group) < 1 then
+            vim.api.nvim_set_hl(0, group, {fg = '#' .. color })
+          end
+          vim_item.kind = ' ' .. kind_icons[vim_item.kind] .. ' '
+          vim_item.kind_hl_group = group
+          return vim_item
+				end
+			end
+
 			-- Kind icons
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
@@ -113,7 +128,7 @@ cmp.setup({
 		end,
 	},
 	sources = {
-		{ name = "nvim_lsp", priority = 100},
+		{ name = "nvim_lsp", priority = 100 },
 		{ name = "nvim_lua", priority = 90 },
 		{ name = "luasnip" },
 		{ name = "buffer" },
@@ -135,9 +150,9 @@ cmp.setup({
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline({
-    ["<C-j>"] = {s = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })},
-    ["<C-k>"] = {s = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })},
-  }),
+		["<C-j>"] = { s = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }) },
+		["<C-k>"] = { s = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }) },
+	}),
 	sources = {
 		{ name = "buffer" },
 	},
@@ -146,9 +161,9 @@ cmp.setup.cmdline("/", {
 -- `:` cmdline setup.
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline({
-    ["<C-j>"] = {c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })},
-    ["<C-k>"] = {c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })},
-  }),
+		["<C-j>"] = { c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }) },
+		["<C-k>"] = { c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }) },
+	}),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, { {
@@ -158,4 +173,3 @@ cmp.setup.cmdline(":", {
 		},
 	} }),
 })
-

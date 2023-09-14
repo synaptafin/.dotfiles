@@ -20,12 +20,12 @@ vim.opt.pumheight = 10
 vim.opt.autowriteall = true
 vim.opt.termguicolors = true
 vim.opt.shell = 'fish'
-
 vim.opt.relativenumber = false
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
 -- vim.opt.splitright = true
 vim.opt.showtabline = 0
+vim.opt.timeoutlen = 800
 
 -- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
 -- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
@@ -41,3 +41,4 @@ vim.opt.diffopt = vim.opt.diffopt + "vertical"
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.foldmethod = "syntax"
 vim.opt.foldlevel = 99
+
