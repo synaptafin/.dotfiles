@@ -78,14 +78,24 @@ treesitter_config.setup({
 	},
 	autotag = {
 		enable = true,
-    enable_rename = true,
-    enable_close = true,
-    enable_close_on_slash = true,
-    filetypes = filetypes,
-    skip_tags = skip_tags,
+		enable_rename = true,
+		enable_close = true,
+		enable_close_on_slash = true,
+		filetypes = filetypes,
+		skip_tags = skip_tags,
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<CR>",
+			node_incremental = "<CR>",
+			-- scope_incremental = "<TAB>",
+			node_decremental = "<BS>",
+		},
 	},
 })
 
+-- context fold
 require("treesitter-context").setup({
 	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 	max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.

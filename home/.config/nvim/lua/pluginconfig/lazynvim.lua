@@ -14,15 +14,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- plugins here
+  -- useful module packer
+  { 'echasnovski/mini.nvim', branch = 'stable' },
+
+  -- ai completion
 	"github/copilot.vim",
+
+  -- extension api
 	"nvim-lua/popup.nvim", -- An implementation of the Popup API from vim in Neovim
 	"nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
-	"windwp/nvim-autopairs",
-	"windwp/nvim-ts-autotag",
 
 	-- appearance
 	"lukas-reineke/indent-blankline.nvim",
+	{
+		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
+	},
 
 	-- theme
 	"shatur/neovim-ayu",
@@ -124,13 +131,7 @@ require("lazy").setup({
 			require("hop").setup({})
 		end,
 	},
-	{
-		"numToStr/Comment.nvim", -- Easily comment stuff
-		event = "VeryLazy",
-		config = function()
-			require("Comment").setup()
-		end,
-	},
+	"windwp/nvim-ts-autotag",
 
 	-- Debugger
 	{
@@ -147,4 +148,7 @@ require("lazy").setup({
 			{ "jbyuki/one-small-step-for-vimkind" },
 		},
 	},
+
+	-- my functions
+	{ "enigmaiiiiiiii/mini-functions.nvim", event = "VeryLazy" },
 })

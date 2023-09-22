@@ -1,14 +1,17 @@
-require "pluginconfig.keymaps"
-require "pluginconfig.functions"
+-- Entry for neovim config
 
+-- Keymap before plugin loaded for basic keymap, which can be override by plugin keymap config
+require "pluginconfig.keymaps"
+
+-- lazy plugin manager
 require "pluginconfig.lazynvim"
-require "pluginconfig.colorscheme"
+
+-- Configuration plugin managed by lazynvim
+require "pluginconfig.functions"
 require "pluginconfig.cmp"
 require "pluginconfig.lsp"
 require "pluginconfig.telescope"
 require "pluginconfig.treesitter"
-require "pluginconfig.autopairs"
-require "pluginconfig.comment"
 require "pluginconfig.gitsigns"
 require "pluginconfig.nvim-tree"
 require "pluginconfig.whichkey"
@@ -20,10 +23,12 @@ require "pluginconfig.outline"
 require "pluginconfig.luasnip"
 require "pluginconfig.nvim-dap"
 require "pluginconfig.nvim-dap-ui"
+require "pluginconfig.mini"
 
+-- Options after plugin loaded for override plugin default options
 require "pluginconfig.options"
 
--- old setup
+-- legacy setup
 -- require "pluginconfig.packer"
 -- require "pluginconfig.bufferline"
 -- require "pluginconfig.toggleterm"

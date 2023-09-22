@@ -10,8 +10,7 @@ vim.g.maplocalleader = " "
 
 -- Modes
 --   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
+--   insert_mode = "i", visual_mode = "v",
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
@@ -37,13 +36,14 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+keymap("v", "<D-c>", '"+y', opts)
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "J", ":m             ove '>+1<CR>gv-gv", opts)
+keymap("x", "K", ":m             ove '<-2<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":m         ove '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":m         ove '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -58,3 +58,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- NvimTree --
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+
+-- my plugin --
+vim.keymap.set("n", "<leader>h", function() require('mini-functions').hello_world() end, opts)

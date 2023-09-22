@@ -1,50 +1,9 @@
+-- local status_ok, mini_functions = pcall(require, 'mini-functions')
+--
+-- if not status_ok then
+--   print("Error loading mini-functions")
+--   return
+-- end
 
--- Insert markdown table of contents
-function GenerateMarkdownTOC()
-	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	local toc = {}
-	for _, line in ipairs(lines) do
-		local level, title = string.match(line, "^(##+)%s*(.*)")
-		if level and title then
-			local item =
-				string.format("%s* [%s](#%s)", string.rep("  ", #level - 2), title, title:lower():gsub("%s+", "-"))
-			table.insert(toc, item)
-		end
-	end
-	return toc
-end
-
-function InsertMarkdownTOC()
-	local toc = GenerateMarkdownTOC()
-	local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_buf_set_lines(0, row, row, false, toc)
-end
-
-vim.api.nvim_set_keymap("n", "<leader>mt", ":lua InsertMarkdownTOC()<CR>", {noremap = true, silent = true})
-
--- replace word with clipboard
-function ReplaceWithClipboard()
-  local clipboard_content= vim.fn.getreg('"')
-  vim.fn.expand('<cword>')
-  vim.api.nvim_command('normal! ciw' .. clipboard_content)
-  vim.fn.setreg('"', clipboard_content)
-end
-
-vim.api.nvim_set_keymap("n", "cp", ":lua ReplaceWithClipboard()<CR>", {noremap = true, silent = true})
-
--- copy current buffer absolute path to system clipboard
--- vim.api.nvim_create_user_command("Bufferpath", "let @+ = expand('%:p')", {bang = false, nargs = 0})
-function BufferPath()
-  local full_path = vim.fn.expand('%:p')
-  vim.fn.setreg('+', full_path)
-  print(full_path)
-end
-vim.api.nvim_create_user_command(
-  "Bufferpath",
-  -- "let @+ = expand('%:p')",
-  BufferPath,
-  {bang = false, nargs = 0}
-)
-
-
+require('mini-functions')
 
