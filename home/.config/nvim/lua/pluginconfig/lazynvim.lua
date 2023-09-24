@@ -131,6 +131,7 @@ require("lazy").setup({
 			require("hop").setup({})
 		end,
 	},
+  'windwp/nvim-autopairs',
 	"windwp/nvim-ts-autotag",
 
 	-- Debugger

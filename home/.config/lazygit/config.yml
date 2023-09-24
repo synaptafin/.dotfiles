@@ -140,8 +140,8 @@ keybinding:
     openFile: ''
     scrollUpMain: '<pgup>' # main panel scroll up
     scrollDownMain: '<pgdown>' # main panel scroll down
-    scrollUpMain-alt1: 'K' # main panel scroll up
-    scrollDownMain-alt1: 'J' # main panel scroll down
+    scrollUpMain-alt1: '<c-k>' # main panel scroll up
+    scrollDownMain-alt1: '<c-j>' # main panel scroll down
     scrollUpMain-alt2: '.' # main panel scroll up
     scrollDownMain-alt2: ',' # main panel scroll down
     executeCustomCommand: ':'
@@ -205,8 +205,8 @@ keybinding:
     markCommitAsFixup: 'f'
     createFixupCommit: 'F' # create fixup commit for this commit
     squashAboveCommits: 'S'
-    moveDownCommit: '<c-j>' # move commit down one
-    moveUpCommit: '<c-k>' # move commit up one
+    moveDownCommit: '' # move commit down one
+    moveUpCommit: '' # move commit up one
     amendToCommit: 'A'
     pickCommit: 'p' # pick commit (when mid-rebase)
     revertCommit: 't'

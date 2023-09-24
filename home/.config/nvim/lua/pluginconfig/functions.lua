@@ -1,9 +1,28 @@
--- local status_ok, mini_functions = pcall(require, 'mini-functions')
---
--- if not status_ok then
---   print("Error loading mini-functions")
---   return
--- end
+require("mini-functions")
 
-require('mini-functions')
+local nm  = vim.api.nvim_get_hl(0, { name = 'IncSearch', link=false })
+local co  = vim.api.nvim_get_hl_by_name("Comment",    true)
+local fn  = vim.api.nvim_get_hl(0, { name = 'Function', link = false })
+local str = vim.api.nvim_get_hl_by_name("String",     true)
+local kw  = vim.api.nvim_get_hl_by_name("Keyword",    true)
+local tp  = vim.api.nvim_get_hl_by_name("Type",       true)
+local op  = vim.api.nvim_get_hl_by_name("Operator",   true)
+local err = vim.api.nvim_get_hl_by_name("Error",      true)
+local id  = vim.api.nvim_get_hl_by_name("Identifier", true)
+local cs  = vim.api.nvim_get_hl_by_name("Constant",   true)
+
+-- local hex_fore = string.format('#%06x', ret.foreground)
+-- local hex_back = string.format('#%06x', ret.background)
+
+-- print('normal: ' .. vim.inspect(nm))
+-- print('comment: ' .. vim.inspect(co))
+-- print(vim.inspect(co))
+-- print(vim.inspect(fn))
+-- print(vim.inspect(str))
+-- print(vim.inspect(kw))
+-- print(vim.inspect(tp))
+-- print(vim.inspect(op))
+-- print(vim.inspect(err))
+-- print(vim.inspect(id))
+-- print(vim.inspect(cs))
 
