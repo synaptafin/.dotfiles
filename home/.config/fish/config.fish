@@ -7,6 +7,7 @@ set -gx PATH bin $PATH
 set -gx PATH ~/bin $PATH
 set -gx PATH ~/.local/bin $PATH
 
+# set lf as lfcd
 if type -q lf
   alias lf="lfcd"
 end

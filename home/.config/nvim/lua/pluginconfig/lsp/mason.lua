@@ -7,6 +7,7 @@ local servers = {
   "marksman",
   "bashls",
   "tailwindcss",
+  "clangd",
 }
 
 local settings = {

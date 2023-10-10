@@ -31,9 +31,6 @@ require("mini.align").setup({
 -- mini.comment
 require("mini.comment").setup({})
 
--- mini.pairs
-require("mini.pairs").setup({})
-
 -- mini.hues
 require("mini.hues").setup({ background = "#272a2c", foreground = "#d0d0e4", n_hues = 8, saturation = 'high' })
 

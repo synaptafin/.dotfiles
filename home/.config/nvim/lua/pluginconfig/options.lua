@@ -24,7 +24,7 @@ vim.opt.mouse          = "a"
 vim.opt.splitbelow     = true
 -- vim.opt.splitright  = true
 vim.opt.showtabline    = 0
-vim.opt.timeoutlen     = 800
+vim.opt.timeoutlen     = 500
 
 -- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
 -- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
