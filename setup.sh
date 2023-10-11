@@ -6,30 +6,26 @@ DIR="home"
 cd $DIR
 
 SOURCE_DIR=$(pwd) # Directory where config stored
-DEST_DIR=$HOME # create symlink in $HOME
 
 # config file directly locate under $HOME
-echo "--- link config file directly locate under $HOME ---"
-find $SOURCE_DIR -depth 1 -type f | while read path; do
-  target=$(basename $path)
-  symlink $path $DEST_DIR/$target
+echo "--- link file ---"
+find $SOURCE_DIR -depth 1 -type f | sed 's/.*\///g' | while read target; do
+  dest=$SOURCE_DIR/$target
+  symbol=$HOME/$target
+  symlink $dest $symbol
 done
 
-# config ssh
-echo "--- link file ~/.ssh/config"
-symlink $SOURCE_DIR/.ssh/config $DEST_DIR/.ssh/config
-
-# link directory in .config directory for nvim, lf, etc.
-echo "--- link directory in .config ---"
-find $SOURCE_DIR/.config -depth 1 -type d | while read path; do
-  target=$(basename $path)
-  symlink $SOURCE_DIR/.config/$target $DEST_DIR/.config/$target
+echo "--- link dictory ---"
+find ${SOURCE_DIR} -d 1 -type d | sed 's/.*\///g' | while read config_dir; do
+  if [ ! -d $HOME/$config_dir ]; then
+    rm -f $HOME/$config_dir
+    mkdir $HOME/$config_dir
+  fi
+  find $config_dir -d 1 | sed 's/.*\///g' | while read target; do
+    dest=$SOURCE_DIR/$config_dir/$target
+    symbol=$HOME/$config_dir/$target
+    symlink $dest $symbol
+  done
 done
-
-# link .tmux directory for tmux plugin
-echo "--- setup tmux plugin ---"
-if [[ -d ".tmux" ]]; then
-  symlink $SOURCE_DIR/.tmux $DEST_DIR/.tmux
-fi
 
 success "Setup complete!"
