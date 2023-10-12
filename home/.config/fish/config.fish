@@ -9,7 +9,11 @@ set -gx PATH ~/.local/bin $PATH
 
 # set lf as lfcd
 if type -q lf
-  alias lf="lfcd"
+  alias lf "lfcd"
+end
+
+if type -q ranger
+  alias r "ranger-cd"
 end
 
 if type -q exa

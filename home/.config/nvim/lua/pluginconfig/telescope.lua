@@ -101,6 +101,9 @@ telescope.setup({
 			hidden = true,
 			no_ignore = true,
 		},
+    live_grep = {
+      additional_args = { '--hidden' },
+    },
 	},
 	extensions = {
 		media_files = {
