@@ -5,8 +5,8 @@ require "pluginconfig.keymaps"
 
 -- lazy plugin manager
 require "pluginconfig.lazynvim"
+
 -- Configuration plugin managed by lazynvim
-require "pluginconfig.functions"
 require "pluginconfig.cmp"
 require "pluginconfig.lsp"
 require "pluginconfig.telescope"
@@ -16,7 +16,6 @@ require "pluginconfig.nvim-tree"
 require "pluginconfig.whichkey"
 require "pluginconfig.copilot"
 require "pluginconfig.lualine"
-require "pluginconfig.indent_blankline"
 require "pluginconfig.outline"
 require "pluginconfig.luasnip"
 require "pluginconfig.hop";
@@ -24,6 +23,8 @@ require "pluginconfig.autopairs"
 require "pluginconfig.nvim-dap"
 require "pluginconfig.nvim-dap-ui"
 require "pluginconfig.mini"
+require "pluginconfig.indent_blankline"
+require "pluginconfig.functions"
 
 -- Options after plugin loaded for override plugin default options
 require "pluginconfig.options"

@@ -1,8 +1,4 @@
-local status_treesitter_ok, treesitter_config = pcall(require, "nvim-treesitter.configs")
-
-if not status_treesitter_ok then
-	return
-end
+local treesitter_config = require("nvim-treesitter.configs")
 
 local filetypes = {
 	"html",
@@ -22,6 +18,7 @@ local filetypes = {
 	"glimmer",
 	"handlebars",
 	"hbs",
+  "python",
 }
 local skip_tags = {
 	"area",

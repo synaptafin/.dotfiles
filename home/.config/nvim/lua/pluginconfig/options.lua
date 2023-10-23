@@ -25,6 +25,7 @@ vim.opt.splitbelow     = true
 -- vim.opt.splitright  = true
 vim.opt.showtabline    = 0
 vim.opt.timeoutlen     = 500
+vim.opt.list           = true
 
 -- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
 -- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')

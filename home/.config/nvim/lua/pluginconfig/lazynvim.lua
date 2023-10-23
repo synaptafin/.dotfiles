@@ -25,7 +25,7 @@ require("lazy").setup({
 	"nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
 
 	-- appearance
-	"lukas-reineke/indent-blankline.nvim",
+  {"lukas-reineke/indent-blankline.nvim", main="ibl", opt={} },
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = "BufReadPre",

@@ -1,8 +1,47 @@
 local lualine = require("lualine")
 
 local hide_in_width = function()
-	return vim.fn.winwidth(0) > 80
+	return vim.fn.winwidth(0) > 120
 end
+
+local palette = require("mini.hues").make_palette({
+	background = "#272a2c",
+	foreground = "#d0d0e4",
+	n_hues = 8,
+	saturation = "high",
+})
+
+--- palette table keys
+---   bg, bg_edge2,bg_edge, bg_mid, bg_mid2
+---   fg, fg_edge2, fg_edge, fg_mid, fg_mid2
+---   red, red_bg
+---   orange, orange_bg
+---   yellow, yellow_bg
+---   green, green_bg
+---   cyan, cyan_bg
+---   azure, azure_bg
+---   blue, blue_bg
+---   purple, purple_bg
+
+local theme = {
+	normal = {
+		a = { fg = palette.blue_bg, bg = palette.blue },
+		b = { fg = palette.fg_edge2, bg = palette.bg_mid },
+		c = { fg = palette.fg_edge2, bg = palette.bg_edge },
+		x = { fg = palette.fg_edge2, bg = palette.bg_edge },
+		y = { fg = palette.fg_edge2, bg = palette.bg_edge },
+		z = { fg = palette.fg_edge2, bg = palette.bg_edge },
+	},
+	insert = {
+		a = { fg = palette.green_bg, bg = palette.green },
+	},
+	visual = {
+		a = { fg = palette.purple_bg, bg = palette.purple },
+	},
+	command = {
+		a = { fg = palette.red_bg, bg = palette.red },
+	},
+}
 
 local diagnostics = {
 	"diagnostics",
@@ -11,11 +50,12 @@ local diagnostics = {
 	sections = { "error", "warn", "info" },
 	update_in_insert = false,
 	always_visible = true,
-	-- diagnostics_color = {
-	-- 	error = { fg = colors.red },
-	-- 	warn = { fg = colors.yellow },
-	-- 	info = { fg = colors.cyan },
-	-- },
+	-- color = { fg = palette.fg_mid, bg = palette.bg_mid },
+	diagnostics_color = {
+		error = { fg = palette.red },
+		warn = { fg = palette.yellow },
+		info = { fg = palette.cyan },
+	},
 }
 
 local diff = {
@@ -29,7 +69,7 @@ local diff = {
 local mode = {
 	"mode",
 	fmt = function(str)
-		return str
+		return string.sub(str, 1, 3)
 	end,
 }
 
@@ -57,9 +97,9 @@ local filename = {
 local workspace = {
 	function()
 		local workspace = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-		return workspace
+		return "p:" .. workspace
 	end,
-	-- color = { bg =colors.cyan, gui = "bold" },
+	color = { fg = palette.yellow },
 }
 
 local progress = function()
@@ -71,15 +111,19 @@ local progress = function()
 	return chars[index]
 end
 
-local spaces = function()
-	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
-end
+local spaces = {
+	function()
+		return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+	end,
+	cond = hide_in_width,
+}
 
 -- configuration
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = 'auto',
+		-- theme = 'auto',
+		theme = theme,
 		component_separators = { left = "", right = "" },
 		-- component = '|',
 		section_separators = { left = "", right = "" },
@@ -87,9 +131,9 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { branch, diagnostics },
-		lualine_b = { workspace, filename },
-		lualine_c = { mode },
+		lualine_a = { mode },
+		lualine_b = { branch, diagnostics },
+		lualine_c = { filename, workspace },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_y = { location },
