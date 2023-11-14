@@ -31,6 +31,7 @@ telescope.setup({
 			"%.mp4",
 			"%.zip",
 			".next/",
+      "__pycache__/",
 		},
 		mappings = {
 			i = {

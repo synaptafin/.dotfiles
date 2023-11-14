@@ -109,8 +109,6 @@ if [ -f "$LFCD" ]; then
 fi
 alias lf="lfcd"
 
-
-
 export EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

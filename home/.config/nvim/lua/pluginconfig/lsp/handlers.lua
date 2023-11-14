@@ -19,7 +19,9 @@ M.setup = function()
     -- show signs
     signs = {
       active = signs,
-    }, update_in_insert = true, underline = true,
+    },
+    update_in_insert = true,
+    underline = true,
     severity_sort = true,
     float = {
       focusable = false,

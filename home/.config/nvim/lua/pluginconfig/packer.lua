@@ -48,87 +48,87 @@ return packer.startup(function(use)
 
   -- which key
   -- Lua
-  -- use {
-  --   "folke/which-key.nvim",
-  --   config = function()
-  --     vim.o.timeout = true
-  --     vim.o.timeoutlen =0
-  --     require("which-key").setup {
-  --       -- your configuration comes here
-  --       -- or leave it empty to use the default settings
-  --       -- refer to the configuration section below
-  --     }
-  --   end
-  -- }
-  --
-  -- -- cmp
-  -- use "hrsh7th/nvim-cmp"
-  -- use "hrsh7th/cmp-buffer"
-  -- use "hrsh7th/cmp-path"
-  -- use "hrsh7th/cmp-cmdline"
-  -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  -- use "hrsh7th/cmp-nvim-lsp"
-  -- use "hrsh7th/cmp-nvim-lua"
-  -- use({
-  --     "L3MON4D3/LuaSnip",
-  --     -- follow latest release.
-  --     tag = "v<CurrentMajor>.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-  --     -- install jsregexp (optional!:).
-  --     run = "make install_jsregexp"
-  -- })
-  -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-  --
-  -- -- telescope
-  -- use{
-  --     'nvim-telescope/telescope.nvim',
-  --     tag = '0.1.2',
-  -- }
-  -- use 'nvim-telescope/telescope-media-files.nvim'
-  --
-  -- -- lsp
-  -- use "neovim/nvim-lspconfig"
-  -- use "williamboman/mason.nvim" -- simple to use language server installer
-  -- use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-  -- use 'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
-  --
-  -- -- treesitter
-  -- use {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   run = ":TSUpdate",
-  -- }
-  -- use "p00f/nvim-ts-rainbow"
-  -- use "nvim-treesitter/playground"
-  --
-  -- -- git
-  -- use "lewis6991/gitsigns.nvim"
-  --
-  -- -- file explorer
-  -- use 'kyazdani42/nvim-web-devicons'
-  -- use 'kyazdani42/nvim-tree.lua'
-  --
-  -- -- bufferline
-  -- use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
-  --
-  -- -- toggleterminal
-  -- use "akinsho/toggleterm.nvim"
-  --
-  -- -- edit
-  -- use{
-  --   "kylechui/nvim-surround",
-  --   tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-  --   config = function()
-  --       require("nvim-surround").setup({
-  --           -- Configuration here, or leave empty to use defaults
-  --       })
-  --   end
-  -- }
-  -- use 'ggandor/lightspeed.nvim'
-  -- use {
-  --   "numToStr/Comment.nvim",  -- Easily comment stuff
-  --   config = function()
-  --     require("Comment").setup()
-  --   end
-  -- }
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen =0
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  -- cmp
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
+  use({
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      tag = "v<CurrentMajor>.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+      -- install jsregexp (optional!:).
+      run = "make install_jsregexp"
+  })
+  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+
+  -- telescope
+  use{
+      'nvim-telescope/telescope.nvim',
+      tag = '0.1.2',
+  }
+  use 'nvim-telescope/telescope-media-files.nvim'
+
+  -- lsp
+  use "neovim/nvim-lspconfig"
+  use "williamboman/mason.nvim" -- simple to use language server installer
+  use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
+  use 'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions
+
+  -- treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+  use "p00f/nvim-ts-rainbow"
+  use "nvim-treesitter/playground"
+
+  -- git
+  use "lewis6991/gitsigns.nvim"
+
+  -- file explorer
+  use 'kyazdani42/nvim-web-devicons'
+  use 'kyazdani42/nvim-tree.lua'
+
+  -- bufferline
+  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+
+  -- toggleterminal
+  use "akinsho/toggleterm.nvim"
+
+  -- edit
+  use{
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  }
+  use 'ggandor/lightspeed.nvim'
+  use {
+    "numToStr/Comment.nvim",  -- Easily comment stuff
+    config = function()
+      require("Comment").setup()
+    end
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

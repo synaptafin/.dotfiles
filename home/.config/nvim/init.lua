@@ -16,7 +16,7 @@ require "pluginconfig.nvim-tree"
 require "pluginconfig.whichkey"
 require "pluginconfig.copilot"
 require "pluginconfig.lualine"
-require "pluginconfig.outline"
+require "pluginconfig.symbols-outline"
 require "pluginconfig.luasnip"
 require "pluginconfig.hop";
 require "pluginconfig.autopairs"

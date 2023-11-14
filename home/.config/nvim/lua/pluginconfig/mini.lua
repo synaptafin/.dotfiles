@@ -29,7 +29,13 @@ require("mini.align").setup({
 })
 
 -- mini.comment
-require("mini.comment").setup({})
+require("mini.comment").setup({
+  options = {
+    custom_commentstring = function()
+      return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+    end
+  }
+})
 
 -- mini.hues
 require("mini.hues").setup({ background = "#272a2c", foreground = "#d0d0e4", n_hues = 8, saturation = 'high' })

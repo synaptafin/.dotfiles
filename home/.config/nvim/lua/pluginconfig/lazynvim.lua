@@ -102,6 +102,11 @@ require("lazy").setup({
 	-- file explorer
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
+  -- {
+  --   "stevearc/oil.nvim",
+  --   opts = {},
+  -- },
+
 
 	-- bufferline
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
@@ -131,6 +136,7 @@ require("lazy").setup({
 			require("hop").setup({})
 		end,
 	},
+  { 'numToStr/Comment.nvim', lazy=false},
   'windwp/nvim-autopairs',
 	"windwp/nvim-ts-autotag",
 
@@ -151,5 +157,9 @@ require("lazy").setup({
 	},
 
 	-- my functions
-	{ "enigmaiiiiiiii/mini-functions.nvim", event = "VeryLazy" },
+	{
+    "enigmaiiiiiiii/mini-functions.nvim",
+    branch="dev",
+    event = "VeryLazy"
+  },
 })

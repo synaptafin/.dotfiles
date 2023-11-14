@@ -45,7 +45,7 @@ local theme = {
 
 local diagnostics = {
 	"diagnostics",
-	sources = { "nvim_diagnostic" },
+	sources = { "nvim_lsp", "vim_lsp"  },
 	symbols = { error = " ", warn = " ", info = " " },
 	sections = { "error", "warn", "info" },
 	update_in_insert = false,
@@ -62,7 +62,7 @@ local diff = {
 	"diff",
 	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-	cond = hide_in_width,
+  paddind = 0,
 }
 
 -- section
@@ -75,7 +75,8 @@ local mode = {
 
 local filetype = {
 	"filetype",
-	icons_enabled = false,
+  cond = hide_in_width,
+	icons_enabled = true,
 	icon = nil,
 }
 
@@ -88,17 +89,23 @@ local branch = {
 local location = {
 	"location",
 	padding = 0,
+  cond = hide_in_width,
 }
 local filename = {
-	"filename",
+  function()
+    local path = vim.fn.expand('%:p')
+    local _, _, dir_file = string.find(path, "([^/]+/[^/]+)$")
+    return dir_file
+  end,
 	color = { gui = "bold" },
 }
 
 local workspace = {
 	function()
 		local workspace = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-		return "p:" .. workspace
+		return workspace
 	end,
+  icon = '',
 	color = { fg = palette.yellow },
 }
 
@@ -118,6 +125,11 @@ local spaces = {
 	cond = hide_in_width,
 }
 
+local encoding = {
+  "encoding",
+  cond = hide_in_width,
+}
+
 -- configuration
 lualine.setup({
 	options = {
@@ -135,7 +147,7 @@ lualine.setup({
 		lualine_b = { branch, diagnostics },
 		lualine_c = { filename, workspace },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_x = { diff, spaces, "encoding", filetype },
+		lualine_x = { diff, spaces, encoding, filetype },
 		lualine_y = { location },
 		lualine_z = { progress },
 	},
