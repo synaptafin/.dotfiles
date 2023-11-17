@@ -31,7 +31,7 @@ telescope.setup({
 			"%.mp4",
 			"%.zip",
 			".next/",
-      "__pycache__/",
+			"__pycache__/",
 		},
 		mappings = {
 			i = {
@@ -101,10 +101,19 @@ telescope.setup({
 		find_files = {
 			hidden = true,
 			no_ignore = true,
+			path_display = { "absolute" },
 		},
-    live_grep = {
-      additional_args = { '--hidden' },
-    },
+		live_grep = {
+			additional_args = { "--hidden" },
+			path_display = { "absolute" },
+		},
+		lsp_definitions = {
+      path_display = function(_, path)
+        local workspace = vim.fn.getcwd()
+        return string.gsub(path, workspace, ".")
+      end,
+      show_line = false,
+		},
 	},
 	extensions = {
 		media_files = {
@@ -125,10 +134,6 @@ telescope.setup({
 					.. lst.get_docstring(luasnip, entry.ft, entry.context)[1]
 			end,
 		},
-		-- Your extension configuration goes here:
-		-- extension_name = {
-		--   extension_config_key = value,
-		-- }
-		-- please take a look at the readme of the extension you want to configure
 	},
 })
+

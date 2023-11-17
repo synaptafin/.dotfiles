@@ -9,9 +9,8 @@ require "pluginconfig.lazynvim"
 -- Configuration plugin managed by lazynvim
 require "pluginconfig.cmp"
 require "pluginconfig.lsp"
-require "pluginconfig.telescope"
 require "pluginconfig.treesitter"
-require "pluginconfig.gitsigns"
+require "pluginconfig.telescope"
 require "pluginconfig.nvim-tree"
 require "pluginconfig.whichkey"
 require "pluginconfig.copilot"
@@ -24,6 +23,7 @@ require "pluginconfig.nvim-dap"
 require "pluginconfig.nvim-dap-ui"
 require "pluginconfig.mini"
 require "pluginconfig.indent_blankline"
+require "pluginconfig.gitsigns"
 require "pluginconfig.functions"
 
 -- Options after plugin loaded for override plugin default options

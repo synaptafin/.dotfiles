@@ -47,3 +47,42 @@ hipatterns.setup({
 		hex_color = hipatterns.gen_highlighter.hex_color(),
 	},
 })
+
+-- telescope doesn't integrate with color config
+-- so set it manually with mini.hues module
+local palette = require("mini.hues").make_palette({
+	background = "#3b4252",
+	foreground = "#d0d0e4",
+	n_hues = 8,
+	saturation = "high",
+})
+
+--- palette table keys
+---   bg, bg_edge2,bg_edge, bg_mid, bg_mid2
+---   fg, fg_edge2, fg_edge, fg_mid, fg_mid2
+---   red, red_bg
+---   orange, orange_bg
+---   yellow, yellow_bg
+---   green, green_bg
+---   cyan, cyan_bg
+---   azure, azure_bg
+---   blue, blue_bg
+---   purple, purple_bg
+
+local TelescoperColor = {
+	TelescopeMatching      = { fg = palette.yellow },
+	-- TelescopeSelection     = { fg = palette.fg,   bg = palette.bg_mid2 },
+	-- TelescopePromptPrefix  = { fg = palette.blue  },
+	-- TelescopePromptNormal  = { fg = palette.fg    },
+	-- TelescopeResultsNormal = { fg = palette.fg,   bg = palette.bg      },
+	-- TelescopePreviewnormal = { fg = nil,          bg = nil             },
+	-- TelescopePromptBorder  = { fg = nil,          bg = nil             },
+	-- TelescopePreviewBorder = { fg = nil,          bg = nil             },
+	-- TelescopePromptTitle   = { fg = nil,          bg = nil             },
+	-- TelescopeResultsTitle  = { fg = nil,          bg = nil             },
+	-- TelescopePreviewTitle  = { fg = nil,          bg = nil             },
+}
+
+for hl, col in pairs(TelescoperColor) do
+	vim.api.nvim_set_hl(0, hl, col)
+end
