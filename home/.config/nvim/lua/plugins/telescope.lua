@@ -137,3 +137,24 @@ telescope.setup({
 	},
 })
 
+-- telescope doesn't integrate with color config
+-- so set it manually with mini.hues module
+local palette = require('plugins.mini').palette
+
+local TelescoperColor = {
+	TelescopeMatching      = { fg = palette.yellow },
+	-- TelescopeSelection     = { fg = palette.fg,   bg = palette.bg_mid2 },
+	-- TelescopePromptPrefix  = { fg = palette.blue  },
+	-- TelescopePromptNormal  = { fg = palette.fg    },
+	-- TelescopeResultsNormal = { fg = palette.fg,   bg = palette.bg      },
+	-- TelescopePreviewnormal = { fg = nil,          bg = nil             },
+	-- TelescopePromptBorder  = { fg = nil,          bg = nil             },
+	-- TelescopePreviewBorder = { fg = nil,          bg = nil             },
+	-- TelescopePromptTitle   = { fg = nil,          bg = nil             },
+	-- TelescopeResultsTitle  = { fg = nil,          bg = nil             },
+	-- TelescopePreviewTitle  = { fg = nil,          bg = nil             },
+}
+
+for hl, col in pairs(TelescoperColor) do
+	vim.api.nvim_set_hl(0, hl, col)
+end

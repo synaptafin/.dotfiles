@@ -25,7 +25,7 @@ require("lazy").setup({
 	"nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
 
 	-- appearance
-  {"lukas-reineke/indent-blankline.nvim", main="ibl", opt={} },
+  {"lukas-reineke/indent-blankline.nvim", main="ibl", opts = {} },
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = "BufReadPre",
@@ -55,16 +55,16 @@ require("lazy").setup({
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-cmdline",
-	"saadparwaiz1/cmp_luasnip", -- snippet completions
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-nvim-lua",
-
+	"saadparwaiz1/cmp_luasnip", -- snippet completions
 	{
 		"L3MON4D3/LuaSnip",
 		event = "VimEnter",
 		build = "make install_jsregexp",
 	},
 	"rafamadriz/friendly-snippets", -- a bunch of snippets to use
+  { "folke/neodev.nvim", opts={} },
 
 	-- telescope
 	{
@@ -83,6 +83,10 @@ require("lazy").setup({
 	},
 	"williamboman/mason-lspconfig.nvim", -- simple to use language server installer
 	"jose-elias-alvarez/null-ls.nvim", -- LSP diagnostics and code actions
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+  },
 
 	-- treesitter
 	{

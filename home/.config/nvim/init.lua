@@ -1,35 +1,37 @@
 -- Entry for neovim config
 
 -- Keymap before plugin loaded for basic keymap, which can be override by plugin keymap config
-require "pluginconfig.keymaps"
+require "config.keymaps"
 
 -- lazy plugin manager
-require "pluginconfig.lazynvim"
+require "plugins.lazynvim"
 
 -- Configuration plugin managed by lazynvim
-require "pluginconfig.cmp"
-require "pluginconfig.lsp"
-require "pluginconfig.treesitter"
-require "pluginconfig.telescope"
-require "pluginconfig.nvim-tree"
-require "pluginconfig.whichkey"
-require "pluginconfig.copilot"
-require "pluginconfig.lualine"
-require "pluginconfig.symbols-outline"
-require "pluginconfig.luasnip"
-require "pluginconfig.hop";
-require "pluginconfig.autopairs"
-require "pluginconfig.nvim-dap"
-require "pluginconfig.nvim-dap-ui"
-require "pluginconfig.mini"
-require "pluginconfig.indent_blankline"
-require "pluginconfig.gitsigns"
-require "pluginconfig.functions"
+require "plugins.cmp"
+require "plugins.lsp"
+require "plugins.treesitter"
+require "plugins.telescope"
+require "plugins.nvim-tree"
+require "plugins.whichkey"
+require "plugins.copilot"
+require "plugins.lualine"
+require "plugins.symbols-outline"
+require "plugins.luasnip"
+require "plugins.hop";
+require "plugins.autopairs"
+require "plugins.nvim-dap"
+require "plugins.nvim-dap-ui"
+require "plugins.mini"
+require "plugins.indent_blankline"
+require "plugins.gitsigns"
+require "plugins.functions"
+require "plugins.lsp-signature"
 
 -- Options after plugin loaded for override plugin default options
-require "pluginconfig.options"
+require "config.options"
 
 -- legacy setup
--- require "pluginconfig.packer"
--- require "pluginconfig.bufferline"
--- require "pluginconfig.toggleterm"
+-- require "plugins.packer"
+-- require "plugins.bufferline"
+-- require "plugins.toggleterm"
+
