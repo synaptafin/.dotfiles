@@ -4,24 +4,7 @@ local hide_in_width = function()
 	return vim.fn.winwidth(0) > 120
 end
 
-local palette = require("mini.hues").make_palette({
-	background = "#272a2c",
-	foreground = "#d0d0e4",
-	n_hues = 8,
-	saturation = "high",
-})
-
---- palette table keys
----   bg, bg_edge2,bg_edge, bg_mid, bg_mid2
----   fg, fg_edge2, fg_edge, fg_mid, fg_mid2
----   red, red_bg
----   orange, orange_bg
----   yellow, yellow_bg
----   green, green_bg
----   cyan, cyan_bg
----   azure, azure_bg
----   blue, blue_bg
----   purple, purple_bg
+local palette = require("plugins.mini").palette
 
 local theme = {
 	normal = {

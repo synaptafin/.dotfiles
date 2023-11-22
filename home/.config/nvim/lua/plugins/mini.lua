@@ -4,32 +4,32 @@ local M = {}
 
 -- mini.align
 require("mini.align").setup({
-	-- No need to copy this inside `setup()`. Will be used automatically.
-	-- Module mappings. Use `''` (empty string) to disable one.
-	mappings = {
-		start = "ga", -- abc
-		start_with_preview = "gA", -- abc
-	},
+  -- No need to copy this inside `setup()`. Will be used automatically.
+  -- Module mappings. Use `''` (empty string) to disable one.
+  mappings = {
+    start = "ga",            -- abc
+    start_with_preview = "gA", -- abc
+  },
 
-	-- Default options controlling alignment process
-	options = {
-		split_pattern = "",
-		justify_side = "left",
-		merge_delimiter = "",
-	},
+  -- Default options controlling alignment process
+  options = {
+    split_pattern = "",
+    justify_side = "left",
+    merge_delimiter = "",
+  },
 
-	-- Default steps performing alignment (if `nil`, default is used)
-	steps = {
-		pre_split = {},
-		split = nil,
-		pre_justify = {},
-		justify = nil,
-		pre_merge = {},
-		merge = nil,
-	},
+  -- Default steps performing alignment (if `nil`, default is used)
+  steps = {
+    pre_split = {},
+    split = nil,
+    pre_justify = {},
+    justify = nil,
+    pre_merge = {},
+    merge = nil,
+  },
 
-	-- Whether to disable showing non-error feedback
-	silent = false,
+  -- Whether to disable showing non-error feedback
+  silent = false,
 })
 
 -- mini.comment
@@ -43,10 +43,10 @@ require("mini.comment").setup({
 
 -- mini.hues
 local mini_hues_config = {
-  background = "#272a2c",
-  foreground = "#d0d0e4",
+  background = "#d0d0e4",
+  foreground = "#272a2c",
   n_hues = 8,
-  saturation = 'high'
+  saturation = 'high',
 }
 
 require("mini.hues").setup(mini_hues_config)
@@ -67,9 +67,9 @@ M.palette = require("mini.hues").make_palette(mini_hues_config)
 -- mini.hlpattern
 local hipatterns = require("mini.hipatterns")
 hipatterns.setup({
-	highlighters = {
-		hex_color = hipatterns.gen_highlighter.hex_color(),
-	},
+  highlighters = {
+    hex_color = hipatterns.gen_highlighter.hex_color(),
+  },
 })
 
 return M
