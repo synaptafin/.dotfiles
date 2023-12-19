@@ -41,6 +41,7 @@ local skip_tags = {
 	"menuitem",
 }
 
+--- @diagnostic disable: missing-fields
 treesitter_config.setup({
 	ensure_installed = "all",
 	sync_install = false,
@@ -69,10 +70,10 @@ treesitter_config.setup({
 		},
 	},
 	indent = { enable = true, disable = { "yaml" } },
-	context_commentstring = {
-		enable = true,
-		enable_autocmd = false,
-	},
+	-- context_commentstring = {
+	-- 	enable = true,
+	-- 	enable_autocmd = false,
+	-- },
 	autotag = {
 		enable = true,
 		enable_rename = true,
@@ -107,3 +108,8 @@ require("treesitter-context").setup({
 	zindex = 20, -- The Z-index of the context window
 	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 })
+
+require("ts_context_commentstring").setup({})
+
+vim.g.skip_ts_context_commentstring_module = true
+

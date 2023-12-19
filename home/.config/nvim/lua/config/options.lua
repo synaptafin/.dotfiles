@@ -28,7 +28,15 @@ vim.opt.splitbelow     = true
 -- vim.opt.splitright  = true
 vim.opt.showtabline    = 0
 vim.opt.timeoutlen     = 500
-vim.opt.list           = true
+vim.opt.list           = false
+vim.opt.listchars      = {
+  tab = "▸ ",
+  trail = "·",
+}
+vim.opt.diffopt     = vim.opt.diffopt + "vertical"
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.foldmethod  = "syntax"
+vim.opt.foldlevel   = 99
 
 -- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
 -- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
@@ -38,17 +46,13 @@ vim.opt.list           = true
 local palette = require("plugins.mini").palette
 
 vim.api.nvim_set_hl(0, 'FloatBorder',     { bg = palette.bg_edge, fg = palette.bg_edge })
-vim.api.nvim_set_hl(0, 'NormalFloat',     { bg = palette.bg_edge })
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.bg_edge })
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = palette.bg_edge, fg = palette.fg_mid2 })
+vim.api.nvim_set_hl(0, 'NormalFloat',     { bg = palette.bg_mid2 })
 vim.api.nvim_set_hl(0, "EndOfBuffer",     { bg = palette.bg, fg = palette.bg })  -- hide ~ at EndOfBuffer
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.bg_mid })
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = palette.bg_mid, fg = palette.fg_mid2 })
+vim.api.nvim_set_hl(0, "WhichKeyFloat",   { bg = palette.bg_mid })
 
-vim.opt.diffopt     = vim.opt.diffopt + "vertical"
-vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.foldmethod  = "syntax"
-vim.opt.foldlevel   = 99
-
--- Undercurl
+-- Undercurl(not work on alacritty)
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 

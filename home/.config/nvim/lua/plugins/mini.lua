@@ -7,7 +7,7 @@ require("mini.align").setup({
   -- No need to copy this inside `setup()`. Will be used automatically.
   -- Module mappings. Use `''` (empty string) to disable one.
   mappings = {
-    start = "ga",            -- abc
+    start = "ga",              -- abc
     start_with_preview = "gA", -- abc
   },
 
@@ -43,10 +43,11 @@ require("mini.comment").setup({
 
 -- mini.hues
 local mini_hues_config = {
-  background = "#d0d0e4",
-  foreground = "#272a2c",
-  n_hues = 8,
+  background = "#242a2f",
+  foreground = "#e3e8ea",
+  n_hues     = 8,
   saturation = 'high',
+  accent     = 'bg',
 }
 
 require("mini.hues").setup(mini_hues_config)

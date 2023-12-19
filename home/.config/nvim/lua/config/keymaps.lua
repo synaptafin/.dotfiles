@@ -33,6 +33,10 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<Tab>", "<C-6>", opts)
 
+-- Block Navigation
+keymap("n", "[", "[]", opts)
+keymap("n", "]", "][", opts)
+
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
