@@ -82,7 +82,12 @@ local file_path = {
     local path = vim.fn.expand('%:p')
     -- local _, _, dir_file = string.find(path, "([^/]+/[^/]+)$")
     local workspace = vim.fn.getcwd()
-    local file_path = string.gsub(path, workspace .. "/", "")
+    local function escape_pattern(pattern)
+      return pattern:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]','%%%1')
+    end
+
+    local escaped_workspace = escape_pattern(workspace)
+    local file_path = string.gsub(path, escaped_workspace .. "/", "")
     return file_path
   end,
   color = { gui = "bold" },
@@ -109,6 +114,7 @@ local workspace = {
 -- 	local index = math.ceil(line_ratio * #chars)
 -- 	return chars[index]
 -- end
+
 local progress = {
   "progress",
   padding = 0,
@@ -116,24 +122,41 @@ local progress = {
     return " " .. str
   end
 }
+
+
+local function rgb_escaper(hex)
+
+  local dec = tonumber(hex:sub(2), 16)
+  local b = math.fmod(dec, 256)
+  local g = math.fmod((dec - b) / 256, 256)
+  local r = math.floor(dec / (256 * 256))
+
+  return string.format("\27[38;2;%d;%d;%dm", r, g, b)
+end
+
+local color_reset = "\27[0m"
+
 local copilot_indicator = {
   function()
     local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
     if client == nil then
       return ""
+      -- return rgb_escaper(palette.red) .. "" .. color_reset
     end
 
     if vim.tbl_isempty(client.requests) then
       return "" -- default icon whilst copilot is idle
+      -- return rgb_escaper(palette.cyan) .. "" .. color_reset
     end
 
-    local spinners = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
-    local ms = vim.loop.hrtime() / 1000000
-    local frame = math.floor(ms / 120) % #spinners
+    -- local spinners = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
+    -- local ms = vim.loop.hrtime() / 1000000
+    -- local frame = math.floor(ms / 120) % #spinners
 
-    return spinners[frame + 1]
+    return ""
+    -- return rgb_escaper(palette.green) .. "" .. color_reset
   end,
-  color = { fg = palette.cyan },
+
   cond = show_in_width,
 }
 

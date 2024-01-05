@@ -121,6 +121,9 @@ telescope.setup({
       end,
       show_line = false,
     },
+    buffers = {
+      sort_mru = true,
+    },
   },
 
   extensions = {

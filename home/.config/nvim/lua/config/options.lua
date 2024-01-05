@@ -37,6 +37,7 @@ vim.opt.diffopt     = vim.opt.diffopt + "vertical"
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.foldmethod  = "syntax"
 vim.opt.foldlevel   = 99
+vim.opt.numberwidth = 4
 
 -- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
 -- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
