@@ -11,21 +11,24 @@ require "plugins.cmp"
 require "plugins.lsp"
 require "plugins.treesitter"
 require "plugins.telescope"
-require "plugins.nvim-tree"
-require "plugins.whichkey"
-require "plugins.copilot"
+require "plugins.nvim-tree"  -- file explorer
+
 require "plugins.lualine"
-require "plugins.symbols-outline"
 require "plugins.luasnip"
 require "plugins.hop";
 require "plugins.autopairs"
-require "plugins.nvim-dap"
-require "plugins.nvim-dap-ui"
 require "plugins.mini"
 require "plugins.indent_blankline"
 require "plugins.gitsigns"
-require "plugins.functions"
+require "plugins.symbols-outline"
+require "plugins.whichkey"
+require "plugins.copilot"
 require "plugins.lsp-signature"
+require "plugins.functions"
+
+-- debug
+require "plugins.nvim-dap"
+require "plugins.nvim-dap-ui"
 
 -- Options after plugin loaded for override plugin default options
 require "config.options"

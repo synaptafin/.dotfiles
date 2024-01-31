@@ -99,6 +99,7 @@ require("lazy").setup({
 	"p00f/nvim-ts-rainbow",
 	"nvim-treesitter/playground",
 	"nvim-treesitter/nvim-treesitter-context",
+  "nvim-treesitter/nvim-treesitter-textobjects",
 
 	-- git
 	"lewis6991/gitsigns.nvim",
