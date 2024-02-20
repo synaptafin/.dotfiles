@@ -90,30 +90,6 @@ treesitter_config.setup({
       node_decremental = "<BS>",
     },
   },
-  textobjects = {
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        ["]]"] = { query = { "@class.outer", "@function.outer" } },
-      },
-      goto_previous_start = {
-        ["[["] = { query = { "@function.outer", "@class.outer" } },
-      },
-      goto_next_end = {
-        ["]e"] = { query = { "@function.outer", "@class.outer" } },
-      },
-      -- Below will go to either the start or the end, whichever is closer.
-      -- Use if you want more granular movements
-      -- Make it even more gradual by adding multiple queries and regex.
-      goto_next = {
-        ["]w"] = "@block.outer",
-      },
-      goto_previous = {
-        ["[w"] = "@block.outer",
-      }
-    },
-  },
 })
 
 -- context fold
