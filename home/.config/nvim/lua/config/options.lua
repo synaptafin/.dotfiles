@@ -49,8 +49,6 @@ local palette = require("plugins.mini").palette
 vim.api.nvim_set_hl(0, 'FloatBorder',     { bg = palette.bg_edge, fg = palette.bg_edge })
 vim.api.nvim_set_hl(0, 'NormalFloat',     { bg = palette.bg_mid2 })
 vim.api.nvim_set_hl(0, "EndOfBuffer",     { bg = palette.bg, fg = palette.bg })  -- hide ~ at EndOfBuffer
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.bg_mid })
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = palette.bg_mid, fg = palette.fg_mid2 })
 vim.api.nvim_set_hl(0, "WhichKeyFloat",   { bg = palette.bg_mid })
 
 -- Undercurl(not work on alacritty)

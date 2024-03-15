@@ -152,18 +152,25 @@ telescope.setup({
 -- so set it manually with mini.hues module
 local palette = require('plugins.mini').palette
 
+-- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.bg_mid })
+-- vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = palette.bg_mid, fg = palette.fg_mid2 })
+
 local TelescoperColor = {
-  TelescopeMatching = { fg = palette.yellow },
+  TelescopeBorder        = { fg = nil, bg = palette.bg_mid },
+  TelescopeMatching      = { fg = palette.bg_edge2, bg = palette.green },
   -- TelescopeSelection     = { fg = palette.fg,   bg = palette.bg_mid2 },
+  TelescopeNormal        = { fg = palette.fg_mid2, bg = palette.bg_mid },
+  TelescopePromptTitle   = { fg = palette.bg_edge2, bg = palette.red },
+  TelescopePromptNormal  = { fg = palette.fg, bg = palette.bg_edge },
+  TelescopePromptBorder  = { fg = palette.bg_edge, bg = palette.bg_edge },
   -- TelescopePromptPrefix  = { fg = palette.blue  },
-  -- TelescopePromptNormal  = { fg = palette.fg    },
-  -- TelescopeResultsNormal = { fg = palette.fg,   bg = palette.bg      },
-  -- TelescopePreviewnormal = { fg = nil,          bg = nil             },
-  -- TelescopePromptBorder  = { fg = nil,          bg = nil             },
-  -- TelescopePreviewBorder = { fg = nil,          bg = nil             },
-  -- TelescopePromptTitle   = { fg = nil,          bg = nil             },
-  -- TelescopeResultsTitle  = { fg = nil,          bg = nil             },
-  -- TelescopePreviewTitle  = { fg = nil,          bg = nil             },
+  TelescopeResultsNormal = { fg = palette.fg, bg = palette.bg_edge },
+  TelescopeResultsTitle  = { fg = palette.bg_edge, bg = palette.bg_edge },
+  TelescopeResultsBorder = { fg = palette.bg_edge, bg = palette.bg_edge },
+  TelescopePreviewNormal = { fg = palette.fg_mid2, bg = palette.bg_edge },
+  TelescopePreviewBorder = { fg = palette.bg_edge, bg = palette.bg_edge },
+  TelescopePreviewTitle  = { fg = palette.bg_edge2, bg = palette.cyan },
+  TelescopePreviewLine   = { fg = palette.bg_edge2, bg = palette.green },
 }
 
 for hl, col in pairs(TelescoperColor) do

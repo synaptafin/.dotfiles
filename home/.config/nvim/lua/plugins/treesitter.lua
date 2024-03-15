@@ -1,10 +1,12 @@
 local treesitter_config = require("nvim-treesitter.configs")
 
 local filetypes = {
+  "cs",
   "html",
   "javascript",
   "typescript",
-  "javascriptreact", "typescriptreact",
+  "javascriptreact",
+  "typescriptreact",
   "svelte",
   "vue",
   "tsx",

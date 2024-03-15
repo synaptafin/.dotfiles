@@ -72,7 +72,7 @@ local function lsp_keymaps()
   vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, opts)
   -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   -- vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.signature_help() end, opts)
-  vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references() end,
+  vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end,
     { noremap = true, silent = true })
   -- vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev({ border = "rounded" }) end, opts)
