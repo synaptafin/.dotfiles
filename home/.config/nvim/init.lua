@@ -27,8 +27,8 @@ require "plugins.lsp-signature"
 require "plugins.functions"
 
 -- debug
-require "plugins.nvim-dap"
-require "plugins.nvim-dap-ui"
+-- require "plugins.nvim-dap"
+-- require "plugins.nvim-dap-ui"
 
 -- Options after plugin loaded for override plugin default options
 require "config.options"

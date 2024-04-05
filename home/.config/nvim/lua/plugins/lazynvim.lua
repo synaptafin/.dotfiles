@@ -32,11 +32,6 @@ require("lazy").setup({
 	},
 
 	-- theme
-	"shatur/neovim-ayu",
-	"rebelot/kanagawa.nvim",
-	"folke/tokyonight.nvim",
-	"NLKNguyen/papercolor-theme",
-	"EdenEast/nightfox.nvim",
 
 	-- which key
 	{

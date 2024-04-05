@@ -21,6 +21,10 @@ if type -q exa
   alias lla "ll -a"
 end
 
+if type -q Unity\ Hub
+  alias unity "Unity\ Hub"
+end
+
 bind \cr fzf_select_history # Bind for peco select history to Ctrl+R
 bind \cf fzf_change_directory # Bind for peco change directory to Ctrl+F
 # bind \cs fish_test

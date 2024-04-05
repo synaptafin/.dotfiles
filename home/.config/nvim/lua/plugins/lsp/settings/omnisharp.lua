@@ -32,5 +32,5 @@ return {
 
   -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
   -- true
-  analyze_open_documents_only = true, -- default false
+  analyze_open_documents_only = false, -- default false
 }

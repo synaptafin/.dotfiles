@@ -12,6 +12,18 @@ M.setup = function()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
+  -- local border = {
+  --   { "", "FloatBorder" },
+  --   { "▔", "FloatBorder" },
+  --   { "", "FloatBorder" },
+  --   { "▕", "FloatBorder" },
+  --   { "", "FloatBorder" },
+  --   { "▁", "FloatBorder" },
+  --   { "", "FloatBorder" },
+  --   { "▏", "FloatBorder" },
+  -- }
+  local border = "rounded"
+
   local config = {
     -- enable virtual text
     virtual_text = true,
@@ -25,7 +37,7 @@ M.setup = function()
     float = {
       focusable = false,
       style     = "minimal",
-      border    = false,
+      border    = border,
       source    = "always",
       header    = "",
       prefix    = "",
@@ -34,9 +46,9 @@ M.setup = function()
 
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = false })
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = false })
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 end
 
 local function lsp_highlight_document(client)
@@ -65,6 +77,14 @@ end
 --   end
 -- end
 
+local goto_opts = {
+  border = "rounded",
+  severity = {
+    vim.diagnostic.severity.ERROR,
+  }
+}
+
+
 local function lsp_keymaps()
   local opts = { noremap = true, silent = true }
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
@@ -75,8 +95,8 @@ local function lsp_keymaps()
   vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end,
     { noremap = true, silent = true })
   -- vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev({ border = "rounded" }) end, opts)
-  vim.keymap.set('n', 'gn', function() vim.diagnostic.goto_next({ border = "rounded" }) end, opts)
+  vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev(goto_opts) end, opts)
+  vim.keymap.set('n', 'gn', function() vim.diagnostic.goto_next(goto_opts) end, opts)
   vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, opts)
   -- vim.keymap.set('n', '<leader>d', function() toggle_virtual_text() end, opts)
   vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, opts)
