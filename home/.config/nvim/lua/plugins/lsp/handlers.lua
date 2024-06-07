@@ -80,7 +80,7 @@ end
 local goto_opts = {
   border = "rounded",
   severity = {
-    vim.diagnostic.severity.ERROR,
+    min = vim.diagnostic.severity.WARN,
   }
 }
 
@@ -107,13 +107,19 @@ M.on_attach = function(client)
   if client.name == "tsserver" then
     client.server_capabilities.documentFormattingProvider = false
   end
+  if client.server_capabilities.signatureHelpProvider then
+    require('lsp-overloads').setup(client, {})
+  end
   lsp_keymaps()
   lsp_highlight_document(client)
 end
 
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if status_ok then
-  M.capabilities = cmp_nvim_lsp.default_capabilities()
-end
+-- local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+-- if status_ok then
+--   M.capabilities = cmp_nvim_lsp.default_capabilities()
+-- end
+
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 return M

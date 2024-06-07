@@ -1,6 +1,6 @@
 vim.opt.shiftwidth     = 2
 -- vim.opt.softtabstop = 4
-vim.opt.tabstop        = 2
+vim.opt.tabstop        = 2  -- default tab size, can be override by .editorconfig
 vim.opt.expandtab      = true
 vim.opt.smarttab       = true
 vim.opt.number         = true

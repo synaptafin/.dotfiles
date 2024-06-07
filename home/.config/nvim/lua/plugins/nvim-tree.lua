@@ -225,7 +225,7 @@ nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
     exclude = {},
   },
   filesystem_watchers = {
-    enable = true,
+    enable = false,
     debounce_delay = 50,
     ignore_dirs = {},
   },

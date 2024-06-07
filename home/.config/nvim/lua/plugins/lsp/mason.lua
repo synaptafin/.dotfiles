@@ -10,6 +10,7 @@ local servers = {
   "omnisharp",
 }
 
+
 local settings = {
   ui = {
     border = "none",
@@ -46,5 +47,9 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
   end
   lspconfig[server].setup(opts)
+  -- if server == "omnisharp" then
+  --   vim.g.dotnetlsp = "omnisharp"
+  --   vim.cmd('LspStart omnisharp')
+  -- end
 end
 

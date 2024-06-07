@@ -11,10 +11,9 @@ local actions = require("telescope.actions")
 
 telescope.setup({
   defaults = {
-
     prompt_prefix = " ",
     selection_caret = " ",
-    path_display = { "smart" },
+    path_display = { "truncate" },
 
     file_ignore_patterns = {
       ".git/",
@@ -32,6 +31,16 @@ telescope.setup({
       "%.zip",
       ".next/",
       "__pycache__/",
+
+      -- unity
+      "Temp/",
+      "Library/",
+      "%.meta",
+      "%.unity",
+      "%.prefab",
+      "%.asset",
+      "%.fbx",
+      "%.controller",
     },
     mappings = {
       i = {
@@ -101,7 +110,7 @@ telescope.setup({
     find_files = {
       hidden = true,
       no_ignore = true,
-      path_display = { "absolute" },
+      path_display = { "truncate", truncate = 0 },
     },
     live_grep = {
       additional_args = { "--hidden" },
@@ -124,6 +133,10 @@ telescope.setup({
     buffers = {
       sort_mru = true,
     },
+    jumplist = {
+      path_display = { "truncate", truncate = 0 },
+      fname_width = 100,
+    }
   },
 
   extensions = {

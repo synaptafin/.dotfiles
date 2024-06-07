@@ -82,6 +82,9 @@ require("lazy").setup({
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
   },
+  {'Issafalcon/lsp-overloads.nvim' },
+  { 'Hoffs/omnisharp-extended-lsp.nvim' },
+
 
 	-- treesitter
 	{

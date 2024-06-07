@@ -140,7 +140,8 @@ local copilot_indicator = {
   function()
     local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
     if client == nil then
-      return ""
+      -- return ""
+      return "" -- default icon whilst copilot is idle
       -- return rgb_escaper(palette.red) .. "" .. color_reset
     end
 
