@@ -11,6 +11,7 @@ require "plugins.cmp"
 require "plugins.lsp"
 require "plugins.treesitter"
 require "plugins.telescope"
+require "plugins.fzf-lua"
 require "plugins.nvim-tree"  -- file explorer
 
 require "plugins.lualine"

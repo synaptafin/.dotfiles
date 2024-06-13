@@ -77,6 +77,7 @@ end
 --   end
 -- end
 
+local opts = { noremap = true, silent = true }
 local goto_opts = {
   border = "rounded",
   severity = {
@@ -84,11 +85,35 @@ local goto_opts = {
   }
 }
 
+local vsplit_opts = {
+  jump_type = "vsplit",
+}
+
+local goto_definition_in_split = function()
+  local has_split = false;
+  local current_window = vim.api.nvim_get_current_win()
+  local windows = vim.api.nvim_list_wins()
+
+  for _, win in ipairs(windows) do
+    if win ~= current_window then
+      has_split = true
+      vim.api.nvim_set_current_win(win)
+      break
+    end
+  end
+
+  if has_split then
+    require('telescope.builtin').lsp_definitions()
+  else
+    require('telescope.builtin').lsp_definitions(vsplit_opts)
+  end
+end
+
 
 local function lsp_keymaps()
-  local opts = { noremap = true, silent = true }
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
   vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
+  -- vim.keymap.set('n', 'gv', goto_definition_in_split, opts)  -- TODO: go to definition in split
   vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, opts)
   -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   -- vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.signature_help() end, opts)

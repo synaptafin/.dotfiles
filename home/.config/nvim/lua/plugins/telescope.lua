@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 telescope.load_extension("media_files")
+telescope.load_extension("fzf")
 local lst = telescope.load_extension("luasnip")
 local luasnip = require("luasnip")
 
@@ -110,7 +111,7 @@ telescope.setup({
     find_files = {
       hidden = true,
       no_ignore = true,
-      path_display = { "truncate", truncate = 0 },
+      path_display = { "truncate", truncate = 1 },
     },
     live_grep = {
       additional_args = { "--hidden" },
@@ -124,17 +125,18 @@ telescope.setup({
       show_line = false,
     },
     lsp_references = {
-      path_display = function(_, path)
-        local workspace = vim.fn.getcwd()
-        return string.gsub(path, workspace, ".")
-      end,
+      -- path_display = function(_, path)
+      --   local workspace = vim.fn.getcwd()
+      --   return string.gsub(path, workspace, ".")
+      -- end,
+      path_display = { "truncate", truncate = 1 },
       show_line = false,
     },
     buffers = {
       sort_mru = true,
     },
     jumplist = {
-      path_display = { "truncate", truncate = 0 },
+      path_display = { "truncate", truncate = 1 },
       fname_width = 100,
     }
   },
