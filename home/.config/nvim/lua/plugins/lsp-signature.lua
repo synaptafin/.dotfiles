@@ -38,7 +38,7 @@ local cfg = {
 	-- return 'right_align' to display hint right aligned in the current line
 	hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
 	handler_opts = {
-		border = "none", -- double, rounded, single, shadow, none, or a table of borders
+		border = "rounded", -- double, rounded, single, shadow, none, or a table of borders
 	},
 
 	always_trigger = false, -- sometime show signature on new line or in middle of parameter can be confusing, set it to false for #58
@@ -63,3 +63,4 @@ local cfg = {
 -- recommended:
 require("lsp_signature").setup(cfg) -- no need to specify bufnr if you don't use toggle_key
 
+vim.keymap.set({'i'}, '<c-s>', function() require('lsp_signature').toggle_float_win() end, { noremap = true, silent = true })

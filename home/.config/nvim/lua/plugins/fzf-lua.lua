@@ -1,31 +1,35 @@
 local actions = require "fzf-lua.actions"
+
 local fd_exclude =
   [[--exclude '.git/' ]]
   ..  [[--exclude node_modules/ ]]
   ..  [[--exclude 'cache/' ]]
-  ..  [[--exclude '%.cache' ]]
+  ..  [[--exclude '*.cache' ]]
   ..  [[--exclude '.venv/' ]]
   ..  [[--exclude 'node_modules/' ]]
-  ..  [[--exclude '%.o' ]]
-  ..  [[--exclude '%.a' ]]
-  ..  [[--exclude '%.out' ]]
-  ..  [[--exclude '%.class' ]]
-  ..  [[--exclude '%.pdf' ]]
-  ..  [[--exclude '%.mkv' ]]
-  ..  [[--exclude '%.mp4' ]]
-  ..  [[--exclude '%.zip' ]]
+  ..  [[--exclude '*.o' ]]
+  ..  [[--exclude '*.a' ]]
+  ..  [[--exclude '*.out' ]]
+  ..  [[--exclude '*.class' ]]
+  ..  [[--exclude '*.pdf' ]]
+  ..  [[--exclude '*.mkv' ]]
+  ..  [[--exclude '*.mp4' ]]
+  ..  [[--exclude '*.jpg' ]]
+  ..  [[--exclude '*.png' ]]
+  ..  [[--exclude '*.psd' ]]
+  ..  [[--exclude '*.zip' ]]
   ..  [[--exclude '.next/' ]]
   ..  [[--exclude '__pycache__/' ]]
 
       -- unity
   ..  [[--exclude 'Temp/' ]]
   ..  [[--exclude 'Library/' ]]
-  ..  [[--exclude '%.meta' ]]
-  ..  [[--exclude '%.unity' ]]
-  ..  [[--exclude '%.prefab' ]]
-  ..  [[--exclude '%.asset' ]]
-  ..  [[--exclude '%.fbx' ]]
-  ..  [[--exclude '%.controller' ]]
+  ..  [[--exclude '*.meta' ]]
+  ..  [[--exclude '*.unity' ]]
+  ..  [[--exclude '*.prefab' ]]
+  ..  [[--exclude '*.asset' ]]
+  ..  [[--exclude '*.fbx' ]]
+  ..  [[--exclude '*.controller' ]]
 
 require('fzf-lua').setup({
   -- fzf_bin         = 'sk',            -- use skim instead of fzf?
@@ -263,11 +267,14 @@ require('fzf-lua').setup({
       -- will do nothing if `viu` isn't executable
       extensions      = {
         -- neovim terminal only supports `viu` block output
-        ["png"]       = { "viu", "-b" },
+        -- ["png"]       = { "viu", "-b" },
+        ["png"]       = nil,
         -- by default the filename is added as last argument
         -- if required, use `{file}` for argument positioning
-        ["svg"]       = { "chafa", "{file}" },
-        ["jpg"]       = { "ueberzug" },
+        -- ["svg"]       = { "chafa", "{file}" },
+        ["svg"]       = nil,
+        -- ["jpg"]       = { "ueberzug" },
+        ["jpg"]       = nil,
       },
       -- if using `ueberzug` in the above extensions map
       -- set the default image scaler, possible scalers:

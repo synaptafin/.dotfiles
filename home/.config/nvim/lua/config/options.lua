@@ -33,7 +33,7 @@ vim.opt.listchars      = {
   tab = "▸ ",
   trail = "·",
 }
-vim.opt.fillchars = { eob = " " }
+vim.opt.fillchars   = { eob = " " }
 vim.opt.diffopt     = vim.opt.diffopt + "vertical"
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.foldmethod  = "syntax"
@@ -55,4 +55,11 @@ vim.api.nvim_set_hl(0, "WhichKeyFloat",   { bg = palette.bg_mid })
 -- Undercurl(not work on alacritty)
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+vim.filetype.add({
+  extension = {
+    uss = 'css',
+    uxml = 'html'
+  }
+})
 

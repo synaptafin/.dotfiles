@@ -8,8 +8,9 @@ local servers = {
   "tailwindcss",
   "clangd",
   "omnisharp",
+  "html",
+  "cssls",
 }
-
 
 local settings = {
   ui = {
