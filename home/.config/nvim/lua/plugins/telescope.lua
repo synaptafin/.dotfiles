@@ -4,7 +4,6 @@ if not status_ok then
 end
 
 telescope.load_extension("media_files")
-telescope.load_extension("fzf")
 local lst = telescope.load_extension("luasnip")
 local luasnip = require("luasnip")
 

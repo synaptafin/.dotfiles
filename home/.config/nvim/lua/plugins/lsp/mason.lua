@@ -2,7 +2,7 @@ local servers = {
   "lua_ls",
   "pyright",
   "jsonls",
-  "tsserver",
+  "ts_ls",
   "marksman",
   "bashls",
   "tailwindcss",
@@ -48,9 +48,9 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
   end
   lspconfig[server].setup(opts)
-  -- if server == "omnisharp" then
-  --   vim.g.dotnetlsp = "omnisharp"
-  --   vim.cmd('LspStart omnisharp')
-  -- end
+  if server == "omnisharp" then
+    vim.g.dotnetlsp = "omnisharp"
+    vim.cmd('LspStart omnisharp')
+  end
 end
 

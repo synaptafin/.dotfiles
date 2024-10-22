@@ -28,13 +28,7 @@ keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Block Navigation
--- keymap("n", "[", "[]", opts)
--- keymap("n", "]", "][", opts)
+keymap("n", "^", 'v%<C-v>', opts)  -- vertical select by match bracket/parentheses/braces
 
 -- Visual --
 -- Stay in indent mode
@@ -44,10 +38,10 @@ keymap("v", "<D-c>", '"+y', opts)
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "J", ":m             ove '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":m             ove '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":m         ove '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":m         ove '<-2<CR>gv-gv", opts)
+keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -56,10 +50,5 @@ keymap("x", "<A-k>", ":m         ove '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- Command --
--- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
--- keymap("n", "<C-f>", "<cmd>Telescope live_grep<cr>", opts)
-
 -- NvimTree --
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
-

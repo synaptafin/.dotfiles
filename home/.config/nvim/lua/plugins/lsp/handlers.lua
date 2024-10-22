@@ -64,6 +64,13 @@ local function lsp_highlight_document(client)
     ]],
       false
     )
+    -- vim.cmd([[
+    --   augroup lsp_document_highlight
+    --     autocmd! * <buffer>
+    --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    --   augroup END
+    -- ]])
   end
 end
 
@@ -90,30 +97,57 @@ local vsplit_opts = {
 }
 
 local goto_definition_in_split = function()
-  local has_split = false;
-  local current_window = vim.api.nvim_get_current_win()
-  local windows = vim.api.nvim_list_wins()
 
-  for _, win in ipairs(windows) do
-    if win ~= current_window then
-      has_split = true
-      vim.api.nvim_set_current_win(win)
-      break
-    end
-  end
+  -- Execute 'definition' request and handle the result
+  vim.lsp.buf_request(0, 'textDocument/definition', vim.lsp.util.make_position_params(),
+    function(err, result, ctx, config)
+      if err then
+        print("Error: " .. err.message)
+        return
+      end
+      if not result or vim.tbl_isempty(result) then
+        print("No definition found")
+        return
+      end
 
-  if has_split then
-    require('telescope.builtin').lsp_definitions()
-  else
-    require('telescope.builtin').lsp_definitions(vsplit_opts)
-  end
+      -- Handling the possibility of a result being directly a location or a list of locations
+      local def = result[1] or result
+      if not def.uri then
+        print("Definition missing URI")
+        return
+      end
+
+      local target_buf = vim.uri_to_bufnr(vim.uri_from_buf(def.uri))
+      if not target_buf or target_buf == 0 then
+        print("Failed to resolve definition buffer from URI")
+        return
+      end
+
+      local target_pos = def.range.start
+
+      -- Check current window and move to the next one
+      local current_win = vim.api.nvim_get_current_win()
+      vim.cmd('wincmd w')   -- This cycles to the next window
+
+      -- If still in the same window, split vertically
+      if current_win == vim.api.nvim_get_current_win() then
+        vim.cmd('vsplit')
+      end
+
+      -- Ensure buffer is loaded before setting it
+      vim.api.nvim_buf_set_lines(target_buf, 0, -1, false, vim.api.nvim_buf_get_lines(target_buf, 0, -1, false))
+      vim.api.nvim_set_current_buf(target_buf)
+      vim.api.nvim_win_set_cursor(0, { target_pos.line + 1, target_pos.character })
+    end)
 end
+
+
 
 
 local function lsp_keymaps()
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
   vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
-  -- vim.keymap.set('n', 'gv', goto_definition_in_split, opts)  -- TODO: go to definition in split
+  -- vim.keymap.set('n', 'gv', goto_definition_in_split, opts) -- TODO: go to definition in split
   vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, opts)
   -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   -- vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.signature_help() end, opts)
@@ -139,12 +173,15 @@ M.on_attach = function(client)
   lsp_highlight_document(client)
 end
 
--- local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
--- if status_ok then
---   M.capabilities = cmp_nvim_lsp.default_capabilities()
--- end
-
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if status_ok then
+  M.capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+  M.capabilities.workspace = {
+    didChangeWatchedFiles = {
+      dynamicRegistration = true,
+    }
+  }
+end
 
 return M
