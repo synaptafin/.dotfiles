@@ -74,15 +74,13 @@ local function lsp_highlight_document(client)
   end
 end
 
--- local diagnostics_active = true
--- function _G.toggle_virtual_text()
---   diagnostics_active = not diagnostics_active
---   if diagnostics_active then
---     vim.diagnostic.show()
---   else
---     vim.diagnostic.hide()
---   end
--- end
+vim.g.diagnostic_virtual_text_enabled = true
+function _G.toggle_virtual_text()
+  vim.g.diagnostic_virtual_text_enabled = not vim.g.diagnostic_virtual_text_enabled
+  vim.diagnostic.config({
+    virtual_text = vim.g.diagnostic_virtual_text_enabled,
+  })
+end
 
 local opts = { noremap = true, silent = true }
 local goto_opts = {
@@ -157,7 +155,7 @@ local function lsp_keymaps()
   vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev(goto_opts) end, opts)
   vim.keymap.set('n', 'gn', function() vim.diagnostic.goto_next(goto_opts) end, opts)
   vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, opts)
-  -- vim.keymap.set('n', '<leader>d', function() toggle_virtual_text() end, opts)
+  vim.keymap.set('n', '<leader>d', function() toggle_virtual_text() end, opts)
   vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end

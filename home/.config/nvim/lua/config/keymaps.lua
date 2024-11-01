@@ -18,9 +18,12 @@ vim.g.maplocalleader = " "
 -- Normal --
 -- Window Navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+keymap('n', '<C-j>', '10j', opts)
+keymap('n', '<C-k>', '10k', opts)
+
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -35,6 +38,8 @@ keymap("n", "^", 'v%<C-v>', opts)  -- vertical select by match bracket/parenthes
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 keymap("v", "<D-c>", '"+y', opts)
+keymap('v', '<C-j>', '10j', opts)
+keymap('v', '<C-k>', '10k', opts)
 
 -- Visual Block --
 -- Move text up and down
