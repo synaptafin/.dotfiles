@@ -40,11 +40,33 @@ local settings = {
 
 local omnisharp_dll_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll"
 
+local opts = function(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
+local function override_keymap()
+  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').telescope_lsp_definition() end, opts("Go To Definition"))
+  vim.keymap.set('n', 'gr',
+    function() require('omnisharp_extended').telescope_lsp_references({ include_declaration = false }) end,
+    opts("Go To Reference")
+  )
+  vim.keymap.set('n', 'gD', function() require('omnisharp_extended').telescope_lsp_type_definition() end, opts("Go To Type"))
+  vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end, opts("Go To Implementation"))
+end
+
 return {
   cmd = { "dotnet", omnisharp_dll_path },
   handlers = {
-    ["textDocument/definition"] = require('omnisharp_extended').handler,
+    ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+    ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+    ["textDocument/references"] = require('omnisharp_extended').references_handler,
+    ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
   },
   settings = settings,
   enable_roslyn_analyzers = true, -- default false
+
+  on_attach = function(_)
+    override_keymap()
+    vim.g.dotnetlsp = "omnisharp"
+    vim.cmd('LspStart omnisharp')
+  end
 }

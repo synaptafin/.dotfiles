@@ -107,7 +107,10 @@ nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
     centralize_selection = false,
     cursorline = true,
     debounce_delay = 15,
-    width = 30,
+    width = {
+      min = 30,
+      max = 60,
+    },
     side = "left",
     preserve_window_proportions = false,
     number = false,

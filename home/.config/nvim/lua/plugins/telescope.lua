@@ -114,13 +114,14 @@ telescope.setup({
     },
     live_grep = {
       additional_args = { "--hidden" },
-      path_display = { "absolute" },
+      path_display = { "truncate", truncate = 1 },
     },
     lsp_definitions = {
-      path_display = function(_, path)
-        local workspace = vim.fn.getcwd()
-        return string.gsub(path, workspace, ".")
-      end,
+      -- path_display = function(_, path)
+      --   local workspace = vim.fn.getcwd()
+      --   return string.gsub(path, workspace, ".")
+      -- end,
+      path_display = { "truncate", truncate = 1 },
       show_line = false,
     },
     lsp_references = {

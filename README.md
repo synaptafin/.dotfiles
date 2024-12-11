@@ -6,7 +6,7 @@ Configuration files for vim, tmux, git, ...
 
 ## Bootstrap
 
-```
+```sh
 ./bootstrap.sh
 ```
 

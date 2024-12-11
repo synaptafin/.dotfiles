@@ -24,22 +24,23 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap('n', '<C-j>', '10j', opts)
 keymap('n', '<C-k>', '10k', opts)
 
-
--- Resize with arrows
+-- Window Resize 
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<c-w>z", ":vertical resize | windcmd =<CR>", vim.tbl_deep_extend("force", opts, { desc = "Maximize window width" }))
 
 keymap("n", "^", 'v%<C-v>', opts)  -- vertical select by match bracket/parentheses/braces
 
 -- Visual --
+keymap('v', '<C-j>', '10j', opts)
+keymap('v', '<C-k>', '10k', opts)
+
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 keymap("v", "<D-c>", '"+y', opts)
-keymap('v', '<C-j>', '10j', opts)
-keymap('v', '<C-k>', '10k', opts)
 
 -- Visual Block --
 -- Move text up and down

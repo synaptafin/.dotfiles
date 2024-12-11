@@ -63,4 +63,4 @@ local cfg = {
 -- recommended:
 require("lsp_signature").setup(cfg) -- no need to specify bufnr if you don't use toggle_key
 
-vim.keymap.set({'i'}, '<c-s>', function() require('lsp_signature').toggle_float_win() end, { noremap = true, silent = true })
+vim.keymap.set({'i'}, '<c-k>', function() require('lsp_signature').toggle_float_win() end, { noremap = true, silent = true, desc = "Toggle signature help" })

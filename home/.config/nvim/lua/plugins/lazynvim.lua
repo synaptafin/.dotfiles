@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- useful module packer
-  { 'echasnovski/mini.nvim',               branch = 'stable' },
+  { 'echasnovski/mini.nvim', branch = 'stable' },
 
   -- ai completion
   "github/copilot.vim",
@@ -82,13 +82,15 @@ require("lazy").setup({
     build = ":MasonUpdate",
   },
   "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
-  "jose-elias-alvarez/null-ls.nvim",  -- LSP diagnostics and code actions
+  "nvimtools/none-ls.nvim",
+
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
   },
   { 'Issafalcon/lsp-overloads.nvim' },
   { 'Hoffs/omnisharp-extended-lsp.nvim' },
+  { 'onsails/lspkind.nvim' },
 
 
   -- treesitter
@@ -125,6 +127,14 @@ require("lazy").setup({
   -- file info
   "nvim-lualine/lualine.nvim",
   "simrat39/symbols-outline.nvim",
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    }
+  },
 
   -- edit
   {

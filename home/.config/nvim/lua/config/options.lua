@@ -1,6 +1,6 @@
 vim.opt.shiftwidth     = 2
 -- vim.opt.softtabstop = 4
-vim.opt.tabstop        = 2  -- default tab size, can be override by .editorconfig
+vim.opt.tabstop        = 2 -- default tab size, can be override by .editorconfig
 vim.opt.expandtab      = true
 vim.opt.smarttab       = true
 vim.opt.number         = true
@@ -22,7 +22,7 @@ vim.opt.pumheight      = 10
 vim.opt.autowriteall   = true
 vim.opt.termguicolors  = true
 vim.opt.shell          = 'fish'
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 vim.opt.mouse          = "a"
 vim.opt.splitbelow     = true
 -- vim.opt.splitright  = true
@@ -30,27 +30,27 @@ vim.opt.showtabline    = 0
 vim.opt.timeoutlen     = 500
 vim.opt.list           = false
 vim.opt.listchars      = {
-  tab = "▸ ",
+  tab   = "▸ ",
   trail = "·",
 }
-vim.opt.fillchars   = { eob = " " }
-vim.opt.diffopt     = vim.opt.diffopt + "vertical"
-vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.foldmethod  = "syntax"
-vim.opt.foldlevel   = 99
-vim.opt.numberwidth = 4
+vim.opt.fillchars      = { eob = " " }
+vim.opt.diffopt        = vim.opt.diffopt + "vertical"
+vim.opt.completeopt    = "menu,menuone,noselect"
+vim.opt.foldmethod     = "syntax"
+vim.opt.foldlevel      = 99
+vim.opt.numberwidth    = 4
 
 -- vim.cmd('hi Normal guibg=NONE ctermbg=NONE') -- for transparent background
 -- vim.cmd('hi WinSeparator guifg=#85877C guibg=#85877C')
 
 -- floating window color scheme
 -- vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#85877C', bg = '#85877C' })
-local palette = require("plugins.mini").palette
+local palette          = require("plugins.mini").palette
 
-vim.api.nvim_set_hl(0, 'FloatBorder',     { bg = palette.bg_edge, fg = palette.fg_mid2 })
-vim.api.nvim_set_hl(0, 'NormalFloat',     { bg = palette.bg_edge })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = palette.bg_edge, fg = palette.fg_mid2 })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = palette.bg_edge })
 -- vim.api.nvim_set_hl(0, "EndOfBuffer",     { bg = palette.bg, fg = palette.bg })  -- hide ~ at EndOfBuffer
-vim.api.nvim_set_hl(0, "WhichKeyFloat",   { bg = palette.bg_mid })
+vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })
 
 -- Undercurl(not work on alacritty)
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
@@ -63,3 +63,39 @@ vim.filetype.add({
   }
 })
 
+--- @return boolean
+local function is_nofile_buf()
+  local buftype = vim.bo.buftype
+  if buftype == "nofile" or buftype == "terminal" then
+    return true
+  end
+  return false
+end
+
+vim.api.nvim_create_augroup("LineNumbers", { clear = true })
+vim.api.nvim_create_autocmd(
+  { "FocusGained", "InsertLeave", "CmdlineLeave" },
+  {
+    group = "LineNumbers",
+    pattern = "*",
+    callback = function()
+      if is_nofile_buf() then return end
+      vim.opt.relativenumber = true
+    end,
+  }
+)
+vim.api.nvim_create_autocmd(
+  { "FocusLost", "InsertEnter", "CmdlineEnter" },
+  {
+    group = "LineNumbers",
+    pattern = "*",
+    callback = function(e)
+      if is_nofile_buf() then return end
+      vim.opt.relativenumber = false
+      vim.opt.number = true
+      if e.event == "CmdlineEnter" then
+        vim.cmd("redraw")
+      end
+    end,
+  }
+)
