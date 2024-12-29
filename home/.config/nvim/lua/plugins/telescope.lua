@@ -131,6 +131,7 @@ telescope.setup({
       -- end,
       path_display = { "truncate", truncate = 1 },
       show_line = false,
+      include_declaration = false,
     },
     buffers = {
       sort_mru = true,

@@ -28,6 +28,7 @@ require("lazy").setup({
   { "lukas-reineke/indent-blankline.nvim", main = "ibl",     opts = {} },
 
   -- theme
+  { "rebelot/kanagawa.nvim" },
 
   -- which key
   {
@@ -127,14 +128,6 @@ require("lazy").setup({
   -- file info
   "nvim-lualine/lualine.nvim",
   "simrat39/symbols-outline.nvim",
-  {
-    'stevearc/aerial.nvim',
-    opts = {},
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    }
-  },
 
   -- edit
   {
@@ -142,9 +135,7 @@ require("lazy").setup({
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("nvim-surround").setup()
     end,
   },
   {

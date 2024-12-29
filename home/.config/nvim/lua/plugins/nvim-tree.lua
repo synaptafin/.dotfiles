@@ -1,6 +1,3 @@
--- following options are the default
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
-
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
   return
@@ -13,8 +10,9 @@ local function on_attach(bufnr)
     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
+  api.config.mappings.default_on_attach(bufnr)
+
   -- Default mappings. Feel free to modify or remove as you wish.
-  --
   -- BEGIN_DEFAULT_ON_ATTACH
   vim.keymap.set('n', 'L', api.tree.change_root_to_node, opts('CD'))
   vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
@@ -48,7 +46,7 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'f', api.live_filter.start, opts('Filter'))
   vim.keymap.set('n', 'g?', api.tree.toggle_help, opts('Help'))
   vim.keymap.set('n', 'gy', api.fs.copy.absolute_path, opts('Copy Absolute Path'))
-  vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
+  -- vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
   vim.keymap.set('n', 'I', api.tree.toggle_gitignore_filter, opts('Toggle Git Ignore'))
   vim.keymap.set('n', 'J', api.node.navigate.sibling.last, opts('Last Sibling'))
   vim.keymap.set('n', 'K', api.node.navigate.sibling.first, opts('First Sibling'))
@@ -56,7 +54,7 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'o', api.node.open.edit, opts('Open'))
   vim.keymap.set('n', 'O', api.node.open.no_window_picker, opts('Open: No Window Picker'))
   vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
-  vim.keymap.set('n', 'P', api.node.navigate.parent, opts('Parent Directory'))
+  -- vim.keymap.set('n', 'P', api.node.navigate.parent, opts('Parent Directory'))
   vim.keymap.set('n', 'q', api.tree.close, opts('Close'))
   vim.keymap.set('n', 'r', api.fs.rename, opts('Rename'))
   vim.keymap.set('n', 'R', api.tree.reload, opts('Refresh'))
@@ -86,6 +84,7 @@ local function on_attach(bufnr)
     end,
     opts('Create Directory')
   )
+  vim.keymap.set('n', '[[', api.node.navigate.parent, opts('Parent Directory'))
 end
 
 nvim_tree.setup { -- BEGIN_DEFAULT_OPTS

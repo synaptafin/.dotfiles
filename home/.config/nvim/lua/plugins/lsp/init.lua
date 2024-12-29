@@ -21,7 +21,7 @@ end
 -- }
 local border = "rounded"
 
-local config = {
+local diagnostic_config = {
   -- enable virtual text
   virtual_text = true,
   -- show signs
@@ -41,7 +41,7 @@ local config = {
   },
 }
 
-vim.diagnostic.config(config)
+vim.diagnostic.config(diagnostic_config)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 

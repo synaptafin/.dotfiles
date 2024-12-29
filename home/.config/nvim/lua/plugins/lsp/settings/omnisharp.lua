@@ -41,17 +41,32 @@ local settings = {
 local omnisharp_dll_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll"
 
 local opts = function(desc)
-  return { noremap = true, silent = true, desc = desc }
+  return { noremap = true, silent = true, buffer = true, desc = desc }
 end
 local function override_keymap()
-  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').telescope_lsp_definition() end, opts("Go To Definition"))
+  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').telescope_lsp_definition() end,
+    opts("Go To Definition"))
   vim.keymap.set('n', 'gr',
-    function() require('omnisharp_extended').telescope_lsp_references({ include_declaration = false }) end,
+    function() require('omnisharp_extended').telescope_lsp_references() end,
     opts("Go To Reference")
   )
-  vim.keymap.set('n', 'gD', function() require('omnisharp_extended').telescope_lsp_type_definition() end, opts("Go To Type"))
-  vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end, opts("Go To Implementation"))
+  vim.keymap.set('n', 'gD', function() require('omnisharp_extended').telescope_lsp_type_definition() end,
+    opts("Go To Type"))
+  vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
+    opts("Go To Implementation"))
 end
+
+vim.api.nvim_create_augroup("OmnisharpLsp", { clear = true })
+vim.api.nvim_create_autocmd(
+  "BufEnter",
+  {
+    group = "OmnisharpLsp",
+    pattern = { "*.cs", "*.vb" },
+    callback = function()
+      override_keymap()
+    end
+  }
+)
 
 return {
   cmd = { "dotnet", omnisharp_dll_path },
@@ -63,9 +78,7 @@ return {
   },
   settings = settings,
   enable_roslyn_analyzers = true, -- default false
-
   on_attach = function(_)
-    override_keymap()
     vim.g.dotnetlsp = "omnisharp"
     vim.cmd('LspStart omnisharp')
   end

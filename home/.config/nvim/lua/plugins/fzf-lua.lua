@@ -313,7 +313,7 @@ require('fzf-lua').setup({
                                         -- set to 'false' to disable
     prompt            = 'Files❯ ',
     multiprocess      = true,           -- run command in a separate process
-    git_icons         = true,           -- show git icons?
+    git_icons         = false,           -- show git icons?
     file_icons        = true,           -- show file icons?
     color_icons       = true,           -- colorize file|git icons
     -- path_shorten   = 1,              -- 'true' or number, shorten path?

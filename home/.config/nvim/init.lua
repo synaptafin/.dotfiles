@@ -6,6 +6,9 @@ require "config.keymaps"
 -- lazy plugin manager
 require "plugins.lazynvim"
 
+-- Color
+-- require "plugins.colorscheme"
+
 -- Configuration plugin managed by lazynvim
 require "plugins.cmp"
 require "plugins.lsp"
