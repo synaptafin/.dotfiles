@@ -1,7 +1,12 @@
 local opts = { noremap = true, silent = true }
+local keymap = vim.keymap.set
 
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local opts_desc = function(desc)
+  if desc then
+    return { noremap = true, silent = true, desc = desc }
+  end
+  return { noremap = true, silent = true }
+end
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -29,7 +34,8 @@ keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-keymap("n", "<c-w>z", ":vertical resize | windcmd =<CR>", vim.tbl_deep_extend("force", opts, { desc = "Maximize window width" }))
+keymap("n", "<c-w>z", ":vertical resize | windcmd =<CR>", opts_desc("Maximize window width"))
+keymap("n", "<c-w>v", function() vim.api.nvim_open_win(0, true, {split="right", win = 0}) end, opts_desc("Split window vertically"))
 
 keymap("n", "^", 'v%<C-v>', opts)  -- vertical select by match bracket/parentheses/braces
 
@@ -58,3 +64,4 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- NvimTree --
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+

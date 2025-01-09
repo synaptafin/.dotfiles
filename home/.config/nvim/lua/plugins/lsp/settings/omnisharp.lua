@@ -43,17 +43,49 @@ local omnisharp_dll_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/om
 local opts = function(desc)
   return { noremap = true, silent = true, buffer = true, desc = desc }
 end
+
+local function goto_definition_in_split()
+  local function is_normal_window(win)
+    local flag = false
+    local config = vim.api.nvim_win_get_config(win)
+    if not config.relative or config.relative == "" then
+      flag = true
+    end
+    return flag
+  end
+
+  local wins = vim.api.nvim_tabpage_list_wins(0)
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local current_buf = vim.api.nvim_get_current_buf()
+  local current_win_id = vim.api.nvim_get_current_win()
+  local split_win_id = nil
+
+  -- search for opened normal split window
+  for _, win_id in pairs(wins) do
+    if win_id ~= current_win_id and is_normal_window(win_id) then
+      split_win_id = win_id
+      break
+    end
+  end
+
+  if split_win_id then
+    vim.api.nvim_set_current_win(split_win_id)
+    vim.api.nvim_win_set_buf(split_win_id, current_buf)
+    vim.api.nvim_win_set_cursor(split_win_id, cursor_pos)
+  else
+    vim.api.nvim_open_win(0, true, { split = 'right', win = 0, })
+  end
+  require('omnisharp_extended').lsp_definition()
+end
+
 local function override_keymap()
-  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').telescope_lsp_definition() end,
-    opts("Go To Definition"))
-  vim.keymap.set('n', 'gr',
-    function() require('omnisharp_extended').telescope_lsp_references() end,
-    opts("Go To Reference")
-  )
+  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').lsp_definition() end, opts("Go To Definition"))
+  vim.keymap.set('n', 'gr', function() require('omnisharp_extended').lsp_references() end, opts("Go To Reference"))
   vim.keymap.set('n', 'gD', function() require('omnisharp_extended').telescope_lsp_type_definition() end,
     opts("Go To Type"))
   vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
     opts("Go To Implementation"))
+  vim.keymap.set('n', 'gv', goto_definition_in_split, opts("Go To Definition In Split"))
 end
 
 vim.api.nvim_create_augroup("OmnisharpLsp", { clear = true })
