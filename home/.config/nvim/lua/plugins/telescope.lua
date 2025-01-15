@@ -171,7 +171,7 @@ local palette = require('plugins.mini').palette
 -- vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.bg_mid })
 -- vim.api.nvim_set_hl(0, 'TelescopeBorder', { bg = palette.bg_mid, fg = palette.fg_mid2 })
 
-local TelescoperColor = {
+local TelescopeColor = {
   TelescopeBorder        = { fg = nil, bg = palette.bg_mid },
   TelescopeMatching      = { fg = palette.bg_edge2, bg = palette.green },
   -- TelescopeSelection     = { fg = palette.fg,   bg = palette.bg_mid2 },
@@ -189,6 +189,6 @@ local TelescoperColor = {
   TelescopePreviewLine   = { fg = palette.bg_edge2, bg = palette.green },
 }
 
-for hl, col in pairs(TelescoperColor) do
+for hl, col in pairs(TelescopeColor) do
   vim.api.nvim_set_hl(0, hl, col)
 end

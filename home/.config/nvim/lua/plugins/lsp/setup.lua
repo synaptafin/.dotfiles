@@ -47,6 +47,8 @@ local function goto_definition_in_split()
 
   if split_win_id then
     vim.api.nvim_set_current_win(split_win_id)
+    local half_width = math.floor(vim.o.columns / 2)
+    vim.api.nvim_win_set_width(split_win_id, half_width)
     vim.api.nvim_win_set_buf(split_win_id, current_buf)
     vim.api.nvim_win_set_cursor(split_win_id, cursor_pos)
   else
@@ -59,8 +61,8 @@ end
 local function default_keymaps()
   vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end,
     keymap_opts("Go To Definition"))
-  vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end,
-    keymap_opts("Go To Reference"))
+  -- vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end, keymap_opts("Go To Reference"))
+  vim.keymap.set('n', 'gr', "<cmd>FzfLua lsp_references<cr>", keymap_opts("Go To Reference"))
 
   vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, keymap_opts("Hover"))
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, keymap_opts("Declaration"))

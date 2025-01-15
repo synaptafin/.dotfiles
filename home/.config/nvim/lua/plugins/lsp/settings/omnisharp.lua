@@ -70,21 +70,24 @@ local function goto_definition_in_split()
 
   if split_win_id then
     vim.api.nvim_set_current_win(split_win_id)
+    local half_width = math.floor(vim.o.columns / 2)
+    vim.api.nvim_win_set_width(split_win_id, half_width)
     vim.api.nvim_win_set_buf(split_win_id, current_buf)
     vim.api.nvim_win_set_cursor(split_win_id, cursor_pos)
   else
     vim.api.nvim_open_win(0, true, { split = 'right', win = 0, })
   end
+
   require('omnisharp_extended').lsp_definition()
 end
 
 local function override_keymap()
-  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').lsp_definition() end, opts("Go To Definition"))
-  vim.keymap.set('n', 'gr', function() require('omnisharp_extended').lsp_references() end, opts("Go To Reference"))
+  vim.keymap.set('n', 'gd', function() require('omnisharp_extended').lsp_definition() end, opts("OmniExtend Go To Definition"))
+  -- vim.keymap.set('n', 'gr', function() require('omnisharp_extended').telescope_lsp_references() end, opts("OmniExtend Go To Reference"))
   vim.keymap.set('n', 'gD', function() require('omnisharp_extended').telescope_lsp_type_definition() end,
-    opts("Go To Type"))
+    opts("OmniExtend Go To Type"))
   vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
-    opts("Go To Implementation"))
+    opts("OmniExtend Go To Implementation"))
   vim.keymap.set('n', 'gv', goto_definition_in_split, opts("Go To Definition In Split"))
 end
 

@@ -51,7 +51,7 @@ require('fzf-lua').setup({
     -- to manually draw the border characters around the preview
     -- window, can be set to 'false' to remove all borders or to
     -- 'none', 'single', 'double', 'thicc' (+cc) or 'rounded' (default)
-    border           = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    border           = 'single',
     -- requires neovim > v0.9.0, passed as is to `nvim_open_win`
     -- can be sent individually to any provider to set the win title
     -- title         = "Title",
@@ -71,7 +71,7 @@ require('fzf-lua').setup({
       -- Only used with the builtin previewer:
       title          = true,            -- preview border title (file/buf)?
       title_pos      = "center",        -- left|center|right, title alignment
-      scrollbar      = 'float',         -- `false` or string:'float|border'
+      scrollbar      = false,           -- `false` or string:'float|border'
                                         -- float:  in-window floating border
                                         -- border: in-border chars (see below)
       scrolloff      = '-2',            -- float scrollbar offset from right
@@ -174,7 +174,12 @@ require('fzf-lua').setup({
     ["--height"]         = "100%",
     ["--layout"]         = "reverse",
     ["--border"]         = "none",
-    ["--highlight-line"] = true,           -- fzf >= v0.53
+    ["--highlight-line"] = true,           -- fzf >       = v0.53
+
+    ["--delimiter"]      = ":",
+    ["--with-nth"]       = "1",
+    ["--keep-right"]     = true,
+    ["--margin"]         = "0,1,0,0",
   },
   -- Only used when fzf_bin = "fzf-tmux", by default opens as a
   -- popup 80% width, 80% height (note `-p` requires tmux > 3.2)
@@ -201,21 +206,6 @@ require('fzf-lua').setup({
   -- Assuming `Comment.fg=#010101` the resulting fzf command line will be:
   --   `--color fg:#010101:underline:bold`
   -- NOTE: to pass raw arguments `fzf_opts["--color"]` or `fzf_args`
-  --[[ fzf_colors = {
-      ["fg"]          = { "fg", "CursorLine" },
-      ["bg"]          = { "bg", "Normal" },
-      ["hl"]          = { "fg", "Comment" },
-      ["fg+"]         = { "fg", "Normal" },
-      ["bg+"]         = { "bg", "CursorLine" },
-      ["hl+"]         = { "fg", "Statement" },
-      ["info"]        = { "fg", "PreProc" },
-      ["prompt"]      = { "fg", "Conditional" },
-      ["pointer"]     = { "fg", "Exception" },
-      ["marker"]      = { "fg", "Keyword" },
-      ["spinner"]     = { "fg", "Label" },
-      ["header"]      = { "fg", "Comment" },
-      ["gutter"]      = "-1",
-  }, ]]
   previewers = {
     cat = {
       cmd             = "cat",
@@ -316,10 +306,10 @@ require('fzf-lua').setup({
     git_icons         = false,           -- show git icons?
     file_icons        = true,           -- show file icons?
     color_icons       = true,           -- colorize file|git icons
-    -- path_shorten   = 1,              -- 'true' or number, shorten path?
+    -- path_shorten   = 1,                 -- 'true' or number, shorten path?
     -- Uncomment for custom vscode-like formatter where the filename is first:
     -- e.g. "fzf-lua/previewer/fzf.lua" => "fzf.lua previewer/fzf-lua"
-    -- formatter      = "path.filename_first",
+    -- formatter         = "path.filename_first",
     -- executed command priority is 'cmd' (if exists)
     -- otherwise auto-detect prioritizes `fd`:`rg`:`find`
     -- default options are controlled by 'fd|rg|find|_opts'
@@ -838,3 +828,21 @@ require('fzf-lua').setup({
   -- 'EN SPACE' (U+2002), the below sets it to 'NBSP' (U+00A0) instead
   -- nbsp = '\xc2\xa0',
 })
+
+local palette = require('plugins.mini').palette
+
+local FzfLuaColors = {
+  FzfLuaNormal        = { fg = palette.fg_edge,  bg = palette.bg_edge },
+  FzfLuaBorder        = { fg = palette.fg_edge,  bg = palette.bg_edge },
+  FzfLuaTitle         = { fg = palette.bg_edge2, bg = palette.red     },
+
+  FzfLuaPreviewNormal = { fg = palette.fg_mid2,  bg = palette.bg_edge },
+  FzfLuaPreviewTitle  = { fg = palette.bg_edge2, bg = palette.cyan    },
+  FzfLuaPreviewBorder = { fg = palette.bg_edge2, bg = palette.bg_edge },
+  FzfLuaCursor        = { fg = palette.bg_edge2, bg = palette.orange  },
+  FzfLuaCursorLine    = { fg = palette.bg_edge2, bg = palette.green   },
+}
+
+for hl, col in pairs(FzfLuaColors) do
+  vim.api.nvim_set_hl(0, hl, col)
+end

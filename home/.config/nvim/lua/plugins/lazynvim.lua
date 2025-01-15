@@ -165,7 +165,7 @@ require("lazy").setup({
     },
   },
 
-  -- my functions
+  -- my plugin
   {
     "enigmaiiiiiiii/mini-functions.nvim",
     branch = "dev",
