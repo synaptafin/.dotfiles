@@ -30,7 +30,7 @@ require "plugins.copilot"
 require "plugins.lsp-signature"
 require "plugins.functions"
 
--- debug
+-- debug plugin inactivate
 -- require "plugins.nvim-dap"
 -- require "plugins.nvim-dap-ui"
 
@@ -38,7 +38,5 @@ require "plugins.functions"
 require "config.options"
 
 -- legacy setup
--- require "plugins.packer"
 -- require "plugins.bufferline"
--- require "plugins.toggleterm"
 

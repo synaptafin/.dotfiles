@@ -134,7 +134,7 @@ local lsp_overloads_opts = {
     previous_signature = "<C-k>",
     next_parameter = "<C-l>",
     previous_parameter = "<C-h>",
-    close_signature = "<A-s>"
+    close_signature = "<C-s>"
   },
   display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
 }
