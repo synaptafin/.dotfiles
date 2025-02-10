@@ -58,16 +58,32 @@ local function goto_definition_in_split()
   vim.lsp.buf.definition()
 end
 
+local fzf_lua_lsp_opts = {
+  fzf_opts = {
+    ["--ansi"]           = true,
+    ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
+    ["--height"]         = "100%",
+    ["--layout"]         = "reverse",
+    ["--border"]         = "none",
+    ["--highlight-line"] = true, -- fzf >       = v0.53
+
+    ["--delimiter"]      = ":",
+    ["--with-nth"]       = "1",
+    ["--keep-right"]     = true,
+    ["--margin"]         = "0,1,0,0",
+  }
+}
+
 local function default_keymaps()
   vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end,
     keymap_opts("Go To Definition"))
   -- vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end, keymap_opts("Go To Reference"))
-  vim.keymap.set('n', 'gr', "<cmd>FzfLua lsp_references<cr>", keymap_opts("Go To Reference"))
+  vim.keymap.set('n', 'gr', function() require('fzf-lua').lsp_references(fzf_lua_lsp_opts) end, keymap_opts("Go To Reference"))
 
   vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, keymap_opts("Hover"))
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, keymap_opts("Declaration"))
   vim.keymap.set('n', 'gv', goto_definition_in_split, keymap_opts("Goto definition in split"))
-  -- vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
+  vim.keymap.set('n', 'gi', function() require('fzf-lua').lsp_implementations(fzf_lua_lsp_opts) end, keymap_opts("Go To Implementation"))
   -- vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.signature_help() end, opts)
   -- vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev(goto_opts) end, keymap_opts())

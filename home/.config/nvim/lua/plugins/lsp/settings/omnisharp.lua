@@ -86,8 +86,8 @@ local function override_keymap()
   -- vim.keymap.set('n', 'gr', function() require('omnisharp_extended').telescope_lsp_references() end, opts("OmniExtend Go To Reference"))
   vim.keymap.set('n', 'gD', function() require('omnisharp_extended').telescope_lsp_type_definition() end,
     opts("OmniExtend Go To Type"))
-  vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
-    opts("OmniExtend Go To Implementation"))
+  -- vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
+  --   opts("OmniExtend Go To Implementation"))
   vim.keymap.set('n', 'gv', goto_definition_in_split, opts("Go To Definition In Split"))
 end
 
