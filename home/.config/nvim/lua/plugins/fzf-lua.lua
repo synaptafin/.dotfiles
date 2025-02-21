@@ -31,11 +31,11 @@ local fd_exclude =
     .. [[--exclude '*.fbx' ]]
     .. [[--exclude '*.controller' ]]
 
-require('fzf-lua').setup({
+local opts = {
   -- fzf_bin         = 'sk',            -- use skim instead of fzf?
   -- https://github.com/lotabout/skim
   -- can also be set to 'fzf-tmux'
-  winopts = {
+  winopts              = {
     -- split         = "belowright new",-- open in a split instead?
     -- "belowright new"  : split below
     -- "aboveleft new"   : split above
@@ -93,7 +93,7 @@ require('fzf-lua').setup({
         foldmethod     = 'manual',
       },
     },
-    on_create = function()
+    on_create   = function()
       -- called once upon creation of the fzf main window
       -- can be used to add custom fzf-lua mappings, e.g:
       --   vim.keymap.set("t", "<C-j>", "<Down>", { silent = true, buffer = true })
@@ -769,14 +769,23 @@ require('fzf-lua').setup({
         { "outgoing_calls",  prefix = require("fzf-lua").utils.ansi_codes.yellow("out ") },
       },
     },
+
     -- not work, but suppose to work
-    references = {
+    -- has to manually pass to reference function
+    references         = {
       fzf_opts = {
-        ["--delimiter"]  = ":",
-        ["--with-nth"]   = "1",
-        ["--keep-right"] = true,
-        ["--margin"]     = "0,1,0,0",
-      },
+        ["--ansi"]           = true,
+        ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
+        ["--height"]         = "100%",
+        ["--layout"]         = "reverse",
+        ["--border"]         = "none",
+        ["--highlight-line"] = true, -- fzf >       = v0.53
+
+        ["--delimiter"]      = ":",
+        ["--with-nth"]       = "1",
+        ["--keep-right"]     = true,
+        ["--margin"]         = "0,1,0,0",
+      }
     },
   },
   diagnostics          = {
@@ -841,7 +850,9 @@ require('fzf-lua').setup({
   -- uncomment if your terminal/font does not support unicode character
   -- 'EN SPACE' (U+2002), the below sets it to 'NBSP' (U+00A0) instead
   -- nbsp = '\xc2\xa0',
-})
+}
+
+require('fzf-lua').setup(opts)
 
 local palette = require('plugins.mini').palette
 
@@ -860,3 +871,29 @@ local FzfLuaColors = {
 for hl, col in pairs(FzfLuaColors) do
   vim.api.nvim_set_hl(0, hl, col)
 end
+
+local fzf_lua_lsp_opts = {
+  fzf_opts = {
+    ["--ansi"]           = true,
+    ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
+    ["--height"]         = "100%",
+    ["--layout"]         = "reverse",
+    ["--border"]         = "none",
+    ["--highlight-line"] = true, -- fzf >       = v0.53
+
+    ["--delimiter"]      = ":",
+    ["--with-nth"]       = "1",
+    ["--keep-right"]     = true,
+    ["--margin"]         = "0,1,0,0",
+  }
+}
+
+return {
+  -- temporary solution for lsp references with fzf commands
+  fzf_lua_references_with_opts = function()
+    require('fzf-lua').lsp_references(opts.lsp.references)
+  end,
+  fzf_lua_implementations_with_opts = function()
+    require('fzf-lua').lsp_implementations(opts.lsp.references)
+  end
+}

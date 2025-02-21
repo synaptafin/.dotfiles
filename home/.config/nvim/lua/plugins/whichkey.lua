@@ -4,6 +4,7 @@ if not status_ok then
   return
 end
 
+
 local setup = {
   plugins = {
     marks = true,         -- shows a list of your marks on ' and ` registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -218,3 +219,7 @@ local vmappings = {
 which_key.setup(setup)
 which_key.add(mapping, opts)
 which_key.add(vmappings, vopts)
+
+-- override default highlight
+local palette = require("plugins.mini").palette
+vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })

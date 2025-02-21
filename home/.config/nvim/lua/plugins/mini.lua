@@ -65,6 +65,9 @@ require("mini.hues").setup(mini_hues_config)
 --   purple, purple_bg
 M.palette = require("mini.hues").make_palette(mini_hues_config)
 
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = M.palette.bg_edge, fg = M.palette.fg_mid2 })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = M.palette.bg_edge })
+
 -- mini.hlpattern
 local hipatterns = require("mini.hipatterns")
 hipatterns.setup({

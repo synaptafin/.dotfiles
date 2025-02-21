@@ -1,11 +1,12 @@
 local servers = require("plugins.lsp.servers")
 
-local keymap_opts = function(desc)
+local function keymap_opts(desc)
   if desc then
     return { noremap = true, silent = true, desc = desc }
   end
   return { noremap = true, silent = true }
 end
+
 local goto_opts = {
   border = "rounded",
   severity = {
@@ -21,69 +22,23 @@ function _G.toggle_diagnostic_virtual_text()
   })
 end
 
-local function goto_definition_in_split()
-  local function is_normal_window(win)
-    local available = false
-    local config = vim.api.nvim_win_get_config(win)
-    if not config.relative or config.relative == "" then
-      available = true
-    end
-    return available
-  end
-
-  local wins = vim.api.nvim_tabpage_list_wins(0)
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  local current_buf = vim.api.nvim_get_current_buf()
-  local current_win_id = vim.api.nvim_get_current_win()
-  local split_win_id = nil
-
-  -- search for opened normal split window
-  for _, win_id in pairs(wins) do
-    if win_id ~= current_win_id and is_normal_window(win_id) then
-      split_win_id = win_id
-      break
-    end
-  end
-
-  if split_win_id then
-    vim.api.nvim_set_current_win(split_win_id)
-    local half_width = math.floor(vim.o.columns / 2)
-    vim.api.nvim_win_set_width(split_win_id, half_width)
-    vim.api.nvim_win_set_buf(split_win_id, current_buf)
-    vim.api.nvim_win_set_cursor(split_win_id, cursor_pos)
-  else
-    vim.api.nvim_open_win(0, true, { split = 'right', win = 0, })
-  end
-
-  vim.lsp.buf.definition()
-end
-
-local fzf_lua_lsp_opts = {
-  fzf_opts = {
-    ["--ansi"]           = true,
-    ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
-    ["--height"]         = "100%",
-    ["--layout"]         = "reverse",
-    ["--border"]         = "none",
-    ["--highlight-line"] = true, -- fzf >       = v0.53
-
-    ["--delimiter"]      = ":",
-    ["--with-nth"]       = "1",
-    ["--keep-right"]     = true,
-    ["--margin"]         = "0,1,0,0",
-  }
-}
-
+local operation_in_split = require("plugins.lsp.utilities").operation_in_split
 local function default_keymaps()
   vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end,
     keymap_opts("Go To Definition"))
   -- vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end, keymap_opts("Go To Reference"))
-  vim.keymap.set('n', 'gr', function() require('fzf-lua').lsp_references(fzf_lua_lsp_opts) end, keymap_opts("Go To Reference"))
+  vim.keymap.set('n', 'gr', require('plugins.fzf-lua').fzf_lua_references_with_opts, keymap_opts("Go To Reference"))
 
   vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover() end, keymap_opts("Hover"))
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, keymap_opts("Declaration"))
-  vim.keymap.set('n', 'gv', goto_definition_in_split, keymap_opts("Goto definition in split"))
-  vim.keymap.set('n', 'gi', function() require('fzf-lua').lsp_implementations(fzf_lua_lsp_opts) end, keymap_opts("Go To Implementation"))
+
+  vim.keymap.set('n', 'gv',
+    function() operation_in_split(vim.lsp.buf.definition) end,
+    keymap_opts("Goto definition in split")
+  )
+
+  -- vim.keymap.set('n', 'gi', require('plugins.fzf-lua').fzf_lua_implementation_with_opts,
+  --   keymap_opts("Go To Implementation"))
   -- vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.signature_help() end, opts)
   -- vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev(goto_opts) end, keymap_opts())

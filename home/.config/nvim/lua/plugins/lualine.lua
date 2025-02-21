@@ -90,7 +90,7 @@ local file_path = {
     local file_path = string.gsub(path, escaped_workspace .. "/", "")
     return file_path
   end,
-  color = { gui = "bold" },
+  color = { fg = "#11b849", gui = "bold" },
   fmt = function(str)
     return str .. " "
   end
@@ -104,6 +104,7 @@ local workspace = {
   icon = '',
   color = { fg = palette.yellow },
   padding = 0,
+  cond = show_in_width,
 }
 
 -- local progress = function()

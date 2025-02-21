@@ -118,10 +118,6 @@ require("lazy").setup({
   --   opts = {},
   -- },
 
-
-  -- bufferline
-  { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
-
   -- toggleterminal
   -- {"akinsho/toggleterm.nvim", event="VeryLazy"},
 

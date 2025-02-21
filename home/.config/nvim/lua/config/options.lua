@@ -45,17 +45,10 @@ vim.opt.numberwidth    = 4
 
 -- floating window color scheme
 -- vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#85877C', bg = '#85877C' })
-local palette          = require("plugins.mini").palette
-
-vim.api.nvim_set_hl(0, 'FloatBorder', { bg = palette.bg_edge, fg = palette.fg_mid2 })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = palette.bg_edge })
--- vim.api.nvim_set_hl(0, "EndOfBuffer",     { bg = palette.bg, fg = palette.bg })  -- hide ~ at EndOfBuffer
-vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })
 
 -- Undercurl(not work on alacritty)
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
-
 vim.filetype.add({
   extension = {
     uss = 'css',
