@@ -1,7 +1,7 @@
 local lualine = require("lualine")
 
 local show_in_width = function()
-  return vim.fn.winwidth(0) > 150
+  return vim.fn.winwidth(0) > vim.o.columns / 2
 end
 
 local palette = require("plugins.mini").palette

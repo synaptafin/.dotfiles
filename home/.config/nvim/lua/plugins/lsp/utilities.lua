@@ -37,4 +37,9 @@ function M.operation_in_split(operation)
   operation()
 end
 
+function M.is_vue_project()
+  local paths = vim.fs.find('@vue', { path = "./node_modules", type = 'directory' })
+  return #paths > 0
+end
+
 return M

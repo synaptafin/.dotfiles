@@ -189,4 +189,8 @@ local opts = {
   },
 }
 
-return opts
+local M = { }
+M.setup_condition = true
+M.setup_options = opts
+
+return M

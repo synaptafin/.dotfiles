@@ -74,7 +74,10 @@ vim.api.nvim_create_autocmd(
   }
 )
 
-return {
+local M = { }
+
+M.setup_condition = true
+M.setup_options = {
   cmd = { "dotnet", omnisharp_dll_path },
   handlers = {
     ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
@@ -89,3 +92,5 @@ return {
     vim.cmd('LspStart omnisharp')
   end
 }
+
+return M

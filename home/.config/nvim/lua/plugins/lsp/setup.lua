@@ -110,7 +110,7 @@ local lsp_overloads_opts = {
   display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
 }
 
-local function base_attach(client)
+local function base_on_attach(client)
   default_keymaps()
   lsp_highlight_document(client)
   if (client.server_capabilities.signatureHelpProvider) then
@@ -129,21 +129,25 @@ capabilities.workspace = {
 for _, server_name in pairs(servers) do
   server_name = vim.split(server_name, "@")[1]
   local lsp_opts = {
-    on_attach = base_attach,
+    on_attach = base_on_attach,
     capabilities = capabilities,
   }
 
   local require_ok, server_opts = pcall(require, "plugins.lsp.settings." .. server_name)
 
   if (require_ok) then
-    if (server_opts.on_attach) then
-      local extra_attach = server_opts.on_attach
-      server_opts.on_attach = function(client)
-        base_attach(client)
-        extra_attach(client)
+    local extra_on_attach = server_opts.setup_options.on_attach
+    if (extra_on_attach) then
+      server_opts.setup_options.on_attach = function(client)
+        base_on_attach(client)
+        extra_on_attach(client)
       end
     end
-    lsp_opts = vim.tbl_deep_extend("force", lsp_opts, server_opts)
+    lsp_opts = vim.tbl_deep_extend("force", lsp_opts, server_opts.setup_options)
+    if server_opts.setup_condition then
+      require("lspconfig")[server_name].setup(lsp_opts)
+    end
+  else
+    require("lspconfig")[server_name].setup(lsp_opts)
   end
-  require("lspconfig")[server_name].setup(lsp_opts)
 end

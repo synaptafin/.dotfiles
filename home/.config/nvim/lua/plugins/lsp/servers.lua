@@ -10,6 +10,7 @@ local servers = {
   "omnisharp",
   "html",
   "cssls",
+  "volar",
 }
 
 return servers
