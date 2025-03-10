@@ -45,6 +45,8 @@ require("mini.comment").setup({
 local mini_hues_config = {
   background = "#1d242f",
   foreground = "#efe9dc",
+  -- foreground = "#1d242f",
+  -- background = "#efe9dc",
   n_hues     = 8,
   saturation = 'high',
   accent     = 'bg',

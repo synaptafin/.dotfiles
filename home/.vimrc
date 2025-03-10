@@ -7,7 +7,8 @@ set nowrap
 set ruler
 set laststatus=2
 set statusline+=%f
-set tabstop=4
-set shiftwidth=4
-hi Normal guibg=NONE ctermbg=NONE
+set tabstop=2
+set shiftwidth=2
+
+" hi Normal guibg=NONE ctermbg=NONE
 

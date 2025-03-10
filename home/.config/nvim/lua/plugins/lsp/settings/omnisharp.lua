@@ -62,17 +62,17 @@ local function override_keymap()
   )
 end
 
-vim.api.nvim_create_augroup("OmnisharpLsp", { clear = true })
-vim.api.nvim_create_autocmd(
-  "BufEnter",
-  {
-    group = "OmnisharpLsp",
-    pattern = { "*.cs", "*.vb" },
-    callback = function()
-      override_keymap()
-    end
-  }
-)
+-- vim.api.nvim_create_augroup("OmnisharpLsp", { clear = true })
+-- vim.api.nvim_create_autocmd(
+--   "BufEnter",
+--   {
+--     group = "OmnisharpLsp",
+--     pattern = { "*.cs", "*.vb" },
+--     callback = function()
+--       override_keymap()
+--     end
+--   }
+-- )
 
 local M = { }
 
@@ -90,6 +90,7 @@ M.setup_options = {
   on_attach = function(_)
     vim.g.dotnetlsp = "omnisharp"
     vim.cmd('LspStart omnisharp')
+    override_keymap()
   end
 }
 

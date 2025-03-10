@@ -36,6 +36,8 @@ local function default_keymaps()
     function() operation_in_split(vim.lsp.buf.definition) end,
     keymap_opts("Goto definition in split")
   )
+  vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, keymap_opts())
+  vim.keymap.set('n', 'gs', function() require('fzf-lua').lsp_live_workspace_symbols() end, keymap_opts("Workspace Symbols"))
 
   -- vim.keymap.set('n', 'gi', require('plugins.fzf-lua').fzf_lua_implementation_with_opts,
   --   keymap_opts("Go To Implementation"))
@@ -43,7 +45,6 @@ local function default_keymaps()
   -- vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', 'gp', function() vim.diagnostic.goto_prev(goto_opts) end, keymap_opts())
   vim.keymap.set('n', 'gn', function() vim.diagnostic.goto_next(goto_opts) end, keymap_opts())
-  vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, keymap_opts())
   vim.keymap.set('n', '<leader>d', function() toggle_diagnostic_virtual_text() end,
     { noremap = true, silent = true, desc = "Toggle disgnostic virtual text" })
   vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, keymap_opts())
