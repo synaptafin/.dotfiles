@@ -11,6 +11,7 @@ local servers = {
   "html",
   "cssls",
   "volar",
+  "rust_analyzer",
 }
 
 return servers

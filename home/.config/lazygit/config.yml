@@ -1,6 +1,6 @@
 gui:
   # stuff relating to the UI
-  windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
+  screenMode: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
   sidePanelWidth: 0.3333 # number from 0 to 1
@@ -128,7 +128,7 @@ keybinding:
     jumpToBlock: ['1', '2', '3', '4', '5'] # goto the Nth block / panel
     nextMatch: 'n'
     prevMatch: 'N'
-    optionMenu: null # show help menu
+    optionMenu: <disabled> # show help menu
     optionMenu-alt1: '?' # show help menu
     select: '<space>'
     goInto: 'l'
@@ -144,7 +144,7 @@ keybinding:
     scrollDownMain-alt1: '<c-j>' # main panel scroll down
     scrollUpMain-alt2: '.' # main panel scroll up
     scrollDownMain-alt2: ',' # main panel scroll down
-    executeCustomCommand: ':'
+    executeShellCommand: ':'
     createRebaseOptionsMenu: 'm'
     pushFiles: 'P'
     pullFiles: 'p'
@@ -233,4 +233,3 @@ keybinding:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
-
