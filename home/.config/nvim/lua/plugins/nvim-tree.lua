@@ -86,6 +86,7 @@ local function on_attach(bufnr)
     opts('Create Directory')
   )
   vim.keymap.set('n', '[[', api.node.navigate.parent, opts('Parent Directory'))
+  vim.keymap.set('n', '<esc>', api.tree.close, opts('Close'))
 end
 
 nvim_tree.setup { -- BEGIN_DEFAULT_OPTS

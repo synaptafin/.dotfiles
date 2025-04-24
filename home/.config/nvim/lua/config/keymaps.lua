@@ -38,6 +38,7 @@ keymap("n", "<c-w>z", ":vertical resize | windcmd =<CR>", opts_desc("Maximize wi
 keymap("n", "<c-w>v", function() vim.api.nvim_open_win(0, true, {split="right", win = 0}) end, opts_desc("Split window vertically"))
 
 keymap("n", "^", 'v%<C-v>', opts)  -- vertical select by match bracket/parentheses/braces
+keymap("n", "ge", "gi", opts)
 
 -- Visual --
 keymap('v', '<C-j>', '10j', opts)

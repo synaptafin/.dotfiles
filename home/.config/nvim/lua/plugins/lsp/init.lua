@@ -9,16 +9,6 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
--- local border = {
---   { "", "FloatBorder" },
---   { "▔", "FloatBorder" },
---   { "", "FloatBorder" },
---   { "▕", "FloatBorder" },
---   { "", "FloatBorder" },
---   { "▁", "FloatBorder" },
---   { "", "FloatBorder" },
---   { "▏", "FloatBorder" },
--- }
 local border = "rounded"
 
 local diagnostic_config = {
@@ -42,8 +32,6 @@ local diagnostic_config = {
 }
 
 vim.diagnostic.config(diagnostic_config)
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 
 require("plugins.lsp.setup")
 require("plugins.lsp.mason")

@@ -29,7 +29,7 @@ else
   require "plugins.file-outline"
   require "plugins.whichkey"
   require "plugins.copilot"
-  require "plugins.lsp-signature"
+  -- require "plugins.lsp-signature"
   require "plugins.functions"
 end
 
