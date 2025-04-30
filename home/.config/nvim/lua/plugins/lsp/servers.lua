@@ -7,7 +7,7 @@ local servers = {
   "bashls",
   "tailwindcss",
   "clangd",
-  "omnisharp",
+  "omnisharp@v1.39.13",
   "html",
   "cssls",
   "volar",

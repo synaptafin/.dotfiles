@@ -15,13 +15,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- useful module packer
-  { 'echasnovski/mini.nvim', branch = 'stable' },
+  { 'echasnovski/mini.nvim',               branch = 'stable' },
 
   -- ai completion
   "github/copilot.vim",
 
   -- extension api
-  "nvim-lua/popup.nvim",  -- An implementation of the Popup API from vim in Neovim
+  "nvim-lua/popup.nvim",   -- An implementation of the Popup API from vim in Neovim
   "nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
 
   -- appearance
@@ -85,10 +85,10 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
   "nvimtools/none-ls.nvim",
 
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-  },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   event = "VeryLazy",
+  -- },
   { 'Issafalcon/lsp-overloads.nvim' },
   { 'Hoffs/omnisharp-extended-lsp.nvim' },
   { 'onsails/lspkind.nvim' },
@@ -141,7 +141,7 @@ require("lazy").setup({
       require("hop").setup({})
     end,
   },
-  { 'numToStr/Comment.nvim',   lazy = false },
+  { 'numToStr/Comment.nvim', lazy = false },
   'windwp/nvim-autopairs',
   "windwp/nvim-ts-autotag",
 

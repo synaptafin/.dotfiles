@@ -139,10 +139,9 @@ local color_reset = "\27[0m"
 
 local copilot_indicator = {
   function()
-    local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+    local client = vim.lsp.get_clients({ name = "GitHub Copilot" })[1]
     if client == nil then
-      -- return ""
-      return "" -- default icon whilst copilot is idle
+      return ""
       -- return rgb_escaper(palette.red) .. "" .. color_reset
     end
 
@@ -160,6 +159,18 @@ local copilot_indicator = {
   end,
 
   cond = show_in_width,
+  color = function()
+    local client = vim.lsp.get_clients({ name = "GitHub Copilot" })[1]
+    if client == nil then
+      return { fg = palette.red }
+    end
+
+    if vim.tbl_isempty(client.requests) then
+      return { fg = palette.blue}
+    end
+
+    return { fg = palette.green }
+  end
 }
 
 

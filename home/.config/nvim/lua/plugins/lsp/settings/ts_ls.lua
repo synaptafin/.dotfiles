@@ -16,15 +16,7 @@ end
 M.setup_condition = ~require("plugins.lsp.utilities").is_vue_project()
 
 M.setup_options = {
-  -- init_options = {
-  --   plugins = {
-  --     {
-  --       name = "@vue/typescript-plugin",
-  --       location = global_node_modules_path .. "@vue/typescript-plugin",
-  --       languages = { "vue" },
-  --     },
-  --   }
-  -- },
+  init_options = { hostInfo = 'neovim' },
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
     'javascript',

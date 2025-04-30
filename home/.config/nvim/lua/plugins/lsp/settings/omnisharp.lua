@@ -62,23 +62,36 @@ local function override_keymap()
   )
 end
 
--- vim.api.nvim_create_augroup("OmnisharpLsp", { clear = true })
--- vim.api.nvim_create_autocmd(
---   "BufEnter",
---   {
---     group = "OmnisharpLsp",
---     pattern = { "*.cs", "*.vb" },
---     callback = function()
---       override_keymap()
---     end
---   }
--- )
-
-local M = { }
-
+local M = {}
 M.setup_condition = true
 M.setup_options = {
-  cmd = { "dotnet", omnisharp_dll_path },
+  -- cmd = { "dotnet", omnisharp_dll_path },
+  cmd = {
+    'OmniSharp',
+    '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
+    '--hostPID',
+    tostring(vim.fn.getpid()),
+    'DotNet:enablePackageRestore=false',
+    '--encoding',
+    'utf-8',
+    '--languageserver',
+  },
+  capabilities = {
+    workspace = {
+      workspaceFolders = false
+    }
+  },
+  filetypes = {
+    'cs',
+    'vb',
+  },
+  root_markers = {
+    '.sln',
+    '.csproj',
+    'omnisharp.json',
+    'function.json',
+  },
+
   handlers = {
     ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
     ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
@@ -86,10 +99,9 @@ M.setup_options = {
     ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
   },
   settings = settings,
-  enable_roslyn_analyzers = true, -- default false
   on_attach = function(_)
-    vim.g.dotnetlsp = "omnisharp"
-    vim.cmd('LspStart omnisharp')
+    -- vim.g.dotnetlsp = "omnisharp"
+    -- vim.cmd('LspStart omnisharp')
     override_keymap()
   end
 }

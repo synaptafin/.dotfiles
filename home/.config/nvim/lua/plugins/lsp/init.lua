@@ -1,35 +1,37 @@
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
-local border = "rounded"
-
 local diagnostic_config = {
-  -- enable virtual text
   virtual_text = true,
-  -- show signs
-  signs = {
-    active = signs,
-  },
   update_in_insert = true,
   underline = true,
   severity_sort = true,
   float = {
     focusable = false,
     style     = "minimal",
-    border    = border,
+    border    = "rounded",
     source    = "always",
     header    = "",
     prefix    = "",
   },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "",
+    },
+    -- linehl = {
+    --   [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+    -- },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+    },
+  }
 }
+
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'gO')
 
 vim.diagnostic.config(diagnostic_config)
 

@@ -854,24 +854,6 @@ local opts = {
 
 require('fzf-lua').setup(opts)
 
-local palette = require('plugins.mini').palette
-
-local FzfLuaColors = {
-  FzfLuaNormal        = { fg = palette.fg_edge, bg = palette.bg_edge },
-  FzfLuaBorder        = { fg = palette.fg_edge, bg = palette.bg_edge },
-  FzfLuaTitle         = { fg = palette.bg_edge2, bg = palette.red },
-
-  FzfLuaPreviewNormal = { fg = palette.fg_mid2, bg = palette.bg_edge },
-  FzfLuaPreviewTitle  = { fg = palette.bg_edge2, bg = palette.cyan },
-  FzfLuaPreviewBorder = { fg = palette.bg_edge, bg = palette.bg_edge },
-  FzfLuaCursor        = { fg = palette.bg_edge2, bg = palette.orange },
-  FzfLuaCursorLine    = { fg = palette.bg_edge2, bg = palette.green },
-}
-
-for hl, col in pairs(FzfLuaColors) do
-  vim.api.nvim_set_hl(0, hl, col)
-end
-
 local fzf_lua_lsp_opts = {
   fzf_opts = {
     ["--ansi"]           = true,

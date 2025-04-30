@@ -2,15 +2,14 @@ if vim.g.vscode then
   -- for vscode-neovim only
   require "config.vscode-neovim"
 else
+  require "plugins.lazynvim"
   -- Keymap before plugin loaded for basic keymap, which can be override by plugin keymap config
   -- lazy plugin manager
   -- Color
-  -- require "plugins.colorscheme"
   -- Configuration plugin managed by lazynvim
   require "config.keymaps"
   require "config.options"
-
-  require "plugins.lazynvim"
+  require "config.color-scheme"
 
   require "plugins.treesitter"
   require "plugins.hop";
@@ -29,7 +28,6 @@ else
   require "plugins.file-outline"
   require "plugins.whichkey"
   require "plugins.copilot"
-  -- require "plugins.lsp-signature"
   require "plugins.functions"
 end
 
