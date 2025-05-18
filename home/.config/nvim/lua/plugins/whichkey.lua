@@ -142,7 +142,7 @@ local mapping = {
   { "<leader>F",  "<cmd>Telescope live_grep theme=ivy<cr>", desc = "Find Text", nowait = true, remap = false },
   { "<leader>P", "<cmd>Telescope projects<cr>", desc = "Projects", nowait = true, remap = false },
   { "<leader>a", "<cmd>SymbolsOutline<cr>", desc = "File Outline", nowait = true, remap = false },
-  { "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Buffers", nowait = true, remap = false },
+  { "<leader>b", "<cmd>lua require('fzf-lua').buffers()<cr>", desc = "Buffers", nowait = true, remap = false },
   { "<leader>c", "<cmd>Bdelete!<CR>", desc = "Close Buffer", nowait = true, remap = false },
   { "<leader>e", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Explorer", nowait = true, remap = false },
   { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find files", nowait = true, remap = false },

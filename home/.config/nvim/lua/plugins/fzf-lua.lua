@@ -533,7 +533,10 @@ local opts = {
       -- can resume the buffers picker on the same window
       -- eliminating an otherwise unaesthetic win "flash"
       ["ctrl-x"] = { fn = actions.buf_del, reload = true },
-    }
+    },
+    winopts         = {
+      preview = { hidden = true },
+    },
   },
   tabs                 = {
     prompt      = 'Tabs❯ ',

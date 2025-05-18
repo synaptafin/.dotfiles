@@ -135,11 +135,8 @@ require("lazy").setup({
     end,
   },
   {
-    "phaazon/hop.nvim",
-    branch = "v2",
-    config = function()
-      require("hop").setup({})
-    end,
+    'smoka7/hop.nvim',
+    version = "*",
   },
   { 'numToStr/Comment.nvim', lazy = false },
   'windwp/nvim-autopairs',

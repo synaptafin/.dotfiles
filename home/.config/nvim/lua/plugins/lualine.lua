@@ -156,6 +156,7 @@ local copilot_indicator = {
 
     return ""
     -- return rgb_escaper(palette.green) .. "" .. color_reset
+    -- return spinners[frame + 1]
   end,
 
   cond = show_in_width,

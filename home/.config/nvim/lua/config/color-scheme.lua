@@ -1,18 +1,17 @@
-
 local palette = require('plugins.mini').palette
 local Colors = {
-  DiagnosticError = { fg = "#eb403a" },
+  DiagnosticError        = { fg = "#eb403a" },
 
   --- FzfLua
-  FzfLuaNormal        = { fg = palette.fg_edge, bg = palette.bg_edge2 },
-  FzfLuaBorder        = { fg = palette.fg_edge, bg = palette.bg_edge2 },
-  FzfLuaTitle         = { fg = palette.bg_edge2, bg = palette.red },
+  FzfLuaNormal           = { fg = palette.fg_edge, bg = palette.bg_edge2 },
+  FzfLuaBorder           = { fg = palette.fg_edge, bg = palette.bg_edge2 },
+  FzfLuaTitle            = { fg = palette.bg_edge2, bg = palette.red },
 
-  FzfLuaPreviewNormal = { fg = palette.fg_mid2, bg = palette.bg_edge2 },
-  FzfLuaPreviewTitle  = { fg = palette.bg_edge2, bg = palette.cyan },
-  FzfLuaPreviewBorder = { fg = palette.bg_edge, bg = palette.bg_edge2 },
-  FzfLuaCursor        = { fg = palette.bg_edge2, bg = palette.orange },
-  FzfLuaCursorLine    = { fg = palette.bg_edge2, bg = palette.green },
+  FzfLuaPreviewNormal    = { fg = palette.fg_mid2, bg = palette.bg_edge2 },
+  FzfLuaPreviewTitle     = { fg = palette.bg_edge2, bg = palette.cyan },
+  FzfLuaPreviewBorder    = { fg = palette.bg_edge, bg = palette.bg_edge2 },
+  FzfLuaCursor           = { fg = palette.bg_edge2, bg = palette.orange },
+  FzfLuaCursorLine       = { fg = palette.bg_edge2, bg = palette.green },
 
   --- Telescope
   TelescopeBorder        = { fg = nil, bg = palette.bg_mid },
@@ -32,7 +31,14 @@ local Colors = {
   TelescopePreviewLine   = { fg = palette.bg_edge2, bg = palette.green },
 
   --- WhichKey
-  WhichKeyFloat = { fg = palette.bg_mid },
+  WhichKeyFloat          = { fg = palette.bg_mid },
+
+  --- eyeliner
+  EyelinerPrimary        = { fg = "#fa2f4e", underline = true },
+  EyelinerSecondary      = { fg = "#000000", bg="#ff6fff", underline = true },
+
+  --- hop
+  HopNextKey             = { fg = "#fa2f4e", bold = true, underline = true },
 }
 
 -- vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })
@@ -40,3 +46,9 @@ local Colors = {
 for hl, col in pairs(Colors) do
   vim.api.nvim_set_hl(0, hl, col)
 end
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function()
+  end,
+})
