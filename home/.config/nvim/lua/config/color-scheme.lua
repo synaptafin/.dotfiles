@@ -2,6 +2,9 @@ local palette = require('plugins.mini').palette
 local Colors = {
   DiagnosticError        = { fg = "#eb403a" },
 
+  FloatBorder            = { fg = palette.fg_mid2, bg = palette.bg_edge },
+  NormalFloat            = { bg = palette.bg_edge },
+
   --- FzfLua
   FzfLuaNormal           = { fg = palette.fg_edge, bg = palette.bg_edge2 },
   FzfLuaBorder           = { fg = palette.fg_edge, bg = palette.bg_edge2 },

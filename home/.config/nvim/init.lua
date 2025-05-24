@@ -10,14 +10,15 @@ else
   require "config.keymaps"
   require "config.options"
   require "config.color-scheme"
+  require "config.extra"
 
   require "plugins.treesitter"
   require "plugins.hop";
+  require "plugins.eyeliner";
   require "plugins.cmp"
   require "plugins.lsp"
   require "plugins.telescope"
   require "plugins.fzf-lua"
-  require "plugins.nvim-tree" -- file explorer
 
   require "plugins.lualine"
   require "plugins.luasnip"
@@ -29,6 +30,7 @@ else
   require "plugins.whichkey"
   require "plugins.copilot"
   require "plugins.functions"
+
 end
 
 -- debug plugin inactivate

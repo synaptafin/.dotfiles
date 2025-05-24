@@ -67,9 +67,6 @@ require("mini.hues").setup(mini_hues_config)
 --   purple, purple_bg
 M.palette = require("mini.hues").make_palette(mini_hues_config)
 
-vim.api.nvim_set_hl(0, 'FloatBorder', { bg = M.palette.bg_edge, fg = M.palette.fg_mid2 })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = M.palette.bg_edge })
-
 -- mini.hlpattern
 local hipatterns = require("mini.hipatterns")
 hipatterns.setup({
@@ -77,5 +74,73 @@ hipatterns.setup({
     hex_color = hipatterns.gen_highlighter.hex_color(),
   },
 })
+
+--- mini.files
+local mini_files = require("mini.files")
+
+local mini_files_opts = {
+  -- Customization of shown content
+  content = {
+    -- Predicate for which file system entries to show
+    filter = nil,
+    -- What prefix to show to the left of file system entry
+    prefix = nil,
+    -- In which order to show file system entries
+    sort = nil,
+  },
+
+  -- Module mappings created only inside explorer.
+  -- Use `''` (empty string) to not create one.
+  mappings = {
+    close       = '<ESC>',
+    go_in       = 'l',
+    go_in_plus  = 'L',
+    go_out      = 'h',
+    go_out_plus = 'H',
+    mark_goto   = "'",
+    mark_set    = 'm',
+    reset       = '<BS>',
+    -- reveal_cwd  = '<leader>e',
+    show_help   = 'g?',
+    synchronize = '=',
+    trim_left   = '<',
+    trim_right  = '>',
+  },
+
+  -- General options
+  options = {
+    -- Whether to delete permanently or move into module-specific trash
+    permanent_delete = false,
+    -- Whether to use for editing directories
+    use_as_default_explorer = true,
+  },
+
+  -- Customization of explorer windows
+  windows = {
+    -- Maximum number of windows to show side by side
+    max_number = math.huge,
+    -- Whether to show preview of file/directory under cursor
+    preview = true,
+    -- Width of focused window
+    width_focus = 50,
+    -- Width of non-focused window
+    width_nofocus = 15,
+    -- Width of preview window
+    width_preview = 25,
+  },
+}
+
+local toggle_mini_files = function()
+  if mini_files.close() then
+    return;
+  end
+  if vim.bo.buftype ~= '' then return end
+  mini_files.open(vim.api.nvim_buf_get_name(0), false)
+  mini_files.reveal_cwd()
+end
+
+mini_files.setup(mini_files_opts)
+
+vim.keymap.set("n", "<leader>e", toggle_mini_files, {  noremap = true, silent = true, desc = "Toggle mini.files" })
 
 return M

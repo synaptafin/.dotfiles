@@ -39,6 +39,7 @@ local settings = {
 }
 
 local omnisharp_dll_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll"
+vim.env.DOTNET_ROOT="/usr/local/share/dotnet"
 
 local opts = function(desc)
   return { noremap = true, silent = true, buffer = true, desc = desc }
@@ -66,6 +67,7 @@ local M = {}
 M.setup_condition = true
 M.setup_options = {
   -- cmd = { "dotnet", omnisharp_dll_path },
+  -- { "omnisharp", "-z", "--hostPID", "12345", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" }
   cmd = {
     'OmniSharp',
     '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
@@ -91,7 +93,6 @@ M.setup_options = {
     'omnisharp.json',
     'function.json',
   },
-
   handlers = {
     ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
     ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,

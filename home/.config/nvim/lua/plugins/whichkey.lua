@@ -144,7 +144,6 @@ local mapping = {
   { "<leader>a", "<cmd>SymbolsOutline<cr>", desc = "File Outline", nowait = true, remap = false },
   { "<leader>b", "<cmd>lua require('fzf-lua').buffers()<cr>", desc = "Buffers", nowait = true, remap = false },
   { "<leader>c", "<cmd>Bdelete!<CR>", desc = "Close Buffer", nowait = true, remap = false },
-  { "<leader>e", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Explorer", nowait = true, remap = false },
   { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find files", nowait = true, remap = false },
   { "<leader>g", group = "Git", nowait = true, remap = false },
   { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer", nowait = true, remap = false },

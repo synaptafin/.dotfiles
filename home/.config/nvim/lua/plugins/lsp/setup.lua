@@ -138,7 +138,6 @@ capabilities.workspace = {
   }
 }
 
-
 for _, server_name in pairs(servers) do
   server_name = vim.split(server_name, "@")[1]
   -- for adapting neovim v0.11

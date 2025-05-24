@@ -77,12 +77,11 @@ require("lazy").setup({
 
   -- lsp
   "neovim/nvim-lspconfig",
+  "mason-org/mason.nvim", -- simple to use language server installer
   {
-    "williamboman/mason.nvim", -- simple to use language server installer
-    event = { "BufReadPre", "VimEnter" },
-    build = ":MasonUpdate",
+    "mason-org/mason-lspconfig.nvim", -- simple to use language server installer
+    version = "v1.32.0",  -- for working with require("lspconfig")[lang].setup({})
   },
-  "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
   "nvimtools/none-ls.nvim",
 
   -- {
@@ -110,16 +109,7 @@ require("lazy").setup({
   -- git
   "lewis6991/gitsigns.nvim",
 
-  -- file explorer
-  "nvim-tree/nvim-tree.lua",
   "nvim-tree/nvim-web-devicons",
-  -- {
-  --   "stevearc/oil.nvim",
-  --   opts = {},
-  -- },
-
-  -- toggleterminal
-  -- {"akinsho/toggleterm.nvim", event="VeryLazy"},
 
   -- file info
   "nvim-lualine/lualine.nvim",
@@ -141,6 +131,7 @@ require("lazy").setup({
   { 'numToStr/Comment.nvim', lazy = false },
   'windwp/nvim-autopairs',
   "windwp/nvim-ts-autotag",
+  'jinh0/eyeliner.nvim',
 
   -- Debugger
   {

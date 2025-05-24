@@ -67,12 +67,12 @@ end
 
 vim.api.nvim_create_augroup("LineNumbers", { clear = true })
 vim.api.nvim_create_autocmd(
-  { "FocusGained", "InsertLeave", "CmdlineLeave" },
+  { "FocusGained", "InsertLeave", "CmdlineLeave", "BufEnter" },
   {
     group = "LineNumbers",
     pattern = "*",
     callback = function()
-      if is_nofile_buf() then return end
+      if vim.bo.buftype ~= '' and vim.bo.buftype ~='help' then return end
       vim.opt.relativenumber = true
     end,
   }
@@ -83,7 +83,7 @@ vim.api.nvim_create_autocmd(
     group = "LineNumbers",
     pattern = "*",
     callback = function(e)
-      if is_nofile_buf() then return end
+      if vim.bo.buftype ~= '' and vim.bo.buftype ~='help' then return end
       vim.opt.relativenumber = false
       vim.opt.number = true
       if e.event == "CmdlineEnter" then
