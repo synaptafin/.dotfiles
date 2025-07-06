@@ -131,7 +131,6 @@ require("lazy").setup({
   { 'numToStr/Comment.nvim', lazy = false },
   'windwp/nvim-autopairs',
   "windwp/nvim-ts-autotag",
-  'jinh0/eyeliner.nvim',
 
   -- Debugger
   {

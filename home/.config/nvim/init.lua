@@ -14,7 +14,6 @@ else
 
   require "plugins.treesitter"
   require "plugins.hop";
-  require "plugins.eyeliner";
   require "plugins.cmp"
   require "plugins.lsp"
   require "plugins.telescope"

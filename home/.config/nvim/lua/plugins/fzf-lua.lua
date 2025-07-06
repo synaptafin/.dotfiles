@@ -503,6 +503,21 @@ local opts = {
     no_header      = false, -- hide grep|cwd header?
     no_header_i    = false, -- hide interactive header?
   },
+  live_grep          = {
+      fzf_opts = {
+        ["--ansi"]           = true,
+        ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
+        ["--height"]         = "100%",
+        ["--layout"]         = "reverse",
+        ["--border"]         = "none",
+        ["--highlight-line"] = true, -- fzf >       = v0.53
+
+        ["--delimiter"]      = ":",
+        ["--with-nth"]       = "1",
+        ["--keep-right"]     = true,
+        ["--margin"]         = "0,1,0,0",
+      }
+  },
   args                 = {
     prompt     = 'Args❯ ',
     files_only = true,
@@ -857,21 +872,9 @@ local opts = {
 
 require('fzf-lua').setup(opts)
 
-local fzf_lua_lsp_opts = {
-  fzf_opts = {
-    ["--ansi"]           = true,
-    ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
-    ["--height"]         = "100%",
-    ["--layout"]         = "reverse",
-    ["--border"]         = "none",
-    ["--highlight-line"] = true, -- fzf >       = v0.53
-
-    ["--delimiter"]      = ":",
-    ["--with-nth"]       = "1",
-    ["--keep-right"]     = true,
-    ["--margin"]         = "0,1,0,0",
-  }
-}
+vim.keymap.set('n', '<leader>F', function()
+  require('fzf-lua').live_grep(opts.live_grep)
+end, { nowait = true, noremap = true, desc = 'Find Text' })
 
 return {
   -- temporary solution for lsp references with fzf commands
@@ -880,5 +883,8 @@ return {
   end,
   fzf_lua_implementations_with_opts = function()
     require('fzf-lua').lsp_implementations(opts.lsp.references)
-  end
+  end,
+
+  fzf_lua_live_grep_with_opts = function() require('fzf-lua').live_grep(opts.live_grep)
+  end,
 }

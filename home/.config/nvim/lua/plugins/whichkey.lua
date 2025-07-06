@@ -139,7 +139,7 @@ local opts = {
 
 local mapping = {
   { "<leader>/",  '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', desc = "Comment", nowait = true, remap = false },
-  { "<leader>F",  "<cmd>Telescope live_grep theme=ivy<cr>", desc = "Find Text", nowait = true, remap = false },
+  -- { "<leader>F",  "<cmd>FzfLua live_grep<cr>", desc = "Find Text", nowait = true, remap = false },
   { "<leader>P", "<cmd>Telescope projects<cr>", desc = "Projects", nowait = true, remap = false },
   { "<leader>a", "<cmd>SymbolsOutline<cr>", desc = "File Outline", nowait = true, remap = false },
   { "<leader>b", "<cmd>lua require('fzf-lua').buffers()<cr>", desc = "Buffers", nowait = true, remap = false },

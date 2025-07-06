@@ -33,7 +33,7 @@ end
 
 local operation_in_split = require("plugins.lsp.utilities").operation_in_split
 local function default_keymaps()
-  vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end,
+  vim.keymap.set('n', 'gd', function() require('fzf-lua').lsp_definitions() end,
     keymap_opts("Go To Definition"))
   -- vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({ include_declaration = false }) end, keymap_opts("Go To Reference"))
   vim.keymap.set('n', 'gr', require('plugins.fzf-lua').fzf_lua_references_with_opts, keymap_opts("Go To Reference"))
@@ -44,9 +44,13 @@ local function default_keymaps()
   vim.keymap.set('n', 'gi', require('plugins.fzf-lua').fzf_lua_implementations_with_opts,
     keymap_opts("Go To Implementation"))
 
-  vim.keymap.set('n', 'gv',
+  vim.keymap.set('n', 'gvd',
     function() operation_in_split(vim.lsp.buf.definition) end,
     keymap_opts("Goto definition in split")
+  )
+  vim.keymap.set('n', 'gvr',
+    function() operation_in_split(require('plugins.fzf-lua').fzf_lua_references_with_opts) end,
+    keymap_opts("Goto reference in split")
   )
   vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, keymap_opts())
   vim.keymap.set('n', 'gs', function() require('fzf-lua').lsp_live_workspace_symbols() end,

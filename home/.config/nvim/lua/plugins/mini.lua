@@ -43,7 +43,7 @@ require("mini.comment").setup({
 
 -- mini.hues
 local mini_hues_config = {
-  background = "#1d242f",
+  background = "#1d1a1f",
   foreground = "#efe9dc",
   -- foreground = "#1d242f",
   -- background = "#efe9dc",
