@@ -1,7 +1,7 @@
 local lualine = require("lualine")
 
 local show_in_width = function()
-  return vim.fn.winwidth(0) > vim.o.columns / 2
+  return vim.fn.winwidth(0) > 90
 end
 
 local palette = require("plugins.mini").palette
@@ -34,7 +34,6 @@ local diagnostics = {
   sections = { "error", "warn", "info" },
   update_in_insert = false,
   always_visible = true,
-  cond = show_in_width,
   -- color = { fg = palette.fg_mid, bg = palette.bg_mid },
   diagnostics_color = {
     error = { fg = palette.red },
@@ -48,6 +47,7 @@ local diff = {
   colored = false,
   symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   paddind = 0,
+  cond = show_in_width,
 }
 
 -- section
@@ -201,7 +201,7 @@ lualine.setup({
   },
   sections = {
     lualine_a = { mode },
-    lualine_b = { branch, diagnostics },
+    lualine_b = { diagnostics },
     lualine_c = { file_path, workspace },
     -- lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_x = { diff, spaces, encoding, filetype, copilot_indicator },

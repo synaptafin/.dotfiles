@@ -11,11 +11,14 @@ else
   require "config.options"
   require "config.color-scheme"
   require "config.extra"
+  require "config.lsp" -- neovim native lsp config 
 
   require "plugins.treesitter"
   require "plugins.hop";
   require "plugins.cmp"
-  require "plugins.lsp"
+  require "plugins.mason"
+  require "plugins.null-ls"
+
   require "plugins.telescope"
   require "plugins.fzf-lua"
 

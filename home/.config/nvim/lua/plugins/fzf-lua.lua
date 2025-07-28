@@ -809,7 +809,7 @@ local opts = {
   diagnostics          = {
     prompt       = 'Diagnostics❯ ',
     cwd_only     = false,
-    file_icons   = true,
+    file_icons   = false,
     git_icons    = false,
     diag_icons   = true,
     diag_source  = true, -- display diag source (e.g. [pycodestyle])
@@ -823,12 +823,14 @@ local opts = {
     --   :help hl-DiagnosticSignHint'
     -- only uncomment below if you wish to override the signs/highlights
     -- define only text, texthl or both (':help sign_define()' for more info)
-    -- signs = {
-    --   ["Error"] = { text = "", texthl = "DiagnosticError" },
-    --   ["Warn"]  = { text = "", texthl = "DiagnosticWarn" },
-    --   ["Info"]  = { text = "", texthl = "DiagnosticInfo" },
-    --   ["Hint"]  = { text = "󰌵", texthl = "DiagnosticHint" },
-    -- },
+    signs = {
+      ["Error"] = { text = "", texthl = "DiagnosticError" },
+      -- ["Error"] = { text = "E", texthl = "DiagnosticError" },
+      ["Warn"]  = { text = "", texthl = "DiagnosticWarn" },
+      ["Info"]  = { text = "", texthl = "DiagnosticInfo" },
+      ["Hint"]  = { text = "󰌵", texthl = "DiagnosticHint" },
+    },
+    severity_limit = 3, -- limit diagnostics severity to 'warning' and below
     -- limit to specific severity, use either a string or num:
     --   1 or "hint"
     --   2 or "information"

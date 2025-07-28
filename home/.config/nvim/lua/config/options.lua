@@ -68,11 +68,11 @@ local function is_nofile_buf()
   return false
 end
 
-vim.api.nvim_create_augroup("LineNumbers", { clear = true })
+local group_id = vim.api.nvim_create_augroup("LineNumbers", { clear = true })
 vim.api.nvim_create_autocmd(
   { "FocusGained", "InsertLeave", "CmdlineLeave", "BufEnter" },
   {
-    group = "LineNumbers",
+    group = group_id,
     pattern = "*",
     callback = function()
       if vim.bo.buftype ~= '' and vim.bo.buftype ~='help' then return end
@@ -83,7 +83,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
   { "FocusLost", "InsertEnter", "CmdlineEnter" },
   {
-    group = "LineNumbers",
+    group = group_id,
     pattern = "*",
     callback = function(e)
       if vim.bo.buftype ~= '' and vim.bo.buftype ~='help' then return end

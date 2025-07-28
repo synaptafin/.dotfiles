@@ -80,7 +80,7 @@ require("lazy").setup({
   "mason-org/mason.nvim", -- simple to use language server installer
   {
     "mason-org/mason-lspconfig.nvim", -- simple to use language server installer
-    version = "v1.32.0",  -- for working with require("lspconfig")[lang].setup({})
+    -- version = "v1.32.0",  -- for working with require("lspconfig")[lang].setup({})
   },
   "nvimtools/none-ls.nvim",
 

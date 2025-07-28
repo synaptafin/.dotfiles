@@ -1,5 +1,6 @@
 local palette = require('plugins.mini').palette
 local Colors = {
+  Visual                 = { bg = palette.green, fg = palette.bg_edge2 },
   DiagnosticError        = { fg = "#eb403a" },
 
   FloatBorder            = { fg = palette.fg_mid2, bg = palette.bg_edge },
@@ -19,7 +20,7 @@ local Colors = {
   --- Telescope
   TelescopeBorder        = { fg = nil, bg = palette.bg_mid },
   TelescopeMatching      = { fg = palette.bg_edge2, bg = palette.green },
-  -- TelescopeSelection     = { fg = palette.fg,   bg = palette.bg_mid2 },
+  -- TelescopeSelection     = { fg = palette.fg     ,   bg                  = palette.bg_mid2 },
   TelescopeNormal        = { fg = palette.fg_mid2, bg = palette.bg_mid },
   TelescopePromptTitle   = { fg = palette.bg_edge2, bg = palette.red },
   TelescopePromptNormal  = { fg = palette.fg, bg = palette.bg_edge },
@@ -38,7 +39,7 @@ local Colors = {
 
   --- eyeliner
   EyelinerPrimary        = { fg = "#fa2f4e", underline = true },
-  EyelinerSecondary      = { fg = "#000000", bg="#ff6fff", underline = true },
+  EyelinerSecondary      = { fg = "#000000", bg = "#ff6fff", underline = true },
 
   --- hop
   HopNextKey             = { fg = "#fa2f4e", bold = true, underline = true },
