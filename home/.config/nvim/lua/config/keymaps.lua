@@ -1,7 +1,9 @@
 local fzf_lua = require('fzf-lua')
+local gitsigns = require('gitsigns')
 local diagnostic_goto_opts = require('utils').diagnostic_goto_opts
 local operation_in_split = require('utils').operation_in_split
 local toggle_diagnostic_virtual_text = require("utils").toggle_diagnostic_virtual_text
+local borders = require('utils').listed_borders
 
 local opts_desc = function(desc)
   if desc then
@@ -74,7 +76,7 @@ vim.keymap.set('n', 'gd', function() fzf_lua.lsp_definitions() end,
   opts_desc("Go To Definition"))
 vim.keymap.set('n', 'gr', require('plugins.fzf-lua').fzf_lua_references_with_opts, opts_desc("Go To Reference"))
 
-vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover({ border = "rounded" }) end, opts_desc("Hover"))
+vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover({ border = borders[1]  }) end, opts_desc("Hover"))
 vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts_desc("Declaration"))
 vim.keymap.set('n', 'gi', require('plugins.fzf-lua').fzf_lua_implementations_with_opts, opts_desc("Go To Implementation"))
 
@@ -90,21 +92,37 @@ vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end, opts_desc(
 vim.keymap.set('n', 'gs', function() require('fzf-lua').lsp_live_workspace_symbols() end,
   opts_desc("Workspace Symbols"))
 vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format() end, opts_desc('Format'))
-vim.keymap.set('n', '<leader>lj', function() vim.diagnostic.jump(diagnostic_goto_opts(1)) end, opts_desc("Next Diagnostic"))
-vim.keymap.set('n', '<leader>lk', function() vim.diagnostic.jump(diagnostic_goto_opts(-1)) end, opts_desc("Prev Disgnostic"))
+vim.keymap.set('n', '<leader>lj', function() vim.diagnostic.jump(diagnostic_goto_opts(1)) end,
+  opts_desc("Next Diagnostic"))
+vim.keymap.set('n', '<leader>lk', function() vim.diagnostic.jump(diagnostic_goto_opts(-1)) end,
+  opts_desc("Prev Disgnostic"))
 vim.keymap.set('n', '<leader>ld', function() require('fzf-lua').lsp_document_diagnostics() end,
   opts_desc("Document Diagnostics"))
 vim.keymap.set('n', '<leader>la', function() require('fzf-lua').lsp_code_actions() end, opts_desc("Code Actions"))
-vim.keymap.set('n', '<leader>lD', toggle_diagnostic_virtual_text, { noremap = true, silent = true, desc = "Toggle disgnostic virtual text" })
+vim.keymap.set('n', '<leader>lD', toggle_diagnostic_virtual_text,
+  { noremap = true, silent = true, desc = "Toggle disgnostic virtual text" })
 vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').diagnostics_workspace() end,
   opts_desc("Workspace Diagnostics"))
 vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, opts_desc())
 
--- git
-vim.keymap.set('n', '<leader>gb', fzf_lua.git_branches, opts_desc("Git Branchs"))
-vim.keymap.set('n', '<leader>gc', fzf_lua.git_commits, opts_desc("Git Commits"))
-vim.keymap.set('n', '<leader>gC', fzf_lua.git_bcommits, opts_desc("Git Buffer Commits"))
-vim.keymap.set('n', '<leader>gh', fzf_lua.git_hunks, opts_desc("Git Hunks"))
+-- VCS
+vim.keymap.set('n', '<leader>vb', fzf_lua.git_branches, opts_desc("Git Branchs"))
+vim.keymap.set('n', '<leader>vc', fzf_lua.git_commits, opts_desc("Git Commits"))
+vim.keymap.set('n', '<leader>vC', fzf_lua.git_bcommits, opts_desc("Git Buffer Commits"))
+vim.keymap.set('n', '<leader>vh', fzf_lua.git_hunks, opts_desc("Git Hunks"))
+vim.keymap.set('n', '<leader>vf', fzf_lua.git_status, opts_desc("Open changed file"))
+
+vim.keymap.set('n', '<leader>vR', gitsigns.reset_buffer, opts_desc("Reset Buffer"))
+vim.keymap.set('n', '<leader>vd', gitsigns.diffthis, opts_desc("Diff"))
+vim.keymap.set('n', '<leader>vD', function() gitsigns.diffthis('~') end, opts_desc("Diff with HEAD"))
+vim.keymap.set('n', '<leader>vj', gitsigns.next_hunk, opts_desc('Next Hunk'))
+vim.keymap.set('n', '<leader>vk', gitsigns.prev_hunk, opts_desc('Prev Hunk'))
+vim.keymap.set('n', '<leader>vl', gitsigns.blame_line, opts_desc("Blame"))
+vim.keymap.set('n', '<leader>vi', gitsigns.preview_hunk_inline, opts_desc("Preview Hunk Inline"))
+vim.keymap.set('n', '<leader>vp', gitsigns.preview_hunk, opts_desc("Preview Hunk"))
+vim.keymap.set('n', '<leader>vr', gitsigns.reset_hunk, opts_desc("Reset Hunk"))
+vim.keymap.set('n', '<leader>vs', gitsigns.stage_hunk, opts_desc("Stage Hunk"))
+vim.keymap.set('n', '<leader>vu', gitsigns.undo_stage_hunk, opts_desc("Undo Stage Hunk"))
 
 vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'gra')

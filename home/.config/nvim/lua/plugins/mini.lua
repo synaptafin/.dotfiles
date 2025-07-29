@@ -65,6 +65,38 @@ require("mini.hues").setup(mini_hues_config)
 --   azure,  azure_bg
 --   blue,   blue_bg
 --   purple, purple_bg
+-- {
+--   accent = "#e7b7ff",
+--   accent_bg = "#1d1a1f",
+--   azure = "#94d0ff",
+--   azure_bg = "#004c79",
+--   bg = "#1d1a1f",
+--   bg_edge = "#131015",
+--   bg_edge2 = "#070508",
+--   bg_mid = "#3d393f",
+--   bg_mid2 = "#5d5a60",
+--   blue = "#bfb6ff",
+--   blue_bg = "#260061",
+--   cyan = "#84faff",
+--   cyan_bg = "#01787c",
+--   fg = "#efe9dc",
+--   fg_edge = "#f6f0e3",
+--   fg_edge2 = "#fef7ea",
+--   fg_mid = "#cac4b7",
+--   fg_mid2 = "#a49f93",
+--   green = "#9bffbe",
+--   green_bg = "#006133",
+--   orange = "#ffc790",
+--   orange_bg = "#754300",
+--   purple = "#ffb8f7",
+--   purple_bg = "#510048",
+--   red = "#ffadae",
+--   red_bg = "#610015",
+--   yellow = "#f2f266",
+--   yellow_bg = "#636200"
+-- }
+
+
 M.palette = require("mini.hues").make_palette(mini_hues_config)
 
 -- mini.hlpattern

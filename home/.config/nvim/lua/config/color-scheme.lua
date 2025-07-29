@@ -3,7 +3,7 @@ local Colors = {
   Visual                 = { bg = palette.green, fg = palette.bg_edge2 },
   DiagnosticError        = { fg = "#eb403a" },
 
-  FloatBorder            = { fg = palette.fg_mid2, bg = palette.bg_edge },
+  FloatBorder            = { fg = palette.purple_bg, bg = palette.bg_edge },
   NormalFloat            = { bg = palette.bg_edge },
 
   --- FzfLua
@@ -37,12 +37,14 @@ local Colors = {
   --- WhichKey
   WhichKeyFloat          = { fg = palette.bg_mid },
 
-  --- eyeliner
-  EyelinerPrimary        = { fg = "#fa2f4e", underline = true },
-  EyelinerSecondary      = { fg = "#000000", bg = "#ff6fff", underline = true },
 
   --- hop
   HopNextKey             = { fg = "#fa2f4e", bold = true, underline = true },
+
+  --- gitsigns
+  GitSignsAdd            = { fg = "#1ffd3f" },
+  GitSignsChange         = { fg = "#fd9a29" },
+  GitSignsDelete         = { fg = "#eb403a" },
 }
 
 -- vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })

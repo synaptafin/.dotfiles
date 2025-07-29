@@ -117,8 +117,8 @@ local opts = {
       -- Rotate preview clockwise/counter-clockwise
       ["<F5>"]     = "toggle-preview-ccw",
       ["<F6>"]     = "toggle-preview-cw",
-      ["<S-down>"] = "preview-page-down",
-      ["<S-up>"]   = "preview-page-up",
+      ["page-down"] = "preview-page-down",
+      ["page-up"]   = "preview-page-up",
       ["<S-left>"] = "preview-page-reset",
     },
     fzf = {

@@ -14,6 +14,7 @@ local enabled_servers = {
   "rust_analyzer",
 }
 
+
 local diagnostic_config = {
   virtual_text = true,
   update_in_insert = true,
@@ -79,6 +80,10 @@ local lsp_overloads_opts = {
   },
   display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
 
+}
+
+local signature_help_config = {
+  offset_x = 300
 }
 
 vim.diagnostic.config(diagnostic_config)

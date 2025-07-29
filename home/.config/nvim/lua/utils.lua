@@ -61,4 +61,9 @@ function M.diagnostic_goto_opts(count)
   }
 end
 
+M.listed_borders = {
+  { "▛", "▀", "▜", "▐", "▟", "▄", "▙", "▌" },
+  { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
+}
+
 return M
