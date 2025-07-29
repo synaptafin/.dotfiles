@@ -42,9 +42,15 @@ local Colors = {
   HopNextKey             = { fg = "#fa2f4e", bold = true, underline = true },
 
   --- gitsigns
-  GitSignsAdd            = { fg = "#1ffd3f" },
-  GitSignsChange         = { fg = "#fd9a29" },
-  GitSignsDelete         = { fg = "#eb403a" },
+  GitSignsAdd                 = { fg = "#00fd3f" },
+  GitSignsChange              = { fg = "#fdea00" },
+  GitSignsDelete              = { fg = "#eb403a" },
+  GitSignsStagedAdd           = { fg = "#00fd3f" },
+  GitSignsStagedChange        = { fg = "#fdea00" },
+  GitSignsStagedDelete        = { fg = "#eb403a" },
+  GitSignsStagedUntracked     = { fg = "#00fd3f" },
+  GitSignsStagedChangeddelete = { fg = "#fdea00" },
+  GitSignsStagedTopdelete     = { fg = "#eb403a" },
 }
 
 -- vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })

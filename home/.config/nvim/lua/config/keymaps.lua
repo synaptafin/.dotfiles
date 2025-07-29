@@ -3,6 +3,7 @@ local gitsigns = require('gitsigns')
 local diagnostic_goto_opts = require('utils').diagnostic_goto_opts
 local operation_in_split = require('utils').operation_in_split
 local toggle_diagnostic_virtual_text = require("utils").toggle_diagnostic_virtual_text
+local toggle_mini_files = require("plugins.mini").toggle_mini_files
 local borders = require('utils').listed_borders
 
 local opts_desc = function(desc)
@@ -70,13 +71,14 @@ vim.keymap.set({ "n", "v", "i" }, "<Del>", "<Nop>", opts_desc()) -- disable <Del
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+vim.keymap.set("n", "<leader>e", toggle_mini_files, opts_desc("Files Explorer"))
 
 -- Lsp Keymaps
 vim.keymap.set('n', 'gd', function() fzf_lua.lsp_definitions() end,
   opts_desc("Go To Definition"))
 vim.keymap.set('n', 'gr', require('plugins.fzf-lua').fzf_lua_references_with_opts, opts_desc("Go To Reference"))
 
-vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover({ border = borders[1]  }) end, opts_desc("Hover"))
+vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover({ border = borders[1] }) end, opts_desc("Hover"))
 vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts_desc("Declaration"))
 vim.keymap.set('n', 'gi', require('plugins.fzf-lua').fzf_lua_implementations_with_opts, opts_desc("Go To Implementation"))
 
@@ -119,10 +121,11 @@ vim.keymap.set('n', '<leader>vj', gitsigns.next_hunk, opts_desc('Next Hunk'))
 vim.keymap.set('n', '<leader>vk', gitsigns.prev_hunk, opts_desc('Prev Hunk'))
 vim.keymap.set('n', '<leader>vl', gitsigns.blame_line, opts_desc("Blame"))
 vim.keymap.set('n', '<leader>vi', gitsigns.preview_hunk_inline, opts_desc("Preview Hunk Inline"))
+-- vim.keymap.set('n', '<leader>vI', mini_diff.toggle_overlay, opts_desc("Toggle Preview Diff Overlay"))
 vim.keymap.set('n', '<leader>vp', gitsigns.preview_hunk, opts_desc("Preview Hunk"))
 vim.keymap.set('n', '<leader>vr', gitsigns.reset_hunk, opts_desc("Reset Hunk"))
 vim.keymap.set('n', '<leader>vs', gitsigns.stage_hunk, opts_desc("Stage Hunk"))
-vim.keymap.set('n', '<leader>vu', gitsigns.undo_stage_hunk, opts_desc("Undo Stage Hunk"))
+-- vim.keymap.set('n', '<leader>vu', gitsigns.undo_stage_hunk, opts_desc("Undo Stage Hunk"))
 
 vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'gra')

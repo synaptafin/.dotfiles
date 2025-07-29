@@ -1,9 +1,12 @@
+local mini_files = require("mini.files")
+local mini_hues = require("mini.hues")
+local hipatterns = require("mini.hipatterns")
+
 --- mini.nvim config
 --- config information leverage mini.nvim
 local M = {}
 
--- mini.align
-require("mini.align").setup({
+local mini_align_config = {
   -- No need to copy this inside `setup()`. Will be used automatically.
   -- Module mappings. Use `''` (empty string) to disable one.
   mappings = {
@@ -30,18 +33,19 @@ require("mini.align").setup({
 
   -- Whether to disable showing non-error feedback
   silent = false,
-})
+}
 
--- mini.comment
-require("mini.comment").setup({
+-- mini.comment config
+local mini_comment_config = {
   options = {
     custom_commentstring = function()
       return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
     end
   }
-})
+}
 
--- mini.hues
+
+-- mini.hues config
 local mini_hues_config = {
   background = "#1d1a1f",
   foreground = "#efe9dc",
@@ -52,63 +56,12 @@ local mini_hues_config = {
   accent     = 'bg',
 }
 
-require("mini.hues").setup(mini_hues_config)
-
---- palette table keys
---   bg,     bg_edge2, bg_edge, bg_mid, bg_mid2
---   fg,     fg_edge2, fg_edge, fg_mid, fg_mid2
---   red,    red_bg
---   orange, orange_bg
---   yellow, yellow_bg
---   green,  green_bg
---   cyan,   cyan_bg
---   azure,  azure_bg
---   blue,   blue_bg
---   purple, purple_bg
--- {
---   accent = "#e7b7ff",
---   accent_bg = "#1d1a1f",
---   azure = "#94d0ff",
---   azure_bg = "#004c79",
---   bg = "#1d1a1f",
---   bg_edge = "#131015",
---   bg_edge2 = "#070508",
---   bg_mid = "#3d393f",
---   bg_mid2 = "#5d5a60",
---   blue = "#bfb6ff",
---   blue_bg = "#260061",
---   cyan = "#84faff",
---   cyan_bg = "#01787c",
---   fg = "#efe9dc",
---   fg_edge = "#f6f0e3",
---   fg_edge2 = "#fef7ea",
---   fg_mid = "#cac4b7",
---   fg_mid2 = "#a49f93",
---   green = "#9bffbe",
---   green_bg = "#006133",
---   orange = "#ffc790",
---   orange_bg = "#754300",
---   purple = "#ffb8f7",
---   purple_bg = "#510048",
---   red = "#ffadae",
---   red_bg = "#610015",
---   yellow = "#f2f266",
---   yellow_bg = "#636200"
--- }
-
-
-M.palette = require("mini.hues").make_palette(mini_hues_config)
-
--- mini.hlpattern
-local hipatterns = require("mini.hipatterns")
-hipatterns.setup({
+-- mini.hlpatterns config
+local hipatterns_config = {
   highlighters = {
     hex_color = hipatterns.gen_highlighter.hex_color(),
   },
-})
-
---- mini.files
-local mini_files = require("mini.files")
+}
 
 local mini_files_opts = {
   -- Customization of shown content
@@ -162,7 +115,28 @@ local mini_files_opts = {
   },
 }
 
-local toggle_mini_files = function()
+-- mini.diff config
+local mini_diff_config = {
+  -- clear default mappings
+  mappings = {
+    apply = '',
+    reset = '',
+    textobject = '',
+    goto_first = '',
+    goto_prev = '',
+    goto_next = '',
+    goto_last = '',
+  },
+}
+
+-- setup
+require("mini.align").setup(mini_align_config)
+require("mini.comment").setup(mini_comment_config)
+mini_hues.setup(mini_hues_config)
+mini_files.setup(mini_files_opts)
+hipatterns.setup(hipatterns_config)
+
+M.toggle_mini_files = function()
   if mini_files.close() then
     return;
   end
@@ -171,8 +145,38 @@ local toggle_mini_files = function()
   mini_files.reveal_cwd()
 end
 
-mini_files.setup(mini_files_opts)
+-- {
+--   accent = "#e7b7ff",
+--   accent_bg = "#1d1a1f",
+--   azure = "#94d0ff",
+--   azure_bg = "#004c79",
+--   bg = "#1d1a1f",
+--   bg_edge = "#131015",
+--   bg_edge2 = "#070508",
+--   bg_mid = "#3d393f",
+--   bg_mid2 = "#5d5a60",
+--   blue = "#bfb6ff",
+--   blue_bg = "#260061",
+--   cyan = "#84faff",
+--   cyan_bg = "#01787c",
+--   fg = "#efe9dc",
+--   fg_edge = "#f6f0e3",
+--   fg_edge2 = "#fef7ea",
+--   fg_mid = "#cac4b7",
+--   fg_mid2 = "#a49f93",
+--   green = "#9bffbe",
+--   green_bg = "#006133",
+--   orange = "#ffc790",
+--   orange_bg = "#754300",
+--   purple = "#ffb8f7",
+--   purple_bg = "#510048",
+--   red = "#ffadae",
+--   red_bg = "#610015",
+--   yellow = "#f2f266",
+--   yellow_bg = "#636200"
+-- }
 
-vim.keymap.set("n", "<leader>e", toggle_mini_files, {  noremap = true, silent = true, desc = "Toggle mini.files" })
+M.palette = require("mini.hues").make_palette(mini_hues_config)
+
 
 return M
