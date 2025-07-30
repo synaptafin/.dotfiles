@@ -120,6 +120,7 @@ vim.keymap.set('n', '<leader>vD', function() gitsigns.diffthis('~') end, opts_de
 vim.keymap.set('n', '<leader>vj', gitsigns.next_hunk, opts_desc('Next Hunk'))
 vim.keymap.set('n', '<leader>vk', gitsigns.prev_hunk, opts_desc('Prev Hunk'))
 vim.keymap.set('n', '<leader>vl', gitsigns.blame_line, opts_desc("Blame"))
+vim.keymap.set('n', '<leader>vL', gitsigns.toggle_current_line_blame, opts_desc("Toggle Current Line Blame"))
 vim.keymap.set('n', '<leader>vi', gitsigns.preview_hunk_inline, opts_desc("Preview Hunk Inline"))
 -- vim.keymap.set('n', '<leader>vI', mini_diff.toggle_overlay, opts_desc("Toggle Preview Diff Overlay"))
 vim.keymap.set('n', '<leader>vp', gitsigns.preview_hunk, opts_desc("Preview Hunk"))

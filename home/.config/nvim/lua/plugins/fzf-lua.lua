@@ -117,8 +117,8 @@ local opts = {
       -- Rotate preview clockwise/counter-clockwise
       ["<F5>"]     = "toggle-preview-ccw",
       ["<F6>"]     = "toggle-preview-cw",
-      ["page-down"] = "preview-page-down",
-      ["page-up"]   = "preview-page-up",
+      ["S-Down"] = "preview-page-down",
+      ["S-Up"]   = "preview-page-up",
       ["<S-left>"] = "preview-page-reset",
     },
     fzf = {
@@ -133,8 +133,8 @@ local opts = {
       -- Only valid with fzf previewers (bat/cat/git/etc)
       ["f3"]         = "toggle-preview-wrap",
       ["f4"]         = "toggle-preview",
-      ["shift-down"] = "preview-page-down",
-      ["shift-up"]   = "preview-page-up",
+      ["page-down"] = "preview-page-down",
+      ["page-up"]   = "preview-page-up",
     },
   },
   actions              = {
