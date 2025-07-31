@@ -1,5 +1,7 @@
 local fzf_lua = require('fzf-lua')
 local gitsigns = require('gitsigns')
+local hop = require("hop")
+local mini_comment = require("mini.comment")
 local diagnostic_goto_opts = require('utils').diagnostic_goto_opts
 local operation_in_split = require('utils').operation_in_split
 local toggle_diagnostic_virtual_text = require("utils").toggle_diagnostic_virtual_text
@@ -13,6 +15,11 @@ local opts_desc = function(desc)
   return { noremap = true, silent = true }
 end
 
+local toggle_current_line_or_with_count = function()
+  return vim.v.count == 0
+      and '<Plug>(comment_toggle_linewise_current)'
+      or '<Plug>(comment_toggle_linewise_count)'
+end
 
 --Remap space as leader key
 vim.keymap.set("", "<Space>", "<Nop>", opts_desc())
@@ -71,9 +78,16 @@ vim.keymap.set({ "n", "v", "i" }, "<Del>", "<Nop>", opts_desc()) -- disable <Del
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- leader key essential keymaps
 vim.keymap.set("n", "<leader>e", toggle_mini_files, opts_desc("Files Explorer"))
+vim.keymap.set('n', "<leader>f", fzf_lua.files, opts_desc("Find Files"))
+vim.keymap.set('n', "<leader>b", "<cmd>lua require('fzf-lua').buffers()<cr>", opts_desc("Buffers"))
+vim.keymap.set('n', "<leader>a", "<cmd>SymbolsOutline<cr>", opts_desc("File Outline"))
+vim.keymap.set('n', "<leader>F", "<cmd>FzfLua live_grep<cr>", opts_desc("Find Text"))
 
--- Lsp Keymaps
+vim.keymap.set('n', "<leader>/", mini_comment.toggle_lines, opts_desc("Comment"))
+
+-- Lsp ---------------------
 vim.keymap.set('n', 'gd', function() fzf_lua.lsp_definitions() end,
   opts_desc("Go To Definition"))
 vim.keymap.set('n', 'gr', require('plugins.fzf-lua').fzf_lua_references_with_opts, opts_desc("Go To Reference"))
@@ -105,14 +119,17 @@ vim.keymap.set('n', '<leader>lD', toggle_diagnostic_virtual_text,
   { noremap = true, silent = true, desc = "Toggle disgnostic virtual text" })
 vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').diagnostics_workspace() end,
   opts_desc("Workspace Diagnostics"))
-vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, opts_desc())
+vim.keymap.set('n', "<leader>lr", vim.lsp.buf.rename, opts_desc("Rename"))
+vim.keymap.set('n', "<leader>lq", "<cmd>FzfLua lsp_document_symbols<cr>", opts_desc("Document Symbols"))
+vim.keymap.set('n', "<leader>ls", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", opts_desc("Workspace Symbols"))
+vim.keymap.set('n', "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", opts_desc("CodeLens Action"))
 
--- VCS
+-- VCS ------------------
 vim.keymap.set('n', '<leader>vb', fzf_lua.git_branches, opts_desc("Git Branchs"))
 vim.keymap.set('n', '<leader>vc', fzf_lua.git_commits, opts_desc("Git Commits"))
 vim.keymap.set('n', '<leader>vC', fzf_lua.git_bcommits, opts_desc("Git Buffer Commits"))
 vim.keymap.set('n', '<leader>vh', fzf_lua.git_hunks, opts_desc("Git Hunks"))
-vim.keymap.set('n', '<leader>vf', fzf_lua.git_status, opts_desc("Open changed file"))
+vim.keymap.set('n', '<leader>vf', fzf_lua.git_status, opts_desc("Changed File"))
 
 vim.keymap.set('n', '<leader>vR', gitsigns.reset_buffer, opts_desc("Reset Buffer"))
 vim.keymap.set('n', '<leader>vd', gitsigns.diffthis, opts_desc("Diff"))
@@ -127,6 +144,22 @@ vim.keymap.set('n', '<leader>vp', gitsigns.preview_hunk, opts_desc("Preview Hunk
 vim.keymap.set('n', '<leader>vr', gitsigns.reset_hunk, opts_desc("Reset Hunk"))
 vim.keymap.set('n', '<leader>vs', gitsigns.stage_hunk, opts_desc("Stage Hunk"))
 -- vim.keymap.set('n', '<leader>vu', gitsigns.undo_stage_hunk, opts_desc("Undo Stage Hunk"))
+
+-- Searching -----------
+vim.keymap.set('n', "<leader>sj", "<cmd>FzfLua jumps<cr>", opts_desc("Jump List"))
+vim.keymap.set('n', "<leader>sC", "<cmd>FzfLua commands<cr>", opts_desc("Commands"))
+vim.keymap.set('n', "<leader>sM", "<cmd>FzfLua man_pages<cr>", opts_desc("Man Pages"))
+vim.keymap.set('n', "<leader>sR", "<cmd>FzfLua registers<cr>", opts_desc("Registers"))
+vim.keymap.set('n', "<leader>sc", "<cmd>FzfLua colorschemes<cr>", opts_desc("Colorscheme"))
+vim.keymap.set('n', "<leader>sh", "<cmd>FzfLua helptags<cr>", opts_desc("Find Help"))
+vim.keymap.set('n', "<leader>sk", "<cmd>FzfLua keymaps<cr>", opts_desc("Keymaps"))
+vim.keymap.set('n', "<leader>sr", "<cmd>FzfLua oldfiles<cr>", opts_desc("Open Recent File"))
+
+-- hop -------
+---@diagnostic disable: missing-parameter
+vim.keymap.set("n", "s", function() hop.hint_char2() end, { remap = true })
+
+-- comment -----------
 
 vim.keymap.del('n', 'grn')
 vim.keymap.del('n', 'gra')

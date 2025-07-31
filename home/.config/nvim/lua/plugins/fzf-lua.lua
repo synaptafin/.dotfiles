@@ -117,22 +117,22 @@ local opts = {
       -- Rotate preview clockwise/counter-clockwise
       ["<F5>"]     = "toggle-preview-ccw",
       ["<F6>"]     = "toggle-preview-cw",
-      ["S-Down"] = "preview-page-down",
-      ["S-Up"]   = "preview-page-up",
+      ["S-Down"]   = "preview-page-down",
+      ["S-Up"]     = "preview-page-up",
       ["<S-left>"] = "preview-page-reset",
     },
     fzf = {
       -- fzf '--bind=' options
-      ["ctrl-z"]     = "abort",
-      ["ctrl-u"]     = "unix-line-discard",
-      ["ctrl-f"]     = "half-page-down",
-      ["ctrl-b"]     = "half-page-up",
-      ["ctrl-a"]     = "beginning-of-line",
-      ["ctrl-e"]     = "end-of-line",
-      ["alt-a"]      = "toggle-all",
+      ["ctrl-z"]    = "abort",
+      ["ctrl-u"]    = "unix-line-discard",
+      ["ctrl-f"]    = "half-page-down",
+      ["ctrl-b"]    = "half-page-up",
+      ["ctrl-a"]    = "beginning-of-line",
+      ["ctrl-e"]    = "end-of-line",
+      ["alt-a"]     = "toggle-all",
       -- Only valid with fzf previewers (bat/cat/git/etc)
-      ["f3"]         = "toggle-preview-wrap",
-      ["f4"]         = "toggle-preview",
+      ["f3"]        = "toggle-preview-wrap",
+      ["f4"]        = "toggle-preview",
       ["page-down"] = "preview-page-down",
       ["page-up"]   = "preview-page-up",
     },
@@ -378,6 +378,29 @@ local opts = {
       --   ["ctrl-s"]  = { fn = actions.git_stage_unstage, reload = true },
       -- },
     },
+    diff = {
+      prompt = 'Diff❯ ',
+      cmd         = "git --no-pager diff --name-only {ref}",
+      ref         = "HEAD",
+      preview     = "git diff {ref} {file}",
+      -- git-delta is automatically detected as pager, uncomment to disable
+      -- preview_pager = false,
+      file_icons  = true,
+      color_icons = true,
+      fzf_opts    = { ["--multi"] = true },
+    },
+    hunks = {
+      prompt  = 'Hunks❯ ',
+      cmd         = "/opt/homebrew/bin/git --no-pager diff --color=always {ref}",
+      ref         = "HEAD",
+      file_icons  = true,
+      color_icons = true,
+      fzf_opts    = {
+        ["--multi"] = true,
+        ["--delimiter"] = ":",
+        ["--nth"] = "3..",
+      },
+    },
     commits = {
       prompt  = 'Commits❯ ',
       cmd     = [[git log --color --pretty=format:"%C(yellow)%h%Creset ]]
@@ -503,20 +526,20 @@ local opts = {
     no_header      = false, -- hide grep|cwd header?
     no_header_i    = false, -- hide interactive header?
   },
-  live_grep          = {
-      fzf_opts = {
-        ["--ansi"]           = true,
-        ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
-        ["--height"]         = "100%",
-        ["--layout"]         = "reverse",
-        ["--border"]         = "none",
-        ["--highlight-line"] = true, -- fzf >       = v0.53
+  live_grep            = {
+    fzf_opts = {
+      ["--ansi"]           = true,
+      ["--info"]           = "inline-right", -- fzf < v0.42 = "inline"
+      ["--height"]         = "100%",
+      ["--layout"]         = "reverse",
+      ["--border"]         = "none",
+      ["--highlight-line"] = true, -- fzf >       = v0.53
 
-        ["--delimiter"]      = ":",
-        ["--with-nth"]       = "1",
-        ["--keep-right"]     = true,
-        ["--margin"]         = "0,1,0,0",
-      }
+      ["--delimiter"]      = ":",
+      ["--with-nth"]       = "1",
+      ["--keep-right"]     = true,
+      ["--margin"]         = "0,1,0,0",
+    }
   },
   args                 = {
     prompt     = 'Args❯ ',
@@ -549,7 +572,7 @@ local opts = {
       -- eliminating an otherwise unaesthetic win "flash"
       ["ctrl-x"] = { fn = actions.buf_del, reload = true },
     },
-    winopts         = {
+    winopts       = {
       preview = { hidden = true },
     },
   },
@@ -807,14 +830,14 @@ local opts = {
     },
   },
   diagnostics          = {
-    prompt       = 'Diagnostics❯ ',
-    cwd_only     = false,
-    file_icons   = false,
-    git_icons    = false,
-    diag_icons   = true,
-    diag_source  = true, -- display diag source (e.g. [pycodestyle])
-    icon_padding = '',   -- add padding for wide diagnostics signs
-    multiline    = true, -- concatenate multi-line diags into a single line
+    prompt         = 'Diagnostics❯ ',
+    cwd_only       = false,
+    file_icons     = false,
+    git_icons      = false,
+    diag_icons     = true,
+    diag_source    = true, -- display diag source (e.g. [pycodestyle])
+    icon_padding   = '',   -- add padding for wide diagnostics signs
+    multiline      = true, -- concatenate multi-line diags into a single line
     -- set to `false` to display the first line only
     -- by default icons and highlights are extracted from 'DiagnosticSignXXX'
     -- and highlighted by a highlight group of the same name (which is usually
@@ -823,7 +846,7 @@ local opts = {
     --   :help hl-DiagnosticSignHint'
     -- only uncomment below if you wish to override the signs/highlights
     -- define only text, texthl or both (':help sign_define()' for more info)
-    signs = {
+    signs          = {
       ["Error"] = { text = "", texthl = "DiagnosticError" },
       -- ["Error"] = { text = "E", texthl = "DiagnosticError" },
       ["Warn"]  = { text = "", texthl = "DiagnosticWarn" },
@@ -887,6 +910,7 @@ return {
     require('fzf-lua').lsp_implementations(opts.lsp.references)
   end,
 
-  fzf_lua_live_grep_with_opts = function() require('fzf-lua').live_grep(opts.live_grep)
+  fzf_lua_live_grep_with_opts = function()
+    require('fzf-lua').live_grep(opts.live_grep)
   end,
 }

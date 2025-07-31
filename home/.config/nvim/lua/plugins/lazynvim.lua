@@ -128,7 +128,6 @@ require("lazy").setup({
     'smoka7/hop.nvim',
     version = "*",
   },
-  { 'numToStr/Comment.nvim', lazy = false },
   'windwp/nvim-autopairs',
   "windwp/nvim-ts-autotag",
 
