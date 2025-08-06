@@ -21,20 +21,9 @@ local function override_keymap()
   end
   -- vim.keymap.set('n', 'gd', function() require('omnisharp_extended').lsp_definition() end, opts("OmniExtend Go To Definition"))
   -- vim.keymap.set('n', 'gr', function() require('omnisharp_extended').telescope_lsp_references() end, opts("OmniExtend Go To Reference"))
-  vim.keymap.set('n', 'gD', function() require('omnisharp_extended').lsp_type_definition() end,
-    opts("OmniExtend Go To Type"))
+  vim.keymap.set('n', 'gD', function() require('omnisharp_extended').lsp_type_definition() end, opts("OmniExtend Go To Type"))
   -- vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
   --   opts("OmniExtend Go To Implementation"))
-  vim.keymap.set('n', 'gi',
-    require('plugins.fzf-lua').fzf_lua_implementations_with_opts,
-    opts("Go To Implementation")
-  )
-  vim.keymap.set('n', 'gvd',
-    function()
-      require('plugins.lsp.utilities').operation_in_split(require('omnisharp_extended').lsp_definition)
-    end,
-    opts("Go To Definition In Split")
-  )
 end
 
 local util = require 'lspconfig.util'
@@ -78,7 +67,7 @@ return {
     ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
   },
   on_attach = function(client, bufnr)
-    require('config.lsp').common_client_config.on_attach(client)
+    require('config.lsp.general-opts').general_client_opts.on_attach(client)
     override_keymap()
   end,
   settings = {

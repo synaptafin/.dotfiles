@@ -1,19 +1,5 @@
-local enabled_servers = {
-  "lua_ls",
-  "pyright",
-  "jsonls",
-  "ts_ls",
-  "marksman",
-  "bashls",
-  "tailwindcss",
-  "clangd",
-  "omnisharp",
-  "html",
-  "cssls",
-  "vue_ls",
-  "rust_analyzer",
-}
-
+local enabled_servers = require("config.lsp.general-opts").enabled_servers
+local general_client_opts = require("config.lsp.general-opts").general_client_opts
 
 local diagnostic_config = {
   virtual_text = true,
@@ -88,65 +74,18 @@ local signature_help_config = {
 
 vim.diagnostic.config(diagnostic_config)
 
-local function lsp_highlight_document(client)
-  -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.documentHighlight then
-    local group = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = group,
-      buffer = 0,
-      callback = function()
-        vim.lsp.buf.document_hightlight()
-      end
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = group,
-      buffer = 0,
-      callback = function()
-        vim.lsp.buf.clear_references()
-      end
-    })
-  end
-end
-
-local function common_on_attach(client)
-  lsp_highlight_document(client)
-
-  if (client.server_capabilities.signatureHelpProvider) then
-    require("lsp-overloads").setup(client, lsp_overloads_opts)
-  end
-end
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.workspace = {
-  didChangeWatchedFiles = {
-    dynamicRegistration = true,
-  }
-}
-
-local common_client_config = {
-  on_attach = common_on_attach,
-  capabilities = capabilities,
-}
 
 for _, server_name in pairs(enabled_servers) do
   server_name = vim.split(server_name, "@")[1]
   vim.lsp.enable(server_name)
-  local is_ok, custom_config = pcall(require, "config.lsp.opts." .. server_name)
+  -- local is_ok, custom_config = pcall(require, "config.lsp.opts." .. server_name)
+  local custom_config = require("config.lsp.opts." .. server_name)
 
-  if not is_ok then
-    custom_config = {}
-  end
+  -- if not is_ok then
+  --   print("No custom config found for " .. server_name .. ", using default config.")
+  --   custom_config = {}
+  -- end
 
-  local server_config = vim.tbl_deep_extend("force", common_client_config, custom_config)
+  local server_config = vim.tbl_deep_extend("force", general_client_opts, custom_config)
   vim.lsp.config(server_name, server_config)
 end
-
-return {
-  common_client_config = {
-    on_attach = common_on_attach,
-    capabilities = capabilities,
-  },
-  enabled_servers = enabled_servers
-}
