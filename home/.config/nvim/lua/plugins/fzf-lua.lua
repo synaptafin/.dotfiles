@@ -1,4 +1,5 @@
 local actions = require "fzf-lua.actions"
+local fzf_lua = require "fzf-lua"
 
 local fd_exclude =
     [[--exclude '.git/' ]]
@@ -396,9 +397,11 @@ local opts = {
       file_icons  = true,
       color_icons = true,
       fzf_opts    = {
-        ["--multi"] = true,
-        ["--delimiter"] = ":",
-        ["--nth"] = "3..",
+        ["--multi"]          = true,
+        ["--delimiter"]      = ":",
+        ["--nth"]            = "3..",
+
+        ["--keep-right"]     = true,
       },
     },
     commits = {
@@ -896,21 +899,17 @@ local opts = {
 }
 
 require('fzf-lua').setup(opts)
-
-vim.keymap.set('n', '<leader>F', function()
-  require('fzf-lua').live_grep(opts.live_grep)
-end, { nowait = true, noremap = true, desc = 'Find Text' })
+vim.cmd('FzfLua register_ui_select')
 
 return {
   -- temporary solution for lsp references with fzf commands
   fzf_lua_references_with_opts = function()
-    require('fzf-lua').lsp_references(opts.lsp.references)
-  end,
-  fzf_lua_implementations_with_opts = function()
-    require('fzf-lua').lsp_implementations(opts.lsp.references)
+    fzf_lua.lsp_references(opts.lsp.references)
   end,
 
-  fzf_lua_live_grep_with_opts = function()
-    require('fzf-lua').live_grep(opts.live_grep)
+  fzf_lua_implementations_with_opts = function()
+    fzf_lua.lsp_implementations(opts.lsp.references)
   end,
+
+  opts = opts
 }
