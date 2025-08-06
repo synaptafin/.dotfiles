@@ -2,14 +2,16 @@ local fzf_lua = require('fzf-lua')
 local gitsigns = require('gitsigns')
 local hop = require("hop")
 local mini_comment = require("mini.comment")
+
 local diagnostic_goto_opts = require('utils').diagnostic_goto_opts
 local operation_in_split = require('utils').operation_in_split
 local toggle_diagnostic_virtual_text = require("utils").toggle_diagnostic_virtual_text
+local fzf_lua_opts = require('plugins.fzf-lua').opts
+
 local toggle_mini_files = require("plugins.mini").toggle_mini_files
 local borders = require('utils').listed_borders
 
-local opts_desc = function(desc)
-  if desc then
+local opts_desc = function(desc) if desc then
     return { noremap = true, silent = true, desc = desc }
   end
   return { noremap = true, silent = true }
@@ -81,20 +83,17 @@ vim.keymap.set({ "n", "v", "i" }, "<Del>", "<Nop>", opts_desc()) -- disable <Del
 -- leader key essential keymaps
 vim.keymap.set("n", "<leader>e", toggle_mini_files, opts_desc("Files Explorer"))
 vim.keymap.set('n', "<leader>f", fzf_lua.files, opts_desc("Find Files"))
-vim.keymap.set('n', "<leader>b", "<cmd>lua require('fzf-lua').buffers()<cr>", opts_desc("Buffers"))
+vim.keymap.set('n', "<leader>b", fzf_lua.buffers, opts_desc("Buffers"))
 vim.keymap.set('n', "<leader>a", "<cmd>SymbolsOutline<cr>", opts_desc("File Outline"))
-vim.keymap.set('n', "<leader>F", "<cmd>FzfLua live_grep<cr>", opts_desc("Find Text"))
-
-vim.keymap.set('n', "<leader>/", mini_comment.toggle_lines, opts_desc("Comment"))
+vim.keymap.set('n', '<leader>F', function() fzf_lua.live_grep(fzf_lua_opts.live_grep) end, { nowait = true, noremap = true, desc = 'Find Text' })
+-- vim.keymap.set('n', "<leader>/", mini_comment.toggle_lines, opts_desc("Comment"))
 
 -- Lsp ---------------------
-vim.keymap.set('n', 'gd', function() fzf_lua.lsp_definitions() end,
-  opts_desc("Go To Definition"))
-vim.keymap.set('n', 'gr', require('plugins.fzf-lua').fzf_lua_references_with_opts, opts_desc("Go To Reference"))
-
+vim.keymap.set('n', 'gd', fzf_lua.lsp_definitions, opts_desc("Go To Definition"))
+vim.keymap.set('n', 'gr', function() fzf_lua.lsp_references(fzf_lua_opts.lsp.references) end, opts_desc("Go To Reference"))
 vim.keymap.set('n', 'gh', function() vim.lsp.buf.hover({ border = borders[1] }) end, opts_desc("Hover"))
-vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts_desc("Declaration"))
-vim.keymap.set('n', 'gi', require('plugins.fzf-lua').fzf_lua_implementations_with_opts, opts_desc("Go To Implementation"))
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts_desc("Declaration"))
+vim.keymap.set('n', 'gi', function() fzf_lua.lsp_implementations(fzf_lua_opts.lsp.reference) end, opts_desc("Go To Implementation"))
 
 vim.keymap.set('n', 'gvd',
   function() operation_in_split(fzf_lua.lsp_definitions) end,
