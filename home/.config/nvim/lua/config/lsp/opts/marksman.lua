@@ -19,17 +19,17 @@ local function restart_marksman_on_detach()
     group = vim.api.nvim_create_augroup('marksman_restart_autocmd', { clear = true }),
     callback = function(args)
       print("marksman detached, restarting...")
-      -- local client = vim.lsp.get_client_by_id(args.data.client_id)
-      -- if not client or client.name ~= 'marksman' then
-      --   return
-      -- end
-      -- local buffer_clients = vim.lsp.get_clients({ bufnr = args.buf })
-      -- for _, c in ipairs(buffer_clients) do
-      --   if c.name == 'marksman' then
-      --     vim.lsp.stop_client(c.id)
-      --   end
-      -- end
-      -- vim.lsp.start(client.config)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if not client or client.name ~= 'marksman' then
+        return
+      end
+      local buffer_clients = vim.lsp.get_clients({ bufnr = args.buf })
+      for _, c in ipairs(buffer_clients) do
+        if c.name == 'marksman' then
+          vim.lsp.stop_client(c.id)
+        end
+      end
+      vim.lsp.start(client.config)
     end,
   })
 end
@@ -39,7 +39,6 @@ return {
   filetypes = { 'markdown', 'markdown.mdx' },
   root_markers = { '.marksman.toml', '.git' },
   on_attach = function(client, bufnr)
-    print("marksman attached")
     general_on_attach(client, bufnr)
     restart_marksman_on_detach()
   end,
