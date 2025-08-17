@@ -10,12 +10,11 @@ local highlight = {
 	"IblIndent",
 	"IblIndent",
 }
-local hooks = require "ibl.hooks"
-local normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-	vim.api.nvim_set_hl(0, "IblNonIndent", { fg = normal_hl.bg })
-	vim.api.nvim_set_hl(0, "IblIndent", { fg = "#444c5e" })
-end)
+-- local hooks = require "ibl.hooks"
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+-- 	vim.api.nvim_set_hl(0, "IblNonIndent", { fg = palette.bg })
+-- 	vim.api.nvim_set_hl(0, "IblIndent",    { fg = "#444c5e" })
+-- end)
 
 require("ibl").overwrite({
 	indent = { highlight = highlight },
@@ -23,9 +22,14 @@ require("ibl").overwrite({
 		remove_blankline_trail = false,
 	},
 	scope = {
-    enabled = false,
+    enabled = true,
     show_start = false,
     show_end = false,
+    include = {
+      node_type = {
+        c_sharp = { "class_declaration" }
+      }
+    }
   },
 	exclude = {
 		buftypes = { "terminal" },

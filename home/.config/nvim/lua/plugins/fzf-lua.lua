@@ -356,7 +356,8 @@ local opts = {
     },
     status = {
       prompt       = 'GitStatus❯ ',
-      cmd          = "git -c color.status=false --no-optional-locks status --porcelain=v1 -u",
+      cmd          = [[git -c color.status=false --no-optional-locks status --porcelain=v1 -u; git submodule foreach --quiet --recursive 'git -c color.status=false --no-optional-locks status --porcelain=v1 -u | awk -v path="$displaypath" "{print substr(\$0,1,2) \" \" path \"/\" substr(\$0,4)}"']],
+
       multiprocess = true, -- run command in a separate process
       file_icons   = true,
       git_icons    = true,
@@ -369,6 +370,10 @@ local opts = {
         ["right"]  = { fn = actions.git_unstage, reload = true },
         ["left"]   = { fn = actions.git_stage, reload = true },
         ["ctrl-x"] = { fn = actions.git_reset, reload = true },
+      },
+      fzf_opts = {
+        ["--keep-right"]     = true,
+        -- ["--margin"]         = "0,1,0,0",
       },
       -- If you wish to use a single stage|unstage toggle instead
       -- using 'ctrl-s' modify the 'actions' table as shown below

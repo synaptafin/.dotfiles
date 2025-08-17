@@ -76,7 +76,6 @@ require("lazy").setup({
   },
 
   -- lsp
-  "neovim/nvim-lspconfig",
   "mason-org/mason.nvim", -- simple to use language server installer
   {
     "mason-org/mason-lspconfig.nvim", -- simple to use language server installer
@@ -84,10 +83,6 @@ require("lazy").setup({
   },
   "nvimtools/none-ls.nvim",
 
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   event = "VeryLazy",
-  -- },
   { 'Issafalcon/lsp-overloads.nvim' },
   { 'Hoffs/omnisharp-extended-lsp.nvim' },
   { 'onsails/lspkind.nvim' },

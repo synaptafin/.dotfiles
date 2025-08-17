@@ -3,7 +3,7 @@ local Colors = {
   Visual                 = { bg = palette.green, fg = palette.bg_edge2 },
   DiagnosticError        = { fg = "#eb403a" },
 
-  FloatBorder            = { fg = palette.purple_bg, bg = palette.bg_edge },
+  FloatBorder            = { fg = "#fda339", bg = palette.bg_edge },
   NormalFloat            = { bg = palette.bg_edge },
 
   --- FzfLua
@@ -51,6 +51,11 @@ local Colors = {
   GitSignsStagedUntracked     = { fg = "#00fd3f" },
   GitSignsStagedChangeddelete = { fg = "#fdea00" },
   GitSignsStagedTopdelete     = { fg = "#eb403a" },
+
+  --- indent line ---
+  IblScope                    = { fg = "#f1611c" },
+	IblNonIndent                = { fg = palette.bg },
+	IblIndent                   = { fg = "#444c5e" }
 }
 
 -- vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = palette.bg_mid })
