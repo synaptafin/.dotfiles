@@ -8,6 +8,7 @@ local enabled_servers = {
   "tailwindcss",
   "clangd",
   "omnisharp",
+  -- "roslyn_ls",
   "html",
   "cssls",
   "vue_ls",
