@@ -76,6 +76,7 @@ require("lazy").setup({
   },
 
   -- lsp
+  "neovim/nvim-lspconfig",
   "mason-org/mason.nvim", -- simple to use language server installer
   {
     "mason-org/mason-lspconfig.nvim", -- simple to use language server installer

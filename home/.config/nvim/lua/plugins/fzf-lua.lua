@@ -32,6 +32,8 @@ local fd_exclude =
     .. [[--exclude '*.fbx' ]]
     .. [[--exclude '*.controller' ]]
 
+local git_status_exclude = [["\.meta$|\.unity$|\.prefab$|\.asset$|\.fbx$|\.controller$"]]
+
 local opts = {
   -- fzf_bin         = 'sk',            -- use skim instead of fzf?
   -- https://github.com/lotabout/skim
@@ -356,7 +358,7 @@ local opts = {
     },
     status = {
       prompt       = 'GitStatus❯ ',
-      cmd          = [[git -c color.status=false --no-optional-locks status --porcelain=v1 -u; git submodule foreach --quiet --recursive 'git -c color.status=false --no-optional-locks status --porcelain=v1 -u | awk -v path="$displaypath" "{print substr(\$0,1,2) \" \" path \"/\" substr(\$0,4)}"']],
+      cmd          = [[git -c color.status=false --no-optional-locks status --porcelain=v1 -u; git submodule foreach --quiet --recursive 'git -c color.status=false --no-optional-locks status --porcelain=v1 -u | grep -Ev ]] .. git_status_exclude ..[[ | awk -v path="$displaypath" "{print substr(\$0,1,2) \" \" path \"/\" substr(\$0,4)}"']],
 
       multiprocess = true, -- run command in a separate process
       file_icons   = true,
