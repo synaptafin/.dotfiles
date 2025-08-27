@@ -8,8 +8,8 @@ else
   -- Color
   -- Configuration plugin managed by lazynvim
   require "config.keymaps"
-  require "config.options"
   require "config.color-scheme"
+  require "config.options"
   require "config.extra"
   require "config.lsp" -- neovim native lsp config 
 

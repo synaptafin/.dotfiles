@@ -132,7 +132,7 @@ local mini_diff_config = {
 -- setup
 require("mini.align").setup(mini_align_config)
 require("mini.comment").setup(mini_comment_config)
-mini_hues.setup(mini_hues_config)
+-- mini_hues.setup(mini_hues_config)
 mini_files.setup(mini_files_opts)
 hipatterns.setup(hipatterns_config)
 
@@ -176,7 +176,7 @@ end
 --   yellow_bg = "#636200"
 -- }
 
-M.palette = require("mini.hues").make_palette(mini_hues_config)
+M.palette = mini_hues.make_palette(mini_hues_config)
 
 
 return M

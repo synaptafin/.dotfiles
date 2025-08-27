@@ -29,6 +29,17 @@ require("lazy").setup({
 
   -- theme
   { "rebelot/kanagawa.nvim" },
+  {
+    "navarasu/onedark.nvim",
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('onedark').setup {
+        style = 'darker'
+      }
+      -- Enable theme
+      require('onedark').load()
+    end
+  },
 
   -- which key
   {
@@ -77,7 +88,7 @@ require("lazy").setup({
 
   -- lsp
   "neovim/nvim-lspconfig",
-  "mason-org/mason.nvim", -- simple to use language server installer
+  "mason-org/mason.nvim",             -- simple to use language server installer
   {
     "mason-org/mason-lspconfig.nvim", -- simple to use language server installer
     -- version = "v1.32.0",  -- for working with require("lspconfig")[lang].setup({})
