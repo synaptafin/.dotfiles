@@ -1,3 +1,7 @@
+require('onedark').setup({
+  style = 'darker'
+})
+require('onedark').load()
 local palette = require('plugins.mini').palette
 local Colors = {
   Visual                 = { bg = palette.green, fg = palette.bg_edge2 },
@@ -17,26 +21,8 @@ local Colors = {
   FzfLuaCursor           = { fg = palette.bg_edge2, bg = palette.orange },
   FzfLuaCursorLine       = { fg = palette.bg_edge2, bg = palette.green },
 
-  --- Telescope
-  TelescopeBorder        = { fg = nil, bg = palette.bg_mid },
-  TelescopeMatching      = { fg = palette.bg_edge2, bg = palette.green },
-  -- TelescopeSelection     = { fg = palette.fg     ,   bg                  = palette.bg_mid2 },
-  TelescopeNormal        = { fg = palette.fg_mid2, bg = palette.bg_mid },
-  TelescopePromptTitle   = { fg = palette.bg_edge2, bg = palette.red },
-  TelescopePromptNormal  = { fg = palette.fg, bg = palette.bg_edge },
-  TelescopePromptBorder  = { fg = palette.bg_edge, bg = palette.bg_edge },
-  -- TelescopePromptPrefix  = { fg = palette.blue  },
-  TelescopeResultsNormal = { fg = palette.fg, bg = palette.bg_edge },
-  TelescopeResultsTitle  = { fg = palette.bg_edge, bg = palette.bg_edge },
-  TelescopeResultsBorder = { fg = palette.bg_edge, bg = palette.bg_edge },
-  TelescopePreviewNormal = { fg = palette.fg_mid2, bg = palette.bg_edge },
-  TelescopePreviewBorder = { fg = palette.bg_edge, bg = palette.bg_edge },
-  TelescopePreviewTitle  = { fg = palette.bg_edge2, bg = palette.cyan },
-  TelescopePreviewLine   = { fg = palette.bg_edge2, bg = palette.green },
-
   --- WhichKey
   WhichKeyFloat          = { fg = palette.bg_mid },
-
 
   --- hop
   HopNextKey             = { fg = "#fa2f4e", bold = true, underline = true },
