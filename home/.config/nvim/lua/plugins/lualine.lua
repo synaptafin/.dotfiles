@@ -28,7 +28,7 @@ local theme = {
 
 local diagnostics = {
   "diagnostics",
-  separator = { right = ""},
+  separator = { right = "" },
   sources = { "nvim_lsp", "vim_lsp" },
   symbols = { error = " ", warn = " ", info = " " },
   sections = { "error", "warn", "info" },
@@ -36,9 +36,13 @@ local diagnostics = {
   always_visible = true,
   -- color = { fg = palette.fg_mid, bg = palette.bg_mid },
   diagnostics_color = {
-    error = { fg = palette.red },
-    warn = { fg = palette.yellow },
-    info = { fg = palette.cyan },
+    -- error = { fg = palette.red },
+    -- warn = { fg = palette.yellow },
+    -- info = { fg = palette.cyan },
+    error = 'DiagnosticError',         -- Changes diagnostics' error color.
+    warn  = 'DiagnosticWarn',          -- Changes diagnostics' warn color.
+    info  = 'DiagnosticInfo',          -- Changes diagnostics' info color.
+    hint  = 'DiagnosticHint',          -- Changes diagnostics' hint color.
   },
 }
 
@@ -83,7 +87,7 @@ local file_path = {
     -- local _, _, dir_file = string.find(path, "([^/]+/[^/]+)$")
     local workspace = vim.fn.getcwd()
     local function escape_pattern(pattern)
-      return pattern:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]','%%%1')
+      return pattern:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]', '%%%1')
     end
 
     local escaped_workspace = escape_pattern(workspace)
@@ -126,7 +130,6 @@ local progress = {
 
 
 local function rgb_escaper(hex)
-
   local dec = tonumber(hex:sub(2), 16)
   local b = math.fmod(dec, 256)
   local g = math.fmod((dec - b) / 256, 256)
@@ -167,7 +170,7 @@ local copilot_indicator = {
     end
 
     if vim.tbl_isempty(client.requests) then
-      return { fg = palette.blue}
+      return { fg = palette.blue }
     end
 
     return { fg = palette.green }
