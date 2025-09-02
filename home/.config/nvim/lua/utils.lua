@@ -43,10 +43,13 @@ function M.is_vue_project()
 end
 
 function M.toggle_diagnostic_virtual_text()
-  vim.g.diagnostic_virtual_text_enabled = not vim.g.diagnostic_virtual_text_enabled
-  vim.diagnostic.config({
-    virtual_text = vim.g.diagnostic_virtual_text_enabled,
-  })
+  vim.g.diagnostic_hide_flag = not vim.g.diagnostic_hide_flag
+
+  if vim.g.diagnostic_hide_flag then
+    vim.diagnostic.hide()
+  else
+    vim.diagnostic.show()
+  end
 end
 
 

@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- useful module packer
-  { 'echasnovski/mini.nvim',               branch = 'stable' },
+  { 'nvim-mini/mini.nvim',               branch = 'stable' },
 
   -- ai completion
   "github/copilot.vim",

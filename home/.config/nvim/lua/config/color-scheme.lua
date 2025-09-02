@@ -16,7 +16,6 @@ local Colors = {
   FloatBorder     = { fg = "#fda339", bg = palette.bg_edge },
   NormalFloat     = { bg = palette.bg_edge },
 
-
   DiffAdd    = { fg = nil, bg = palette.green_bg },
   DiffChange = { fg = nil, bg = palette.cyan_bg },
   DiffDelete = { fg = nil, bg = palette.red_bg },
