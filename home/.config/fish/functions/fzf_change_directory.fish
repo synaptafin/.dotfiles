@@ -19,10 +19,10 @@ function _fzf_change_directory
     ghq list -p  
 
     # current directory 
-    set -l dirs (fd . --type d -d 1)
-    if test -n "$dirs"
-      realpath $dirs | grep -v -w "\.git"
-    end
+    # set -l dirs (fd . --type d -d 1)
+    # if test -n "$dirs"
+    #   realpath $dirs | grep -v -w "\.git"
+    # end
 
     # Code directory
     set -l dirs (fd . --full-path "$HOME/Code/" --type d --max-depth 3 --unrestricted)

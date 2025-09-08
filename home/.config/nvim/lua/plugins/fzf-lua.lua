@@ -32,7 +32,7 @@ local fd_exclude =
     .. [[--exclude '*.fbx' ]]
     .. [[--exclude '*.controller' ]]
 
-local git_status_exclude = [["\.meta$|\.unity$|\.prefab$|\.asset$|\.fbx$|\.controller$"]]
+local git_status_exclude = [["\.(meta|unity|prefab|asset|fbx|controller|xsd)$"]]
 
 local opts = {
   -- fzf_bin         = 'sk',            -- use skim instead of fzf?
@@ -358,7 +358,9 @@ local opts = {
     },
     status = {
       prompt       = 'GitStatus❯ ',
-      cmd          = [[git -c color.status=false --no-optional-locks status --porcelain=v1 -u; git submodule foreach --quiet --recursive 'git -c color.status=false --no-optional-locks status --porcelain=v1 -u | grep -Ev ]] .. git_status_exclude ..[[ | awk -v path="$displaypath" "{print substr(\$0,1,2) \" \" path \"/\" substr(\$0,4)}"']],
+      cmd          = [[git -c color.status=false --no-optional-locks status --porcelain=v1 -u | grep -Ev ]] .. git_status_exclude
+      .. [[; git submodule foreach --quiet --recursive 'git -c color.status=false --no-optional-locks status --porcelain=v1 -u | awk -v path="$displaypath" "{print substr(\$0,1,2) \" \" path \"/\" substr(\$0,4)}"' | grep -Ev ]] -- concatenate workspace path to submodule git status
+        .. git_status_exclude,
 
       multiprocess = true, -- run command in a separate process
       file_icons   = true,
@@ -399,7 +401,7 @@ local opts = {
     },
     hunks = {
       prompt  = 'Hunks❯ ',
-      cmd         = "/opt/homebrew/bin/git --no-pager diff --color=always {ref}",
+      cmd         = "git --no-pager diff --color=always {ref}",
       ref         = "HEAD",
       file_icons  = true,
       color_icons = true,
