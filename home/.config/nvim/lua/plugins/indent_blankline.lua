@@ -27,7 +27,7 @@ require("ibl").overwrite({
     show_end = false,
     include = {
       node_type = {
-        c_sharp = { "class_declaration" }
+        c_sharp = { "class_declaration" },
       }
     }
   },

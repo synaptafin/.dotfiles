@@ -12,6 +12,7 @@ local enabled_servers = {
   "html",
   "cssls",
   "vue_ls",
+  "vtsls",
   "rust_analyzer",
 }
 
