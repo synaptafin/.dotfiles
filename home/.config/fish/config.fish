@@ -41,3 +41,10 @@ end
 
 stty discard undef
 
+
+# pnpm
+set -gx PNPM_HOME "/Users/dopamine/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
