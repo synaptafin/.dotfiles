@@ -1,3 +1,5 @@
+local general_lsp_on_attach = require('config.lsp.general-opts').general_client_opts.on_attach
+
 ---@brief
 ---
 --- https://github.com/yioneko/vtsls
@@ -101,6 +103,13 @@ return {
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
 
     on_dir(project_root)
+  end,
+  on_attach = function(client, bufnr)
+    general_lsp_on_attach(client, bufnr)
+    vim.schedule(function()
+      vim.lsp.stop_client(vim.lsp.get_clients({ name = 'ts_ls' }))
+      vim.lsp.enable('ts_ls', false)
+    end)
   end,
   settings = {
      vtsls = {

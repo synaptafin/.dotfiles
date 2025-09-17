@@ -12,8 +12,9 @@ local enabled_servers = {
   "html",
   "cssls",
   "vue_ls",
-  -- "vtsls",
+  "vtsls",
   "rust_analyzer",
+  "eslint",
 }
 
 local lsp_overloads_opts = {
