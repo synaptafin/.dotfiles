@@ -25,6 +25,7 @@ else
   require "plugins.lualine"
   require "plugins.luasnip"
   require "plugins.autopairs"
+  require "plugins.autotag"
   require "plugins.mini"
   require "plugins.indent_blankline"
   require "plugins.gitsigns"

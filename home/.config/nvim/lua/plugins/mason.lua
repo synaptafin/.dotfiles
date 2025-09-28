@@ -13,12 +13,10 @@ local mason_opts = {
   max_concurrent_installers = 4,
 }
 
-local mason_managed_servers = { }
-for _, server in ipairs(servers) do
-  if server ~= "marksman" then
-    table.insert(mason_managed_servers, server)
-  end
-end
+local manually_installed_servers = { "marksman", "clangd" }
+local mason_managed_servers = vim.tbl_filter(function(server)
+  return not vim.tbl_contains(manually_installed_servers, server)
+end, servers)
 
 require("mason").setup(mason_opts)
 require("mason-lspconfig").setup({

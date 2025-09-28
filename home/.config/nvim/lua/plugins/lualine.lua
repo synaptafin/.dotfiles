@@ -4,6 +4,10 @@ local show_in_width = function()
   return vim.fn.winwidth(0) > 90
 end
 
+local show_in_diff = function()
+  return vim.wo.diff
+end
+
 local palette = require("plugins.mini").palette
 
 local theme = {
@@ -39,11 +43,12 @@ local diagnostics = {
     -- error = { fg = palette.red },
     -- warn = { fg = palette.yellow },
     -- info = { fg = palette.cyan },
-    error = 'DiagnosticError',         -- Changes diagnostics' error color.
-    warn  = 'DiagnosticWarn',          -- Changes diagnostics' warn color.
-    info  = 'DiagnosticInfo',          -- Changes diagnostics' info color.
-    hint  = 'DiagnosticHint',          -- Changes diagnostics' hint color.
+    error = 'DiagnosticError', -- Changes diagnostics' error color.
+    warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+    info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+    hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
   },
+  cond = function() return not vim.wo.diff end,
 }
 
 local diff = {
@@ -81,23 +86,58 @@ local location = {
   "location",
   cond = show_in_width,
 }
+
 local file_path = {
   function()
-    local path = vim.fn.expand('%:p')
+    local full_path = vim.fn.expand('%:p')
+    local file_name = full_path:match("([^/\\]+)$")
     -- local _, _, dir_file = string.find(path, "([^/]+/[^/]+)$")
+    if vim.wo.diff then
+      return file_name
+    end
+
     local workspace = vim.fn.getcwd()
     local function escape_pattern(pattern)
       return pattern:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]', '%%%1')
     end
 
     local escaped_workspace = escape_pattern(workspace)
-    local file_path = string.gsub(path, escaped_workspace .. "/", "")
+    local file_path = string.gsub(full_path, escaped_workspace .. "/", "")
+
     return file_path
   end,
-  color = { fg = "#11b849", gui = "bold" },
+
+  -- color = { fg = "#11b849", gui = "bold" },
+  color = function()
+    local full_path = vim.fn.expand('%:p')
+    if full_path:find('/%.git/') then
+      return { fg="#efefef", bg = '#4a0b6e' }
+    end
+    return { fg = '#11b849', gui = "bold" }
+  end,
   fmt = function(str)
     return str .. " "
-  end
+  end,
+}
+
+local super_git_mark = {
+  function()
+    local full_path = vim.fn.expand('%:p')
+
+    -- managed by git
+    local commit_branch = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null"):read("*l")
+    local commit_hash = full_path:match('/%.git/([0-9a-fA-F]+)/')
+    if not commit_hash then
+      commit_hash = "HEAD"
+    end
+    local commit_date = io.popen("git show -s --format=%ci " .. commit_hash .. " 2>/dev/null")
+      :read("*l")
+      :gsub("(%d%d%d%d%-%d%d%-%d%d) (%d%d:%d%d:%d%d) %S+", "%1T%2")
+
+    return "[" .. commit_branch:gsub("\n", "") .. "][@" .. commit_hash:gsub("\n", "") .. "](" .. commit_date:gsub("\n", "") .. ")"
+  end,
+  color = { fg = palette.yellow },
+  cond = function() return vim.wo.diff end,
 }
 
 local workspace = {
@@ -201,10 +241,28 @@ lualine.setup({
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
     always_divide_middle = true,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+      refresh_time = 500,
+      events = {
+        'WinEnter',
+        'BufEnter',
+        'BufWritePost',
+        'SessionLoadPost',
+        'FileChangedShellPost',
+        'VimResized',
+        'Filetype',
+        'CursorMoved',
+        'CursorMovedI',
+        'ModeChanged',
+      },
+    }
   },
   sections = {
     lualine_a = { mode },
-    lualine_b = { diagnostics },
+    lualine_b = { diagnostics, super_git_mark },
     lualine_c = { file_path, workspace },
     -- lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_x = { diff, spaces, encoding, filetype, copilot_indicator },
@@ -212,9 +270,9 @@ lualine.setup({
     lualine_z = { progress },
   },
   inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { "filename" },
+    lualine_a = { mode },
+    lualine_b = { super_git_mark },
+    lualine_c = { file_path },
     lualine_x = { "location" },
     lualine_y = {},
     lualine_z = {},

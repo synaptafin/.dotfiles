@@ -1,46 +1,5 @@
 local treesitter_config = require("nvim-treesitter.configs")
 
-local filetypes = {
-  "cs",
-  "html",
-  "javascript",
-  "typescript",
-  "javascriptreact",
-  "typescriptreact",
-  "svelte",
-  "vue",
-  "tsx",
-  "jsx",
-  "rescript",
-  "xml",
-  "php",
-  "markdown",
-  "astro",
-  "glimmer",
-  "handlebars",
-  "hbs",
-  "python",
-}
-local skip_tags = {
-  "area",
-  "base",
-  "br",
-  "col",
-  "command",
-  "embed",
-  "hr",
-  "img",
-  "slot",
-  "input",
-  "keygen",
-  "link",
-  "meta",
-  "param",
-  "source",
-  "track",
-  "wbr",
-  "menuitem",
-}
 
 --- @diagnostic disable: missing-fields
 treesitter_config.setup({
@@ -75,14 +34,6 @@ treesitter_config.setup({
   -- 	enable = true,
   -- 	enable_autocmd = false,
   -- },
-  autotag = {
-    enable                = true,
-    enable_rename         = true,
-    enable_close          = true,
-    enable_close_on_slash = true,
-    filetypes             = filetypes,
-    skip_tags             = skip_tags,
-  },
   incremental_selection = {
     enable = true,
     keymaps = {

@@ -115,8 +115,11 @@ require("lazy").setup({
 
   -- git
   "lewis6991/gitsigns.nvim",
-
   "nvim-tree/nvim-web-devicons",
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+  },
 
   -- file info
   "nvim-lualine/lualine.nvim",
