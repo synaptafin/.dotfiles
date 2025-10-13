@@ -50,8 +50,6 @@ vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", opts_desc())
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts_desc())
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts_desc())
 vim.keymap.set("n", "<c-w>z", ":vertical resize | windcmd =<CR>", opts_desc("Maximize window width"))
-vim.keymap.set("n", "<c-w>v", function() vim.api.nvim_open_win(0, true, { split = "right", win = 0 }) end,
-  opts_desc("Split window vertically"))
 
 vim.keymap.set("n", "^", 'v%<C-v>', opts_desc()) -- vertical select by match bracket/parentheses/braces
 vim.keymap.set("n", "ge", "gi", opts_desc())

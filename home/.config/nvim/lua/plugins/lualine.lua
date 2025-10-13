@@ -4,10 +4,6 @@ local show_in_width = function()
   return vim.fn.winwidth(0) > 90
 end
 
-local show_in_diff = function()
-  return vim.wo.diff
-end
-
 local palette = require("plugins.mini").palette
 
 local theme = {

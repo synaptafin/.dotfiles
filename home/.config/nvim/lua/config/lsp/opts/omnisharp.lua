@@ -20,9 +20,7 @@ local function override_keymap()
     return { noremap = true, silent = true, buffer = true, desc = desc }
   end
   -- vim.keymap.set('n', 'gd', function() require('omnisharp_extended').lsp_definition() end, opts("OmniExtend Go To Definition"))
-  -- vim.keymap.set('n', 'gr', function() require('omnisharp_extended').telescope_lsp_references() end, opts("OmniExtend Go To Reference"))
   vim.keymap.set('n', 'gD', function() require('omnisharp_extended').lsp_type_definition() end, opts("OmniExtend Go To Type"))
-  -- vim.keymap.set('n', 'gi', function() require('omnisharp_extended').telescope_lsp_implementation() end,
   --   opts("OmniExtend Go To Implementation"))
 end
 

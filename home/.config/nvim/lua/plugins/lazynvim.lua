@@ -40,6 +40,7 @@ require("lazy").setup({
       require('onedark').load()
     end
   },
+  "HiPhish/rainbow-delimiters.nvim",
 
   -- which key
   {
@@ -70,10 +71,7 @@ require("lazy").setup({
   { "folke/neodev.nvim",                opts = {} },
 
   -- telescope
-  {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.2",
-  },
+  { "nvim-telescope/telescope.nvim", },
   "nvim-telescope/telescope-media-files.nvim",
   "benfowler/telescope-luasnip.nvim",
   {
@@ -108,7 +106,6 @@ require("lazy").setup({
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
   },
-  "p00f/nvim-ts-rainbow",
   "nvim-treesitter/playground",
   "nvim-treesitter/nvim-treesitter-context",
   "nvim-treesitter/nvim-treesitter-textobjects",

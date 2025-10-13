@@ -59,7 +59,7 @@ function M.diagnostic_goto_opts(count)
     float = true,
     border = "rounded",
     severity = {
-      min = vim.diagnostic.severity.WARN,
+      min = vim.diagnostic.severity.ERROR,
     }
   }
 end
