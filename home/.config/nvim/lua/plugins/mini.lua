@@ -87,7 +87,7 @@ local mini_files_opts = {
     reset       = '<BS>',
     -- reveal_cwd  = '<leader>e',
     show_help   = 'g?',
-    synchronize = '=',
+    synchronize = '<CR>',
     trim_left   = '<',
     trim_right  = '>',
   },

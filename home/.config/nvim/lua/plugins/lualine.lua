@@ -1,10 +1,11 @@
 local lualine = require("lualine")
+local palette = require("plugins.mini").palette
 
 local show_in_width = function()
   return vim.fn.winwidth(0) > 90
 end
 
-local palette = require("plugins.mini").palette
+local git_hash_suffix = "%[([0-9a-fA-F]+)%]$"
 
 local theme = {
   normal = {
@@ -94,7 +95,7 @@ local file_path = {
 
     local workspace = vim.fn.getcwd()
     local function escape_pattern(pattern)
-      return pattern:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]', '%%%1')
+      return pattern:gsub('[%-%.%+%[%]%(%)%$%^%%%?%*]', '%%%1')  -- Escape magic characters
     end
 
     local escaped_workspace = escape_pattern(workspace)
@@ -106,9 +107,13 @@ local file_path = {
   -- color = { fg = "#11b849", gui = "bold" },
   color = function()
     local full_path = vim.fn.expand('%:p')
-    if full_path:find('/%.git/') then
+
+    if full_path:find('/%.git/') then -- git directory
       return { fg="#efefef", bg = '#4a0b6e' }
+    elseif full_path:find(git_hash_suffix) then -- fzf commit history
+      return { fg="#efefef", bg = '#005f87' }
     end
+
     return { fg = '#11b849', gui = "bold" }
   end,
   fmt = function(str)
@@ -120,12 +125,24 @@ local super_git_mark = {
   function()
     local full_path = vim.fn.expand('%:p')
 
-    -- managed by git
     local commit_branch = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null"):read("*l")
-    local commit_hash = full_path:match('/%.git/([0-9a-fA-F]+)/')
-    if not commit_hash then
-      commit_hash = "HEAD"
+
+    local commit_hash
+    -- local is_from_git = io.popen("git rev-parse --is-inside-work-tree 2>/dev/null"):read("*l")
+    local is_from_git = full_path:match("/%.git/") or full_path:match("/%.git$")
+
+    if is_from_git then
+      commit_hash = full_path:match('/%.git/([0-9a-fA-F]+)/')  -- Adapt DiffView
+      if not commit_hash then
+        commit_hash = "HEAD"
+      end
+    else
+      commit_hash = full_path:match("^.-" .. git_hash_suffix)  -- Adapt Fzf file commits history
+      if not commit_hash then
+        return ""
+      end
     end
+
     local commit_date = io.popen("git show -s --format=%ci " .. commit_hash .. " 2>/dev/null")
       :read("*l")
       :gsub("(%d%d%d%d%-%d%d%-%d%d) (%d%d:%d%d:%d%d) %S+", "%1T%2")
@@ -133,6 +150,7 @@ local super_git_mark = {
     return "[" .. commit_branch:gsub("\n", "") .. "][@" .. commit_hash:gsub("\n", "") .. "](" .. commit_date:gsub("\n", "") .. ")"
   end,
   color = { fg = palette.yellow },
+  separator = { right = "" },
   cond = function() return vim.wo.diff end,
 }
 

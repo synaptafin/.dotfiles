@@ -29,6 +29,8 @@ require("lazy").setup({
 
   -- theme
   { "rebelot/kanagawa.nvim" },
+  { "scottmckendry/cyberdream.nvim", lazy = false, },
+  { "folke/tokyonight.nvim", lazy = false },
   {
     "navarasu/onedark.nvim",
     priority = 1000, -- make sure to load this before all the other start plugins

@@ -1,1 +1,2 @@
-require('mini-functions.configs').setup({})
+require('mini-functions').setup({})
+

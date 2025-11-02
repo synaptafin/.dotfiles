@@ -1,13 +1,14 @@
-require('onedark').setup({
-  style = 'darker',
-  diagnostics = {
-    darker = false,    -- darker colors for diagnostic
-    undercurl = true,  -- use undercurl instead of underline for diagnostics
-    background = true, -- use background color for virtual text
-  }
+-- require('onedark').setup({
+--   style = 'darker',
+--   diagnostics = {
+--     darker = false,    -- darker colors for diagnostic
+--     undercurl = true,  -- use undercurl instead of underline for diagnostics
+--     background = true, -- use background color for virtual text
+--   }
+-- })
+-- require('onedark').load()
 
-})
-require('onedark').load()
+vim.cmd('colorscheme tokyonight-night')
 local palette = require('plugins.mini').palette
 local Colors = {
   Visual          = { bg = palette.green, fg = palette.bg_edge2 },
