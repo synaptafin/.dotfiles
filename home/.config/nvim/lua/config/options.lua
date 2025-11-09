@@ -59,20 +59,11 @@ vim.filetype.add({
   }
 })
 
---- @return boolean
-local function is_nofile_buf()
-  local buftype = vim.bo.buftype
-  if buftype == "nofile" or buftype == "terminal" then
-    return true
-  end
-  return false
-end
-
-local group_id = vim.api.nvim_create_augroup("LineNumbers", { clear = true })
+local line_numbers_group_id = vim.api.nvim_create_augroup("LineNumbers", { clear = true })
 vim.api.nvim_create_autocmd(
   { "FocusGained", "InsertLeave", "CmdlineLeave", "BufEnter" },
   {
-    group = group_id,
+    group = line_numbers_group_id,
     pattern = "*",
     callback = function()
       if vim.bo.buftype ~= '' and vim.bo.buftype ~='help' then return end
@@ -80,10 +71,11 @@ vim.api.nvim_create_autocmd(
     end,
   }
 )
+
 vim.api.nvim_create_autocmd(
   { "FocusLost", "InsertEnter", "CmdlineEnter" },
   {
-    group = group_id,
+    group = line_numbers_group_id,
     pattern = "*",
     callback = function(e)
       if vim.bo.buftype ~= '' and vim.bo.buftype ~='help' then return end
@@ -95,3 +87,12 @@ vim.api.nvim_create_autocmd(
     end,
   }
 )
+
+local no_auto_comment_group_id = vim.api.nvim_create_augroup("NoAutoComment", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = no_auto_comment_group_id,
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions = vim.opt_local.formatoptions:remove { "c", "r", "o" }
+  end,
+})
