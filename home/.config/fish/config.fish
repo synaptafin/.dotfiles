@@ -22,7 +22,7 @@ if type -q eza
 end
 
 if type -q Unity\ Hub
-  alias unity "Unity\ Hub"
+  alias unity-hub "Unity\ Hub"
 end
 
 bind \cr fzf_select_history # Bind for peco select history to Ctrl+R
