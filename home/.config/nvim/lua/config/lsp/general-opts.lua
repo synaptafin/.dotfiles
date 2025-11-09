@@ -55,29 +55,18 @@ local lsp_overloads_opts = {
 
 }
 
-local function lsp_highlight_document(client)
-  -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.documentHighlight then
+local function general_on_attach(client, bufnr)
+  if client.server_capabilities.documentHighlightProvider then
     local group = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = group,
-      buffer = 0,
-      callback = function()
-        vim.lsp.buf.document_hightlight()
-      end
-    })
     vim.api.nvim_create_autocmd("CursorMoved", {
       group = group,
       buffer = 0,
       callback = function()
         vim.lsp.buf.clear_references()
+        vim.lsp.buf.document_highlight()
       end
     })
   end
-end
-
-local function general_on_attach(client, bufnr)
-  lsp_highlight_document(client)
 
   if (client.server_capabilities.signatureHelpProvider) then
     require("lsp-overloads").setup(client, lsp_overloads_opts)

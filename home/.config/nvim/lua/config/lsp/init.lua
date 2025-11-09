@@ -46,7 +46,6 @@ vim.diagnostic.config(diagnostic_config)
 
 for _, server_name in pairs(enabled_servers) do
   server_name = vim.split(server_name, "@")[1]
-  vim.lsp.enable(server_name)
   -- local is_ok, custom_config = pcall(require, "config.lsp.opts." .. server_name)
   local custom_config = require("config.lsp.opts." .. server_name)
 
@@ -57,4 +56,5 @@ for _, server_name in pairs(enabled_servers) do
 
   local server_config = vim.tbl_deep_extend("force", general_client_opts, custom_config)
   vim.lsp.config(server_name, server_config)
+  vim.lsp.enable(server_name)
 end
