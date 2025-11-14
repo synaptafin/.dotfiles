@@ -94,7 +94,6 @@ require("lazy").setup({
     -- version = "v1.32.0",  -- for working with require("lspconfig")[lang].setup({})
   },
   "nvimtools/none-ls.nvim",
-
   { 'Issafalcon/lsp-overloads.nvim' },
   { 'Hoffs/omnisharp-extended-lsp.nvim' },
   { 'onsails/lspkind.nvim' },

@@ -11,9 +11,13 @@ local mason_opts = {
   },
   log_level = vim.log.levels.INFO,
   max_concurrent_installers = 4,
+  registries = {
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry"
+  }
 }
 
-local manually_installed_servers = { "marksman", "clangd" }
+local manually_installed_servers = { "marksman", "clangd", "roslyn_ls", "roslyn" }
 local mason_managed_servers = vim.tbl_filter(function(server)
   return not vim.tbl_contains(manually_installed_servers, server)
 end, servers)
