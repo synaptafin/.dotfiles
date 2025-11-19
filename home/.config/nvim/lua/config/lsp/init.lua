@@ -28,7 +28,7 @@ local diagnostic_config = {
     numhl = {
       [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
     },
-  }
+  },
 }
 
 vim.filetype.add({
@@ -42,7 +42,6 @@ local signature_help_config = {
 }
 
 vim.diagnostic.config(diagnostic_config)
-
 
 for _, server_name in pairs(enabled_servers) do
   server_name = vim.split(server_name, "@")[1]

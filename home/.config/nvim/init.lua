@@ -10,7 +10,7 @@ else
   require "config.keymaps"
   require "config.color-scheme"
   require "config.options"
-  require "config.extra"
+  require "config.private"
   require "config.lsp" -- neovim native lsp config 
 
   require "plugins.treesitter"

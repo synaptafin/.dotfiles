@@ -64,9 +64,18 @@ function M.diagnostic_goto_opts(count)
   }
 end
 
+function M.toggle_inlay_hints()
+  if vim.lsp.inlay_hint.is_enabled() then
+    vim.lsp.inlay_hint.enable(false)
+  else
+    vim.lsp.inlay_hint.enable(true)
+  end
+end
+
 M.listed_borders = {
   { "▛", "▀", "▜", "▐", "▟", "▄", "▙", "▌" },
   { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" },
 }
+
 
 return M

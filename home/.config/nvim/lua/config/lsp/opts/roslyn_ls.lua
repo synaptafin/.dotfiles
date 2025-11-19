@@ -19,6 +19,8 @@
 --   where `<my_folder>` has to be the folder you extracted the nuget package to.
 -- - for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
 
+local hints_visible = true
+
 local uv = vim.uv
 local fs = vim.fs
 
@@ -182,6 +184,7 @@ return {
   },
 
   on_attach = function(client, bufnr)
+    require('config.lsp.general-opts').general_client_opts.on_attach(client)
     -- avoid duplicate autocmds for same buffer
     if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then
       return

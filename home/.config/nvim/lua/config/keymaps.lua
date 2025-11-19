@@ -4,6 +4,7 @@ local hop = require("hop")
 local mini_comment = require("mini.comment")
 
 local diagnostic_goto_opts = require('utils').diagnostic_goto_opts
+local toggle_inlay_hints = require('utils').toggle_inlay_hints
 local operation_in_split = require('utils').operation_in_split
 local toggle_diagnostic_virtual_text = require("utils").toggle_diagnostic_virtual_text
 local fzf_lua_opts = require('plugins.fzf-lua').opts
@@ -120,6 +121,7 @@ vim.keymap.set('n', "<leader>lr", vim.lsp.buf.rename, opts_desc("Rename"))
 vim.keymap.set('n', "<leader>lq", "<cmd>FzfLua lsp_document_symbols<cr>", opts_desc("Document Symbols"))
 vim.keymap.set('n', "<leader>ls", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", opts_desc("Workspace Symbols"))
 vim.keymap.set('n', "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", opts_desc("CodeLens Action"))
+vim.keymap.set('n', '<leader>lh', toggle_inlay_hints, opts_desc("Toggle Inlay Hints"))
 
 -- VCS ------------------
 vim.keymap.set('n', '<leader>vb', fzf_lua.git_branches, opts_desc("Git Branchs"))

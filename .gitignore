@@ -6,4 +6,4 @@
 .vscode
 *test*
 
-**/extra.lua
+**/private.lua
