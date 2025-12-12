@@ -28,8 +28,8 @@ require("lazy").setup({
   { "lukas-reineke/indent-blankline.nvim", main = "ibl",     opts = {} },
 
   -- theme
-  { "rebelot/kanagawa.nvim" },
-  { "scottmckendry/cyberdream.nvim", lazy = false, },
+  { "rebelot/kanagawa.nvim", lazy = true },
+  { "scottmckendry/cyberdream.nvim", lazy = true, },
   { "folke/tokyonight.nvim", lazy = false },
   {
     "navarasu/onedark.nvim",
@@ -42,6 +42,9 @@ require("lazy").setup({
       require('onedark').load()
     end
   },
+  { "Shatur/neovim-ayu", lazy = false },
+
+
   "HiPhish/rainbow-delimiters.nvim",
 
   -- which key
@@ -95,7 +98,6 @@ require("lazy").setup({
   },
   "nvimtools/none-ls.nvim",
   { 'Issafalcon/lsp-overloads.nvim' },
-  { 'Hoffs/omnisharp-extended-lsp.nvim' },
   { 'onsails/lspkind.nvim' },
 
 

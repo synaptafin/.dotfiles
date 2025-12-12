@@ -24,6 +24,7 @@
   "mini-functions.nvim": { "branch": "dev", "commit": "be218c4eb20d1647a4c0b23e650b66474f2c3d67" },
   "mini.nvim": { "branch": "stable", "commit": "94cae4660a8b2d95dbbd56e1fbc6fcfa2716d152" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
+  "neovim-ayu": { "branch": "master", "commit": "38caa8b5b969010b1dcae8ab1a569d7669a643d5" },
   "none-ls.nvim": { "branch": "main", "commit": "550197530c12b4838d685cf4e0d5eb4cca8d52c7" },
   "nvim-autopairs": { "branch": "master", "commit": "7a2c97cccd60abc559344042fefb1d5a85b3e33b" },
   "nvim-cmp": { "branch": "main", "commit": "106c4bcc053a5da783bf4a9d907b6f22485c2ea0" },

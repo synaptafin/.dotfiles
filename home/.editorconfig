@@ -121,7 +121,7 @@ dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 dotnet_naming_symbols.pascal_case_symbol.applicable_kinds = event, property, enum
 dotnet_naming_symbols.pascal_case_symbol.applicable_accessibilities = *
 
-# "OnPascalCase" style for - event
+# "OnPascalCase" style - event
 dotnet_naming_rule.on_prefix_pascal_case_rule.style = on_prefix_pascal_case_style
 dotnet_naming_rule.on_prefix_pascal_case_rule.symbols = on_prefix_pascal_case_symbol
 dotnet_naming_rule.on_prefix_pascal_case_rule.severity = suggestion
@@ -130,15 +130,15 @@ dotnet_naming_style.on_prefix_pascal_case_style.required_prefix = On
 dotnet_naming_symbols.on_prefix_pascal_case_symbol.applicable_kinds = event
 dotnet_naming_symbols.on_prefix_pascal_case_symbol.applicable_accessibilities = *
 
-# "s_camelCase" style - private/internal/private_protected static field
-dotnet_naming_rule.s_prefix_camel_case_rule.style    = s_prefix_camel_case_style
-dotnet_naming_rule.s_prefix_camel_case_rule.symbols  = s_prefix_camel_case_symbol
-dotnet_naming_rule.s_prefix_camel_case_rule.severity = suggestion
-dotnet_naming_style.s_prefix_camel_case_style.required_prefix = s_
-dotnet_naming_style.s_prefix_camel_case_style.capitalization = camel_case
-dotnet_naming_symbols.s_prefix_camel_case_symbol.applicable_kinds   = field
-dotnet_naming_symbols.s_prefix_camel_case_symbol.required_modifiers = static
-dotnet_naming_symbols.s_prefix_camel_case_symbol.applicable_accessibilities = private, internal, private_protected
+# "s_PascalCase" style - private/internal/private_protected static field
+dotnet_naming_rule.s_prefix_pascal_case_rule.style    = s_prefix_pascal_case_style
+dotnet_naming_rule.s_prefix_pascal_case_rule.symbols  = s_prefix_pascal_case_symbol
+dotnet_naming_rule.s_prefix_pascal_case_rule.severity = suggestion
+dotnet_naming_style.s_prefix_pascal_case_style.required_prefix = s_
+dotnet_naming_style.s_prefix_pascal_case_style.capitalization = pascal_case
+dotnet_naming_symbols.s_prefix_pascal_case_symbol.applicable_kinds   = field
+dotnet_naming_symbols.s_prefix_pascal_case_symbol.required_modifiers = static
+dotnet_naming_symbols.s_prefix_pascal_case_symbol.applicable_accessibilities = private, internal, private_protected
 
 # "_camelCase" style - private/internal/protected instance field
 dotnet_naming_rule.underscore_prefix_camel_case_rule.style    = underscore_prefix_camel_case_style
@@ -230,4 +230,7 @@ csharp_space_between_method_declaration_name_and_open_parenthesis = false
 csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
+
+[*.lua]
+indent_size = 2
 

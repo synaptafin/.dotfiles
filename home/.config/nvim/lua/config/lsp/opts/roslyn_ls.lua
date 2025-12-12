@@ -19,8 +19,6 @@
 --   where `<my_folder>` has to be the folder you extracted the nuget package to.
 -- - for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
 
-local hints_visible = true
-
 local uv = vim.uv
 local fs = vim.fs
 
@@ -106,7 +104,7 @@ return {
   offset_encoding = 'utf-8',
   cmd = {
     '/usr/local/share/dotnet/dotnet',
-    vim.env.HOME .. '/.vscode/extensions/ms-dotnettools.csharp-2.100.5-darwin-arm64/.roslyn/Microsoft.CodeAnalysis.LanguageServer.dll',
+    vim.env.HOME .. '/.vscode/extensions/ms-dotnettools.csharp-2.100.11-darwin-arm64/.roslyn/Microsoft.CodeAnalysis.LanguageServer.dll',
     '--logLevel',
     'Information',
     '--extensionLogDirectory',
