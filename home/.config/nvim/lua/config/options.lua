@@ -21,7 +21,6 @@ vim.opt.scrolloff       = 8
 vim.opt.pumheight       = 10
 vim.opt.autowriteall    = true
 vim.opt.termguicolors   = true
-vim.opt.shell           = 'fish'
 vim.opt.relativenumber  = true
 vim.opt.mouse           = "a"
 vim.opt.splitbelow      = true
@@ -40,6 +39,7 @@ vim.opt.foldmethod      = "syntax"
 vim.opt.foldlevel       = 99
 vim.opt.numberwidth     = 4
 vim.opt.spelllang       = "en_us"
+vim.opt.clipboard       = "unnamedplus"
 -- vim.opt.spell           = true
 -- vim.opt.spellfile       = vim.fn.getcwd() .. '/en.utf-8.add'
 

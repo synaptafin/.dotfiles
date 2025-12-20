@@ -159,7 +159,7 @@ require("lazy").setup({
 
   -- my plugin
   {
-    "enigmaiiiiiiii/mini-functions.nvim",
+    "odezzshuuk/mini-functions.nvim",
     branch = "dev",
     event = "VeryLazy"
   },

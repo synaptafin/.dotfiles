@@ -7,8 +7,10 @@ set -gx PATH bin $PATH
 set -gx PATH ~/bin $PATH
 set -gx PATH ~/.local/bin $PATH
 
+source ~/.config/lf/lfcd.fish
+
 # set lf as lfcd
-if type -q lf
+if type -q lf; and type -q lfcd
   alias lf "lfcd"
 end
 
@@ -43,7 +45,7 @@ stty discard undef
 
 
 # pnpm
-set -gx PNPM_HOME "/Users/dopamine/Library/pnpm"
+set -gx PNPM_HOME "$HOME/Library/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
